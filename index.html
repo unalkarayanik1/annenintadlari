@@ -14,37 +14,39 @@ body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text-dark
 header{background:var(--warm-white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px var(--shadow);}
 .header-top{background:var(--terracotta);color:white;text-align:center;padding:8px;font-size:13px;letter-spacing:.5px;}
 .header-main{max-width:1300px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-.logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none;}
 .logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--terracotta),var(--amber));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
 .logo-text .brand{font-family:'Playfair Display',serif;font-size:20px;color:var(--terracotta);font-weight:700;}
 .logo-text .sub{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
 .header-search{flex:1;max-width:420px;position:relative;}
-.header-search input{width:100%;padding:12px 44px 12px 16px;border:2px solid var(--border);border-radius:50px;background:var(--cream);font-family:'Lato',sans-serif;font-size:14px;color:var(--text-dark);outline:none;}
+.header-search input{width:100%;padding:12px 44px 12px 16px;border:2px solid var(--border);border-radius:50px;background:var(--cream);font-family:'Lato',sans-serif;font-size:14px;color:var(--text-dark);outline:none;transition:border-color .2s;}
 .header-search input:focus{border-color:var(--terracotta);}
-.header-search button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;}
+.header-search button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-light);}
 .header-actions{display:flex;align-items:center;gap:12px;}
 .btn-wp{display:flex;align-items:center;gap:8px;background:#25D366;color:white;border:none;border-radius:50px;padding:10px 18px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;}
-.btn-wp:hover{background:#1da851;}
+.btn-wp:hover{background:#1da851;transform:translateY(-1px);}
 .cart-btn{background:var(--terracotta);color:white;border:none;border-radius:50px;padding:10px 20px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;}
-.cart-btn:hover{background:var(--terracotta-dark);}
+.cart-btn:hover{background:var(--terracotta-dark);transform:translateY(-1px);}
 .cart-count{background:var(--amber-light);color:var(--text-dark);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
 nav{border-top:1px solid var(--border);background:var(--warm-white);}
-.nav-inner{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto;}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;overflow-x:auto;}
 .nav-item{padding:12px 14px;font-size:13px;font-weight:700;color:var(--text-mid);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
 .nav-item:hover,.nav-item.active{color:var(--terracotta);border-bottom-color:var(--terracotta);}
 .page{display:none;}.page.active{display:block;}
 .hero{background:linear-gradient(135deg,#2C1810 0%,#5C3D2E 40%,#8B4513 70%,#C0522A 100%);min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
 .hero-content{max-width:1300px;margin:0 auto;padding:60px 24px;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .hero-badge{display:inline-block;background:rgba(240,168,32,.2);border:1px solid rgba(240,168,32,.4);color:var(--amber-light);padding:6px 16px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 .hero-text h1{font-family:'Playfair Display',serif;font-size:48px;line-height:1.15;margin-bottom:20px;font-weight:700;color:white;}
 .hero-text h1 em{color:var(--amber-light);font-style:italic;}
 .hero-text p{font-size:16px;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:32px;}
 .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
-.btn-primary{background:var(--amber-light);color:var(--text-dark);border:none;border-radius:50px;padding:14px 28px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;}
+.btn-primary{background:var(--amber-light);color:var(--text-dark);border:none;border-radius:50px;padding:14px 28px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
 .btn-primary:hover{background:#FFB830;transform:translateY(-2px);}
-.btn-secondary{background:transparent;color:white;border:2px solid rgba(255,255,255,.4);border-radius:50px;padding:12px 24px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
+.btn-secondary{background:transparent;color:white;border:2px solid rgba(255,255,255,.4);border-radius:50px;padding:12px 24px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-secondary:hover{border-color:white;background:rgba(255,255,255,.1);}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;text-align:center;}
+.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;text-align:center;backdrop-filter:blur(10px);}
 .hero-card:nth-child(even){margin-top:20px;}
 .hero-card .icon{font-size:44px;margin-bottom:8px;}
 .hero-card .name{color:white;font-family:'Playfair Display',serif;font-size:15px;}
@@ -58,7 +60,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .filter-btn{padding:8px 18px;border-radius:50px;border:2px solid var(--border);background:white;color:var(--text-mid);font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .filter-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
 .filter-btn.active{background:var(--terracotta);color:white;border-color:var(--terracotta);}
-.sort-select{margin-left:auto;padding:8px 14px;border-radius:50px;border:2px solid var(--border);background:white;font-family:'Lato',sans-serif;font-size:13px;cursor:pointer;outline:none;}
+.sort-select{margin-left:auto;padding:8px 14px;border-radius:50px;border:2px solid var(--border);background:white;font-family:'Lato',sans-serif;font-size:13px;color:var(--text-mid);cursor:pointer;outline:none;}
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:26px;}
 .product-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);transition:all .3s;position:relative;}
 .product-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(92,61,46,.2);}
@@ -67,39 +69,48 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .badge-popular{background:var(--terracotta);color:white;}
 .badge-fresh{background:var(--amber);color:white;}
 .badge-new{background:var(--olive);color:white;}
-.product-img-box{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:72px;overflow:hidden;}
+.product-img-box{width:100%;height:210px;display:flex;align-items:center;justify-content:center;font-size:72px;overflow:hidden;}
 .product-img-box img{width:100%;height:100%;object-fit:cover;}
 .product-body{padding:18px;}
 .product-category{font-size:11px;font-weight:700;color:var(--terracotta);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
 .product-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--text-dark);margin-bottom:5px;}
-.product-desc{font-size:13px;color:var(--text-light);line-height:1.5;margin-bottom:12px;}
-.product-rating{display:flex;align-items:center;gap:6px;margin-bottom:12px;}
+.product-desc{font-size:13px;color:var(--text-light);line-height:1.5;margin-bottom:10px;}
+.product-rating{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
 .stars{color:var(--amber);font-size:14px;}
-.variant-selector{margin-bottom:10px;}
-.variant-selector label{font-size:12px;color:var(--text-light);font-weight:700;display:block;margin-bottom:6px;}
+/* VARİANT */
+.variant-selector{margin-bottom:8px;}
+.variant-selector>label{font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
 .variant-buttons{display:flex;flex-wrap:wrap;gap:6px;}
-.variant-btn{padding:6px 12px;border:2px solid var(--border);border-radius:10px;background:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.variant-btn{padding:6px 12px;border:2px solid var(--border);border-radius:8px;background:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text-mid);}
 .variant-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
-.variant-btn.selected{border-color:var(--terracotta);background:var(--terracotta);color:white;}
+.variant-btn.selected{background:var(--terracotta);color:white;border-color:var(--terracotta);}
 .variant-btn.out-of-stock{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
-.product-price-display{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--terracotta);margin:10px 0 3px;}
-.stock-ok{font-size:11px;color:var(--olive);margin-bottom:10px;}
-.stock-low{font-size:11px;color:var(--amber);margin-bottom:10px;}
-.stock-out{font-size:11px;color:#C62828;margin-bottom:10px;}
+.product-price-display{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--terracotta);margin:8px 0 4px;}
+.stock-ok{font-size:11px;color:var(--olive);font-weight:700;margin-bottom:10px;}
+.stock-low{font-size:11px;color:var(--amber);font-weight:700;margin-bottom:10px;}
+.stock-out{font-size:11px;color:#C62828;font-weight:700;margin-bottom:10px;}
 .qty-selector{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
-.qty-selector label{font-size:12px;color:var(--text-light);font-weight:700;}
+.qty-selector label{font-size:12px;color:var(--text-light);font-weight:700;white-space:nowrap;}
 .qty-input{width:65px;padding:7px 8px;border:2px solid var(--border);border-radius:10px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;text-align:center;color:var(--text-dark);outline:none;}
 .qty-input:focus{border-color:var(--terracotta);}
 .add-cart-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:12px;padding:12px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .add-cart-btn:hover{background:linear-gradient(135deg,var(--terracotta-dark),var(--terracotta));transform:translateY(-1px);}
 .add-cart-btn.added{background:linear-gradient(135deg,var(--olive),var(--olive-light));}
-.add-cart-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;}
-.reviews-toggle{margin-top:10px;background:none;border:none;color:var(--terracotta);font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;font-family:'Lato',sans-serif;padding:0;}
-.reviews-list{display:none;margin-top:10px;max-height:300px;overflow-y:auto;}
-.reviews-list.open{display:block;}
-.review-item{background:var(--cream);border-radius:10px;padding:10px;margin-bottom:7px;border-left:3px solid var(--terracotta);}
+.add-cart-btn:disabled{background:#bbb;cursor:not-allowed;transform:none;}
+/* YORUM BUTONU & MODALİ */
+.reviews-toggle-btn{margin-top:10px;background:none;border:none;color:var(--terracotta);font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;font-family:'Lato',sans-serif;padding:0;display:block;}
+.review-modal-overlay{display:none;position:fixed;inset:0;background:rgba(44,24,16,.6);z-index:3000;backdrop-filter:blur(4px);align-items:center;justify-content:center;}
+.review-modal-overlay.open{display:flex;}
+.review-modal{background:white;border-radius:20px;padding:32px;max-width:560px;width:92%;max-height:80vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.review-modal h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;color:var(--text-dark);padding-right:40px;}
+.review-modal .modal-sub{font-size:13px;color:var(--text-light);margin-bottom:20px;}
+.review-modal-close{position:absolute;top:16px;right:16px;background:var(--cream);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-mid);}
+.review-item{background:var(--cream);border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid var(--terracotta);}
+.review-item-header{display:flex;justify-content:space-between;margin-bottom:5px;}
 .review-author{font-size:12px;font-weight:700;color:var(--text-dark);}
-.review-text{font-size:12px;color:var(--text-light);line-height:1.5;margin-top:4px;}
+.review-stars-sm{color:var(--amber);font-size:12px;}
+.review-text{font-size:13px;color:var(--text-light);line-height:1.5;}
+/* SEPET */
 .cart-overlay{display:none;position:fixed;inset:0;background:rgba(44,24,16,.5);z-index:2000;backdrop-filter:blur(4px);}
 .cart-overlay.open{display:block;}
 .cart-sidebar{position:fixed;right:0;top:0;bottom:0;width:400px;max-width:95vw;background:var(--warm-white);box-shadow:-8px 0 40px rgba(44,24,16,.2);z-index:2001;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease;}
@@ -125,6 +136,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .cart-total .amount{font-family:'Playfair Display',serif;font-size:22px;color:var(--text-dark);font-weight:700;}
 .cart-shipping-note{font-size:12px;color:var(--olive);margin-bottom:14px;text-align:center;}
 .checkout-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:14px;padding:15px;font-family:'Lato',sans-serif;font-size:16px;font-weight:700;cursor:pointer;}
+/* CHECKOUT */
 .checkout-layout{display:grid;grid-template-columns:1fr 360px;gap:36px;max-width:1060px;margin:0 auto;padding:40px 24px;}
 .checkout-form-section h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:24px;}
 .form-group{margin-bottom:16px;}
@@ -153,7 +165,6 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .success-page p{font-size:16px;color:var(--text-light);line-height:1.6;margin-bottom:28px;}
 .about-hero{background:linear-gradient(135deg,#2C1810,#5C3D2E);padding:80px 24px;text-align:center;color:white;}
 .about-hero h1{font-family:'Playfair Display',serif;font-size:42px;margin-bottom:14px;}
-.about-hero p{font-size:17px;color:rgba(255,255,255,.75);max-width:580px;margin:0 auto;}
 .about-content{max-width:900px;margin:0 auto;padding:70px 24px;}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:64px;}
 .about-img-box{height:380px;background:linear-gradient(135deg,var(--cream),#EDD9B8);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:80px;}
@@ -174,7 +185,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .review-card{background:white;border-radius:16px;padding:22px;box-shadow:0 4px 20px var(--shadow);}
 .review-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
 .reviewer-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--terracotta),var(--amber));color:white;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;}
-.reviewer-name{font-weight:700;font-size:14px;color:var(--text-dark);}
+.reviewer-name{font-weight:700;font-size:14px;}
 .reviewer-date{font-size:12px;color:var(--text-light);}
 .review-card p{font-size:14px;color:var(--text-mid);line-height:1.7;font-style:italic;}
 .product-tag{display:inline-block;background:var(--cream);border:1px solid var(--border);border-radius:50px;padding:4px 12px;font-size:11px;color:var(--text-light);margin-top:10px;}
@@ -183,7 +194,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .contact-info>p{font-size:15px;color:var(--text-light);line-height:1.7;margin-bottom:28px;}
 .contact-method{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;}
 .contact-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.contact-method h4{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:3px;}
+.contact-method h4{font-size:14px;font-weight:700;margin-bottom:3px;}
 .contact-method p,.contact-method a{font-size:13px;color:var(--text-light);}
 .contact-method a{color:var(--terracotta);font-weight:700;text-decoration:none;}
 .wp-big-btn{display:flex;align-items:center;gap:12px;background:#25D366;color:white;border:none;border-radius:16px;padding:16px 24px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;margin-top:10px;}
@@ -210,7 +221,20 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
 </style>
 </head>
 <body>
+
 <div class="toast" id="toast"></div>
+
+<!-- YORUM MODALİ -->
+<div class="review-modal-overlay" id="reviewModalOverlay" onclick="closeReviewModal()">
+  <div class="review-modal" onclick="event.stopPropagation()">
+    <button class="review-modal-close" onclick="closeReviewModal()">✕</button>
+    <h3 id="reviewModalTitle"></h3>
+    <div class="modal-sub" id="reviewModalSub"></div>
+    <div id="reviewModalList"></div>
+  </div>
+</div>
+
+<!-- SEPET -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-header"><h3>🛒 Sepetiniz</h3><button class="close-btn" onclick="closeCart()">✕</button></div>
@@ -221,6 +245,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     <button class="checkout-btn" onclick="goToCheckout()">Siparişi Tamamla →</button>
   </div>
 </div>
+
+<!-- HEADER -->
 <header>
   <div class="header-top">🌿 Katkısız · Doğal · El Yapımı — Her lokma bir sevgi</div>
   <div class="header-main">
@@ -243,6 +269,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div></nav>
 </header>
 
+<!-- ANA SAYFA -->
 <div class="page active" id="page-home">
   <div class="hero">
     <div class="hero-content">
@@ -270,6 +297,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- ÜRÜNLER -->
 <div class="page" id="page-products">
   <div class="section">
     <div class="section-header"><div class="eyebrow">Tüm Ürünlerimiz</div><h2>Doğal Lezzetler</h2><p>Her ürün özenle hazırlanmış, katkısız ve tamamen doğal</p></div>
@@ -287,6 +315,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- YORUMLAR -->
 <div class="page" id="page-reviews">
   <div class="reviews-hero"><h1>❤️ Müşteri Yorumları</h1><p>Gerçek müşterilerimizin gerçek deneyimleri</p></div>
   <div class="section">
@@ -299,6 +328,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- HAKKIMIZDA -->
 <div class="page" id="page-about">
   <div class="about-hero"><h1>Hikayemiz</h1><p>Bir annenin sevgisiyle başlayan lezzetler</p></div>
   <div class="about-content">
@@ -306,7 +336,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
       <div class="about-img-box">👩‍🍳</div>
       <div class="about-text">
         <h2>Annemin Mutfağından Sofranıza</h2>
-        <p>Her ürün, katkı maddesi olmadan, geleneksel yöntemlerle özenle hazırlanıyor. Pulbiberimiz güneşte kurutulur, salçamız taş baskıyla yapılır, balımız çiçekten çiçeğe koşan arılarımızdan gelir.</p>
+        <p>Her ürün, katkı maddesi olmadan, geleneksel yöntemlerle özenle hazırlanıyor.</p>
         <div style="margin-top:26px;padding:18px;background:linear-gradient(135deg,#FFF5E8,#FCECD8);border-radius:14px;border-left:4px solid var(--terracotta);">
           <p style="font-style:italic;color:var(--text-dark);font-size:15px;">"Her kavanozun içinde sadece ürün değil, yıllarca aktarılan bir bilgi, bir sevgi var."</p>
         </div>
@@ -321,16 +351,15 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- İLETİŞİM -->
 <div class="page" id="page-contact">
   <div class="contact-layout">
     <div class="contact-info">
       <h2>Bize Ulaşın</h2>
-      <p>Siparişleriniz veya ürünlerimiz hakkında istediğiniz zaman yazabilirsiniz.</p>
+      <p>Siparişleriniz hakkında istediğiniz zaman yazabilirsiniz.</p>
       <div class="contact-method"><div class="contact-icon" style="background:#E8F5E9;">📱</div><div><h4>WhatsApp</h4><p><a href="https://wa.me/905442852219">+90 544 285 22 19</a></p></div></div>
       <div class="contact-method"><div class="contact-icon" style="background:#FFF3E0;">📍</div><div><h4>Konum</h4><p>Gaziantep, Türkiye</p></div></div>
-      <a class="wp-big-btn" href="https://wa.me/905442852219?text=Merhaba%20sipari%C5%9F%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank">
-        <span style="font-size:24px;">💬</span><div><div>WhatsApp'tan Yaz</div><div style="font-size:11px;opacity:.85;">Hızlıca cevap veriyoruz!</div></div>
-      </a>
+      <a class="wp-big-btn" href="https://wa.me/905442852219?text=Merhaba%20bilgi%20almak%20istiyorum." target="_blank"><span style="font-size:24px;">💬</span><div><div>WhatsApp'tan Yaz</div><div style="font-size:11px;opacity:.85;">Hızlıca cevap veriyoruz!</div></div></a>
     </div>
     <div class="contact-form-card">
       <h3>Mesaj Gönder</h3>
@@ -342,11 +371,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- SİPARİŞ -->
 <div class="page" id="page-checkout">
   <div class="checkout-layout">
     <div class="checkout-form-section">
       <h2>Sipariş Bilgileri</h2>
-      <div class="privacy-note"><div style="font-size:20px;flex-shrink:0;">🔒</div><p><strong>Gizlilik Güvencesi:</strong> Bilgileriniz yalnızca bu siparişin iletilmesi için kullanılır.</p></div>
+      <div class="privacy-note"><div style="font-size:20px;flex-shrink:0;">🔒</div><p><strong>Kişisel Verilerin Korunması (KVKK):</strong> Girdiğiniz ad, telefon ve adres bilgileri yalnızca siparişinizin hazırlanması ve teslimatı amacıyla kullanılır. Bu bilgiler hiçbir üçüncü kişi veya kuruluşla paylaşılmaz. Sipariş teslim edildikten sonra verileriniz sistemden silinir. 6698 sayılı KVKK kapsamındaki haklarınız saklıdır.</p></div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Ad</label><input class="form-input" id="ckAd" placeholder="Adınız"></div>
         <div class="form-group"><label class="form-label">Soyad</label><input class="form-input" id="ckSoyad" placeholder="Soyadınız"></div>
@@ -379,6 +409,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- BAŞARILI -->
 <div class="page" id="page-success">
   <div class="success-page">
     <div class="success-icon">🎉</div>
@@ -390,13 +421,50 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- KVKK -->
+<div class="page" id="page-kvkk">
+  <div style="max-width:760px;margin:0 auto;padding:60px 24px;">
+    <h1 style="font-family:'Playfair Display',serif;font-size:32px;margin-bottom:8px;">🔒 KVKK Aydınlatma Metni</h1>
+    <p style="color:var(--text-light);font-size:14px;margin-bottom:36px;">6698 Sayılı Kişisel Verilerin Korunması Kanunu Kapsamında</p>
+
+    <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 4px 20px var(--shadow);line-height:1.8;color:var(--text-mid);font-size:14px;">
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">1. Veri Sorumlusu</h3>
+      <p style="margin-bottom:22px;">Annenin Doğal Tadları olarak, kişisel verilerinizin güvenliği ve gizliliğine önem veriyoruz. İletişim: <a href="https://wa.me/905442852219" style="color:var(--terracotta);font-weight:700;">+90 544 285 22 19</a></p>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">2. Toplanan Kişisel Veriler</h3>
+      <p style="margin-bottom:22px;">Sipariş sürecinde yalnızca şu bilgiler alınmaktadır: ad-soyad, telefon numarası, teslimat adresi ve isteğe bağlı sipariş notu. Ödeme bilgisi (kart numarası vb.) hiçbir şekilde sistemimizde saklanmamaktadır.</p>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">3. Verilerin Kullanım Amacı</h3>
+      <p style="margin-bottom:22px;">Toplanan kişisel veriler yalnızca şu amaçlarla kullanılır: siparişin hazırlanması, kargoya verilmesi ve teslimat sürecinin yönetilmesi. Başka hiçbir amaçla kullanılmaz.</p>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">4. Verilerin Paylaşımı</h3>
+      <p style="margin-bottom:22px;">Kişisel verileriniz hiçbir üçüncü kişi, kuruluş veya reklam platformuyla paylaşılmaz. Kargo teslimatı için yalnızca kargo firmasıyla zorunlu bilgiler paylaşılır.</p>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">5. Saklama Süresi</h3>
+      <p style="margin-bottom:22px;">Sipariş bilgileriniz teslimat tamamlandıktan sonra en geç 30 gün içinde sistemden silinir.</p>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">6. Haklarınız</h3>
+      <p style="margin-bottom:28px;">6698 sayılı KVKK'nın 11. maddesi uyarınca; kişisel verilerinize erişme, düzeltme, silme veya işlenmesine itiraz etme haklarına sahipsiniz. Bu haklarınızı kullanmak için WhatsApp üzerinden bizimle iletişime geçebilirsiniz.</p>
+
+      <div style="background:var(--cream);border-radius:12px;padding:16px;border-left:4px solid var(--terracotta);">
+        <p style="font-size:13px;color:var(--text-light);">Bu aydınlatma metni, Annenin Doğal Tadları tarafından hazırlanmıştır ve gerektiğinde güncellenebilir.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;">
+      <button class="btn-primary" onclick="history.back()">← Geri Dön</button>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand-name">🌾 Annenin Doğal Tadları</div>
         <p>Katkısız, el yapımı, geleneksel yöntemlerle hazırlanan doğal ürünler.</p>
-        <a class="btn-wp" href="https://wa.me/905442852219?text=Merhaba%2C%20sipari%C5%9F%20vermek%20istiyorum." target="_blank" style="display:inline-flex;margin-top:4px;">💬 WhatsApp</a>
+        <a class="btn-wp" href="https://wa.me/905442852219" target="_blank" style="display:inline-flex;margin-top:4px;">💬 WhatsApp</a>
       </div>
       <div class="footer-col"><h4>Ürünler</h4>
         <a onclick="setCat('baharat',null);showPage('products');setNav(1)">Baharat</a>
@@ -415,7 +483,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
         <a>📍 Gaziantep, Türkiye</a>
       </div>
     </div>
-    <div class="footer-bottom"><span>© 2026 Annenin Doğal Tadları.</span><span>🔒 Müşteri bilgileri kayıt altında tutulmaz</span></div>
+    <div class="footer-bottom"><span>© 2026 Annenin Doğal Tadları.</span><span style="cursor:pointer;" onclick="showPage('kvkk');setNav(-1)">🔒 KVKK Aydınlatma Metni</span></div>
   </div>
 </footer>
 
@@ -429,236 +497,254 @@ const CAT_GRAD   = {baharat:'#FFD0A0,#FF8C5A',salca:'#FFB0A0,#E84040',kuru:'#D4C
 const STATIC_REVIEWS = [
   {name:'Zeynep A.',product:'Pul Biber',stars:5,text:'Bu lezzeti başka hiçbir yerde bulamadım!',date:'2 gün önce'},
   {name:'Murat K.',product:'Çiçek Balı',stars:5,text:'Ham bal bu, gerçekten işlenmemiş. Müthiş.',date:'5 gün önce'},
-  {name:'Ayşe Y.',product:'Domates Salçası',stars:5,text:'Fabrika salçasıyla karşılaştırılamaz. Kış için stok yaptım.',date:'1 hafta önce'},
+  {name:'Ayşe Y.',product:'Domates Salçası',stars:5,text:'Fabrika salçasıyla karşılaştırılamaz.',date:'1 hafta önce'},
   {name:'Cemil A.',product:'Antepfıstığı',stars:5,text:'Gaziantep fıstığının gerçek lezzeti!',date:'1 hafta önce'},
   {name:'Necdet B.',product:'Köy Ekmeği',stars:5,text:'Yıllardır böyle ekmek yememiştim!',date:'2 hafta önce'},
   {name:'Büşra Y.',product:'Meyve Kuruları',stars:5,text:'Çocuklarım çok seviyor.',date:'3 hafta önce'},
 ];
 
-let allProducts = [];
-let cart = [];
-let activeCat = 'all';
-// SEPET AÇMA MANTIĞI:
-// cartWasEmpty = true iken addToCart çağrılırsa sepet açılır, sonra false olur
-// Sipariş tamamlandığında veya tüm ürünler sepetten çıkarıldığında tekrar true olur
+let allProducts=[], cart=[], activeCat='all';
+// SEPET AÇMA MANTIĞI: sepet boş → ilk ürün eklemede aç, sonra kapat
 let cartWasEmpty = true;
 
 async function loadProducts() {
   try {
-    const { data, error } = await sb.from('products').select('*').eq('active',true).order('created_at',{ascending:false});
-    if (error) throw error;
-    allProducts = data || [];
-  } catch(e) { allProducts = []; }
+    const {data,error} = await sb.from('products').select('*').eq('active',true).order('created_at',{ascending:false});
+    if(error) throw error;
+    allProducts = data||[];
+  } catch(e){allProducts=[];}
   renderFeatured(); applyFilters();
 }
 
-function stockLabel(stock) {
-  if (stock <= 0) return {cls:'stock-out',txt:'⛔ Tükendi'};
-  if (stock <= 5) return {cls:'stock-low',txt:'⚠️ Son '+stock+' adet'};
+function stockLabel(stock){
+  if(stock<=0) return {cls:'stock-out',txt:'⛔ Tükendi'};
+  if(stock<=5) return {cls:'stock-low',txt:'⚠️ Son '+stock+' adet'};
   return {cls:'stock-ok',txt:'✅ Stokta var'};
 }
 
-function buildVariants(p, cid) {
-  const variants = p.variants || [];
-  if (!variants.length) {
-    const si = stockLabel(p.stock ?? 99);
-    return '<div class="product-price-display" id="price-'+cid+'">₺'+p.price+'</div>' +
-           '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>' +
-           '<input type="hidden" id="sv-'+cid+'" value="Standart">' +
-           '<input type="hidden" id="sp-'+cid+'" value="'+p.price+'">' +
+function buildVariants(p,cid){
+  const variants=p.variants||[];
+  if(!variants.length){
+    const si=stockLabel(p.stock??99);
+    return '<div class="product-price-display" id="price-'+cid+'">₺'+p.price+'</div>'+
+           '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>'+
+           '<input type="hidden" id="sv-'+cid+'" value="Standart">'+
+           '<input type="hidden" id="sp-'+cid+'" value="'+p.price+'">'+
            '<input type="hidden" id="ss-'+cid+'" value="'+(p.stock??99)+'">';
   }
-  const first = variants[0];
-  const si = stockLabel(first.stock);
-  const btns = variants.map((v,i) =>
-    '<button class="variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'" ' +
-    'onclick="selVar('+p.id+',\''+cid+'\','+i+')" id="vb-'+cid+'-'+i+'" '+(v.stock<=0?'disabled':'')+'>'+
+  const first=variants[0]; const si=stockLabel(first.stock);
+  const btns=variants.map((v,i)=>
+    '<button class="variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'"'+
+    ' onclick="selVar('+p.id+',\''+cid+'\','+i+')" id="vb-'+cid+'-'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
     v.label+' — ₺'+v.price+'</button>'
   ).join('');
-  return '<div class="variant-selector"><label>Seçenek & Fiyat:</label><div class="variant-buttons">'+btns+'</div></div>' +
-         '<div class="product-price-display" id="price-'+cid+'">₺'+first.price+'</div>' +
-         '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>' +
-         '<input type="hidden" id="sv-'+cid+'" value="'+first.label+'">' +
-         '<input type="hidden" id="sp-'+cid+'" value="'+first.price+'">' +
+  return '<div class="variant-selector"><label>Seçenek & Fiyat:</label><div class="variant-buttons">'+btns+'</div></div>'+
+         '<div class="product-price-display" id="price-'+cid+'">₺'+first.price+'</div>'+
+         '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>'+
+         '<input type="hidden" id="sv-'+cid+'" value="'+first.label+'">'+
+         '<input type="hidden" id="sp-'+cid+'" value="'+first.price+'">'+
          '<input type="hidden" id="ss-'+cid+'" value="'+first.stock+'">';
 }
 
-function selVar(pid, cid, idx) {
-  const p = allProducts.find(x=>x.id===pid); if (!p) return;
-  const v = p.variants[idx];
-  p.variants.forEach((_,i) => { const b=document.getElementById('vb-'+cid+'-'+i); if(b) b.classList.toggle('selected',i===idx); });
-  document.getElementById('price-'+cid).textContent = '₺'+v.price;
-  const si = stockLabel(v.stock);
-  const siEl = document.getElementById('si-'+cid);
-  siEl.textContent = si.txt; siEl.className = si.cls;
-  document.getElementById('sv-'+cid).value = v.label;
-  document.getElementById('sp-'+cid).value = v.price;
-  document.getElementById('ss-'+cid).value = v.stock;
-  const ab = document.getElementById('ab-'+cid);
-  if (ab) { ab.disabled = v.stock<=0; ab.textContent = v.stock<=0 ? '⛔ Tükendi' : '🛒 Sepete Ekle'; }
+function selVar(pid,cid,idx){
+  const p=allProducts.find(x=>x.id===pid); if(!p) return;
+  const v=p.variants[idx];
+  p.variants.forEach((_,i)=>{const b=document.getElementById('vb-'+cid+'-'+i);if(b)b.classList.toggle('selected',i===idx);});
+  document.getElementById('price-'+cid).textContent='₺'+v.price;
+  const si=stockLabel(v.stock);
+  const siEl=document.getElementById('si-'+cid); siEl.textContent=si.txt; siEl.className=si.cls;
+  document.getElementById('sv-'+cid).value=v.label;
+  document.getElementById('sp-'+cid).value=v.price;
+  document.getElementById('ss-'+cid).value=v.stock;
+  const ab=document.getElementById('ab-'+cid);
+  if(ab){ab.disabled=v.stock<=0; ab.textContent=v.stock<=0?'⛔ Tükendi':'🛒 Sepete Ekle';}
 }
 
-function productCard(p) {
-  const grad  = CAT_GRAD[p.category]||'#EDD9B8,#C4A060';
-  const badge = p.badge ? '<div class="product-badge-wrap"><span class="badge badge-'+p.badge+'">'+(p.badge==='popular'?'⭐ Popüler':p.badge==='fresh'?'🌿 Taze':'✨ Yeni')+'</span></div>' : '';
-  const cid   = 'p'+p.id;
-  const reviews = p.reviews || [];
-  const revHtml = reviews.length ? '<button class="reviews-toggle" onclick="document.getElementById(\'rv'+p.id+'\').classList.toggle(\'open\')">💬 Yorumları Gör ('+reviews.length+')</button>' +
-    '<div class="reviews-list" id="rv'+p.id+'">' +
-    reviews.map(r=>'<div class="review-item"><div style="display:flex;justify-content:space-between;"><span class="review-author">'+r.author+'</span><span style="color:var(--amber);font-size:12px;">'+'⭐'.repeat(r.stars)+'</span></div><div class="review-text">'+r.text+'</div></div>').join('') +
-    '</div>' : '';
+function productCard(p){
+  const grad=CAT_GRAD[p.category]||'#EDD9B8,#C4A060';
+  const badge=p.badge?'<div class="product-badge-wrap"><span class="badge badge-'+p.badge+'">'+(p.badge==='popular'?'⭐ Popüler':p.badge==='fresh'?'🌿 Taze':'✨ Yeni')+'</span></div>':'';
+  const cid='p'+p.id;
+  const reviews=p.reviews||[];
+  // Yorum butonu → modal açar (artık kart içinde gizli liste YOK)
+  const revBtn=reviews.length
+    ?'<button class="reviews-toggle-btn" onclick="openReviewModal('+p.id+')">💬 '+reviews.length+' Yorumu Gör</button>'
+    :'';
   return '<div class="product-card">'+badge+
     '<div class="product-img-box" style="background:linear-gradient(135deg,'+grad+')">'+(p.emoji||'📦')+'</div>'+
     '<div class="product-body">'+
     '<div class="product-category">'+(CAT_LABELS[p.category]||p.category)+'</div>'+
     '<div class="product-name">'+p.name+'</div>'+
     '<div class="product-desc">'+(p.description||'')+'</div>'+
-    (p.rating?'<div class="product-rating"><span class="stars">'+'⭐'.repeat(Math.round(p.rating))+'</span><span style="font-size:13px;font-weight:700;">'+p.rating+'</span><span style="font-size:12px;color:var(--text-light);">('+( p.review_count||reviews.length)+' yorum)</span></div>':'')+
-    buildVariants(p, cid)+
+    (p.rating?'<div class="product-rating"><span class="stars">'+'⭐'.repeat(Math.round(p.rating||0))+'</span><span style="font-size:13px;font-weight:700;margin-left:4px;">'+p.rating+'</span><span style="font-size:12px;color:var(--text-light);margin-left:4px;">('+( p.review_count||reviews.length)+' yorum)</span></div>':'')+
+    buildVariants(p,cid)+
     '<div class="qty-selector"><label>Adet:</label><input class="qty-input" type="number" value="1" min="1" step="1" id="qty-'+cid+'"></div>'+
     '<button class="add-cart-btn" id="ab-'+cid+'" onclick="addToCart('+p.id+',\''+cid+'\')">🛒 Sepete Ekle</button>'+
-    revHtml+
+    revBtn+
     '</div></div>';
 }
 
-function renderFeatured() {
-  const list = allProducts.filter(p=>p.badge).slice(0,4);
-  const show  = list.length>=2 ? list : allProducts.slice(0,4);
-  const el = document.getElementById('featuredGrid');
-  if (el) el.innerHTML = show.length ? show.map(productCard).join('') : '<p style="grid-column:1/-1;text-align:center;color:var(--text-light);">Ürün bulunamadı.</p>';
+function renderFeatured(){
+  const list=allProducts.filter(p=>p.badge).slice(0,4);
+  const show=list.length>=2?list:allProducts.slice(0,4);
+  const el=document.getElementById('featuredGrid');
+  if(el) el.innerHTML=show.length?show.map(productCard).join(''):'<p style="grid-column:1/-1;text-align:center;color:var(--text-light);">Ürün bulunamadı.</p>';
 }
 
-function applyFilters() {
-  let list = [...allProducts];
-  if (activeCat!=='all') list = list.filter(p=>p.category===activeCat);
-  const q = document.getElementById('searchInput')?.value.toLowerCase()||'';
-  if (q) list = list.filter(p=>p.name.toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q));
-  const sort = document.getElementById('sortSelect')?.value||'';
-  if (sort==='price-asc')  list.sort((a,b)=>a.price-b.price);
-  if (sort==='price-desc') list.sort((a,b)=>b.price-a.price);
-  if (sort==='rating')     list.sort((a,b)=>(b.rating||0)-(a.rating||0));
-  const el = document.getElementById('productsGrid');
-  if (el) el.innerHTML = list.length ? list.map(productCard).join('') : '<p style="grid-column:1/-1;text-align:center;color:var(--text-light);">Bu kategoride ürün yok.</p>';
+function applyFilters(){
+  let list=[...allProducts];
+  if(activeCat!=='all') list=list.filter(p=>p.category===activeCat);
+  const q=document.getElementById('searchInput')?.value.toLowerCase()||'';
+  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q));
+  const sort=document.getElementById('sortSelect')?.value||'';
+  if(sort==='price-asc') list.sort((a,b)=>a.price-b.price);
+  if(sort==='price-desc') list.sort((a,b)=>b.price-a.price);
+  if(sort==='rating') list.sort((a,b)=>(b.rating||0)-(a.rating||0));
+  const el=document.getElementById('productsGrid');
+  if(el) el.innerHTML=list.length?list.map(productCard).join(''):'<p style="grid-column:1/-1;text-align:center;color:var(--text-light);">Bu kategoride ürün yok.</p>';
 }
 
-function setCat(cat,btn) {
+function setCat(cat,btn){
   activeCat=cat;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   applyFilters();
 }
 
-// SEPET
-function addToCart(pid, cid) {
-  const p = allProducts.find(x=>x.id===pid); if(!p) return;
-  const variant = document.getElementById('sv-'+cid)?.value || 'Standart';
-  const price   = parseFloat(document.getElementById('sp-'+cid)?.value || p.price);
-  const stock   = parseInt(document.getElementById('ss-'+cid)?.value   || 99);
-  const qty     = parseInt(document.getElementById('qty-'+cid)?.value  || 1);
-  if (stock<=0) { showToast('⛔ Bu ürün tükendi!','error'); return; }
-  const ex = cart.find(x=>x.id===pid&&x.variant===variant);
-  if (ex && ex.qty+qty > stock) { showToast('⚠️ Stokta yalnızca '+stock+' adet var!','error'); return; }
-  if (ex) ex.qty+=qty; else cart.push({id:pid,name:p.name,emoji:p.emoji||'📦',price,qty,variant,unit:p.unit||''});
+// ── YORUM MODALİ ─────────────────────────────────────────────
+function openReviewModal(pid){
+  const p=allProducts.find(x=>x.id===pid); if(!p) return;
+  const reviews=p.reviews||[];
+  document.getElementById('reviewModalTitle').textContent=p.name+' — Yorumlar';
+  document.getElementById('reviewModalSub').textContent=reviews.length+' yorum · ⭐ '+(p.rating||'—')+' ortalama puan';
+  document.getElementById('reviewModalList').innerHTML=reviews.length
+    ?reviews.map(r=>
+        '<div class="review-item">'+
+        '<div class="review-item-header"><span class="review-author">'+r.author+'</span><span class="review-stars-sm">'+'⭐'.repeat(r.stars||5)+'</span></div>'+
+        '<div class="review-text">'+r.text+'</div>'+
+        '</div>'
+      ).join('')
+    :'<p style="color:var(--text-light);text-align:center;padding:20px;">Henüz yorum yok.</p>';
+  document.getElementById('reviewModalOverlay').classList.add('open');
+}
+function closeReviewModal(){ document.getElementById('reviewModalOverlay').classList.remove('open'); }
+
+// ── SEPET ─────────────────────────────────────────────────────
+function addToCart(pid,cid){
+  const p=allProducts.find(x=>x.id===pid); if(!p) return;
+  const variant=document.getElementById('sv-'+cid)?.value||'Standart';
+  const price=parseFloat(document.getElementById('sp-'+cid)?.value||p.price);
+  const stock=parseInt(document.getElementById('ss-'+cid)?.value||99);
+  const qty=parseInt(document.getElementById('qty-'+cid)?.value||1);
+  if(stock<=0){showToast('⛔ Bu ürün tükendi!','error');return;}
+  const ex=cart.find(x=>x.id===pid&&x.variant===variant);
+  if(ex&&ex.qty+qty>stock){showToast('⚠️ Stokta yalnızca '+stock+' adet var!','error');return;}
+  if(ex) ex.qty+=qty; else cart.push({id:pid,name:p.name,emoji:p.emoji||'📦',price,qty,variant,unit:p.unit||''});
   updateCartUI();
+  // Her eklemede toast göster
   showToast('✅ '+p.name+' ('+variant+') sepete eklendi!','success');
-  // Sadece sepet boşken ilk ürün eklendiğinde aç
-  if (cartWasEmpty) { openCart(); cartWasEmpty = false; }
-  const btn = document.getElementById('ab-'+cid);
-  if (btn) { const orig=btn.textContent; btn.textContent='✅ Eklendi!'; btn.classList.add('added'); setTimeout(()=>{btn.textContent=orig;btn.classList.remove('added');},2000); }
+  // Sepet boşken ilk ekleme → bir kez aç, sonra aynı sipariş için açma
+  if(cartWasEmpty){ openCart(); cartWasEmpty=false; }
+  const btn=document.getElementById('ab-'+cid);
+  if(btn){const orig=btn.textContent;btn.textContent='✅ Eklendi!';btn.classList.add('added');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('added');},2000);}
 }
 
-function removeFromCart(i) {
+function removeFromCart(i){
   cart.splice(i,1);
-  if (cart.length===0) cartWasEmpty = true; // sepet boşaldı → bir sonraki eklemede tekrar açılacak
+  if(cart.length===0) cartWasEmpty=true; // Sepet boşaldı → bir sonraki ilk ekleme yeniden açsın
   updateCartUI();
 }
 
-function updateCartUI() {
-  const total = cart.reduce((s,x)=>s+x.price*x.qty,0);
-  const count = cart.reduce((s,x)=>s+x.qty,0);
-  document.getElementById('cartBadge').textContent = Math.ceil(count);
-  const el = document.getElementById('cartItems');
-  if (!cart.length) {
+function updateCartUI(){
+  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+  const count=cart.reduce((s,x)=>s+x.qty,0);
+  document.getElementById('cartBadge').textContent=Math.ceil(count);
+  const el=document.getElementById('cartItems');
+  if(!cart.length){
     el.innerHTML='<div class="cart-empty"><div class="empty-icon">🧺</div><p>Sepetiniz boş</p></div>';
     document.getElementById('cartTotal').textContent='₺0,00';
     document.getElementById('shippingNote').textContent='🚚 500₺ üzeri kargo ücretsiz!';
     return;
   }
-  el.innerHTML = cart.map((item,i)=>'<div class="cart-item">'+
+  el.innerHTML=cart.map((item,i)=>'<div class="cart-item">'+
     '<div class="cart-item-emoji">'+item.emoji+'</div>'+
     '<div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-detail">'+item.variant+' × '+item.qty+'</div></div>'+
     '<div class="cart-item-price">₺'+(item.price*item.qty).toFixed(0)+'</div>'+
     '<button class="cart-item-remove" onclick="removeFromCart('+i+')">✕</button>'+
     '</div>').join('');
-  document.getElementById('cartTotal').textContent = '₺'+total.toFixed(2).replace('.',',');
-  document.getElementById('shippingNote').textContent = total>=500 ? '🎉 Kargo ücretsiz!' : '🚚 '+(500-total).toFixed(0)+'₺ daha alın, kargo bedava!';
+  document.getElementById('cartTotal').textContent='₺'+total.toFixed(2).replace('.',',');
+  document.getElementById('shippingNote').textContent=total>=500?'🎉 Kargo ücretsiz!':'🚚 '+(500-total).toFixed(0)+'₺ daha alın, kargo bedava!';
 }
 
-function openCart()  { document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartSidebar').classList.add('open'); }
-function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartSidebar').classList.remove('open'); }
+function openCart(){document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartSidebar').classList.add('open');}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartSidebar').classList.remove('open');}
 
-function goToCheckout() {
-  if (!cart.length) { showToast('⚠️ Sepetiniz boş!','error'); return; }
+function goToCheckout(){
+  if(!cart.length){showToast('⚠️ Sepetiniz boş!','error');return;}
   closeCart();
-  const total = cart.reduce((s,x)=>s+x.price*x.qty,0);
-  document.getElementById('orderItems').innerHTML = cart.map(x=>'<div class="summary-item"><span>'+x.emoji+' '+x.name+' — '+x.variant+' × '+x.qty+'</span><span>₺'+(x.price*x.qty).toFixed(0)+'</span></div>').join('');
-  document.getElementById('orderTotal').textContent = '₺'+total.toFixed(2).replace('.',',');
-  document.getElementById('cargoFee').textContent = total>=500 ? '🎉 Ücretsiz!' : '₺49,90';
-  showPage('checkout'); setNav(-1);
+  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+  document.getElementById('orderItems').innerHTML=cart.map(x=>'<div class="summary-item"><span>'+x.emoji+' '+x.name+' — '+x.variant+' × '+x.qty+'</span><span>₺'+(x.price*x.qty).toFixed(0)+'</span></div>').join('');
+  document.getElementById('orderTotal').textContent='₺'+total.toFixed(2).replace('.',',');
+  document.getElementById('cargoFee').textContent=total>=500?'🎉 Ücretsiz!':'₺49,90';
+  showPage('checkout');setNav(-1);
 }
 
-function selectPay(el) {
+function selectPay(el){
   document.querySelectorAll('.payment-option').forEach(x=>x.classList.remove('selected'));
-  el.classList.add('selected'); el.querySelector('input[type="radio"]').checked=true;
-  document.getElementById('eftInfo').style.display = el.querySelector('label').textContent.includes('EFT')?'block':'none';
+  el.classList.add('selected');el.querySelector('input[type="radio"]').checked=true;
+  document.getElementById('eftInfo').style.display=el.querySelector('label').textContent.includes('EFT')?'block':'none';
 }
 
-async function placeOrder() {
-  const ad=document.getElementById('ckAd').value.trim(), tel=document.getElementById('ckTel').value.trim(), adres=document.getElementById('ckAdres').value.trim();
-  if (!ad||!tel||!adres) { showToast('⚠️ Ad, telefon ve adres zorunludur!','error'); return; }
+async function placeOrder(){
+  const ad=document.getElementById('ckAd').value.trim(),tel=document.getElementById('ckTel').value.trim(),adres=document.getElementById('ckAdres').value.trim();
+  if(!ad||!tel||!adres){showToast('⚠️ Ad, telefon ve adres zorunludur!','error');return;}
   const payEl=document.querySelector('.payment-option.selected label');
   const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
   const orderData={customer_name:ad+' '+document.getElementById('ckSoyad').value.trim(),customer_phone:tel,customer_city:document.getElementById('ckSehir').value,customer_address:adres,order_note:document.getElementById('ckNot').value,payment_method:payEl?.textContent||'—',items:JSON.stringify(cart),total_amount:total,cargo_fee:total>=500?0:49.90,status:'Yeni'};
-  const btn=document.getElementById('placeOrderBtn'); btn.textContent='⏳ Gönderiliyor...'; btn.disabled=true;
-  try {
-    // Stok düşür
-    for (const item of cart) {
-      const p=allProducts.find(x=>x.id===item.id); if(!p) continue;
-      if (p.variants&&p.variants.length) {
+  const btn=document.getElementById('placeOrderBtn');btn.textContent='⏳ Gönderiliyor...';btn.disabled=true;
+  try{
+    // Stok düşür — her variant için ayrı ayrı
+    for(const item of cart){
+      const p=allProducts.find(x=>x.id===item.id);if(!p) continue;
+      if(p.variants&&p.variants.length){
         const vi=p.variants.findIndex(v=>v.label===item.variant);
-        if (vi>=0) { p.variants[vi].stock=Math.max(0,p.variants[vi].stock-item.qty); await sb.from('products').update({variants:p.variants}).eq('id',p.id); }
-      } else { p.stock=Math.max(0,(p.stock??99)-item.qty); await sb.from('products').update({stock:p.stock}).eq('id',p.id); }
+        if(vi>=0){p.variants[vi].stock=Math.max(0,p.variants[vi].stock-item.qty);await sb.from('products').update({variants:p.variants}).eq('id',p.id);}
+      } else {p.stock=Math.max(0,(p.stock??99)-item.qty);await sb.from('products').update({stock:p.stock}).eq('id',p.id);}
     }
     const {data,error}=await sb.from('orders').insert([orderData]).select();
-    if (error) throw error;
+    if(error) throw error;
     document.getElementById('orderNoTxt').textContent='#ADT-'+String(data[0].id).padStart(4,'0');
-    cart=[]; cartWasEmpty=true; updateCartUI();
-    showPage('success'); setNav(-1);
-  } catch(e) { showToast("❌ Sipariş gönderilemedi. WhatsApp'tan ulaşın.",'error'); console.error(e); }
-  finally { btn.textContent='✅ Siparişi Onayla'; btn.disabled=false; }
+    cart=[];cartWasEmpty=true;updateCartUI();
+    showPage('success');setNav(-1);
+  }catch(e){showToast("❌ Sipariş gönderilemedi. WhatsApp'tan ulaşın.",'error');console.error(e);}
+  finally{btn.textContent='✅ Siparişi Onayla';btn.disabled=false;}
 }
 
-function showPage(name) {
+function showPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name)?.classList.add('active'); window.scrollTo(0,0);
-  if (name==='products') applyFilters();
-  if (name==='reviews')  renderReviews();
+  document.getElementById('page-'+name)?.classList.add('active');window.scrollTo(0,0);
+  if(name==='products') applyFilters();
+  if(name==='reviews') renderReviews();
 }
-function setNav(i) { document.querySelectorAll('.nav-item').forEach((n,idx)=>n.classList.toggle('active',idx===i)); }
+function setNav(i){document.querySelectorAll('.nav-item').forEach((n,idx)=>n.classList.toggle('active',idx===i));}
 
-function renderReviews() {
-  document.getElementById('reviewsGrid').innerHTML = STATIC_REVIEWS.map(r=>'<div class="review-card"><div class="review-card-header"><div class="reviewer-avatar">'+r.name[0]+'</div><div><div class="reviewer-name">'+r.name+'</div><div class="reviewer-date">'+r.date+'</div></div></div><div class="stars" style="margin-bottom:10px;">'+'⭐'.repeat(r.stars)+'</div><p>"'+r.text+'"</p><span class="product-tag">'+r.product+'</span></div>').join('');
+function renderReviews(){
+  document.getElementById('reviewsGrid').innerHTML=STATIC_REVIEWS.map(r=>
+    '<div class="review-card">'+
+    '<div class="review-card-header"><div class="reviewer-avatar">'+r.name[0]+'</div><div><div class="reviewer-name">'+r.name+'</div><div class="reviewer-date">'+r.date+'</div></div></div>'+
+    '<div class="stars" style="margin-bottom:10px;">'+'⭐'.repeat(r.stars)+'</div>'+
+    '<p>"'+r.text+'"</p><span class="product-tag">'+r.product+'</span></div>'
+  ).join('');
 }
 
-function sendContact() {
-  const n=document.getElementById('cName').value.trim(), p=document.getElementById('cPhone').value.trim();
-  if (!n||!p) { showToast('⚠️ Ad ve telefon zorunludur!','error'); return; }
+function sendContact(){
+  const n=document.getElementById('cName').value.trim(),p=document.getElementById('cPhone').value.trim();
+  if(!n||!p){showToast('⚠️ Ad ve telefon zorunludur!','error');return;}
   showToast('✅ Mesajınız iletildi!','success');
 }
 
-function showToast(msg,type='') {
-  const t=document.getElementById('toast'); t.textContent=msg; t.className='toast show '+(type||'');
-  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3500);
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
 loadProducts();
