@@ -270,10 +270,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     <div class="cart-shipping-note" id="shippingNote">🚚 500₺ üzeri kargo ücretsiz!</div>
     <div class="cart-footer-btns">
       <button class="checkout-btn" onclick="goToCheckout()">Siparişi Tamamla →</button>
-      <div style="display:flex;gap:8px;">
-        <button class="edit-cart-btn" style="flex:1;" onclick="openCart()">🛒 Sepetimi Düzenle</button>
-        <button class="edit-cart-btn" style="flex:1;" onclick="closeCart();showPage('products')">← Alışverişe Devam Et</button>
-      </div>
+      <button class="edit-cart-btn" onclick="closeCart();showPage('products')">← Alışverişe Devam Et</button>
     </div>
   </div>
 </div>
@@ -288,7 +285,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     </div>
     <div class="header-search"><input type="text" placeholder="Ürün ara..." id="searchInput" oninput="applyFilters()"><button>🔍</button></div>
     <div class="header-actions">
-      <a class="btn-wp" href="https://wa.me/905442852219?text=Merhaba%20sipari%C5%9F%20vermek%20istiyorum." target="_blank">💬 WhatsApp</a>
+      <a href="#" onclick="event.preventDefault();openWA('905442852219',decodeURIComponent('Merhaba%20sipari%C5%9F%20vermek%20istiyorum.'))" class="btn-wp">💬 WhatsApp</a>
       <button class="cart-btn" onclick="openCart()">🛒 Sepet <span class="cart-count" id="cartBadge">0</span></button>
     </div>
   </div>
@@ -397,9 +394,9 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     <div class="contact-info">
       <h2>Bize Ulaşın</h2>
       <p>Siparişleriniz veya ürünlerimiz hakkında istediğiniz zaman yazabilirsiniz.</p>
-      <div class="contact-method"><div class="contact-icon" style="background:#E8F5E9;">📱</div><div><h4>WhatsApp</h4><p><a href="https://wa.me/905442852219">+90 544 285 22 19</a></p></div></div>
+      <div class="contact-method"><div class="contact-icon" style="background:#E8F5E9;">📱</div><div><h4>WhatsApp</h4><p><a>+90 544 285 22 19</a></p></div></div>
       <div class="contact-method"><div class="contact-icon" style="background:#FFF3E0;">📍</div><div><h4>Konum</h4><p>Gaziantep, Türkiye</p></div></div>
-      <a class="wp-big-btn" href="https://wa.me/905442852219?text=Merhaba%20bilgi%20almak%20istiyorum." target="_blank"><span style="font-size:24px;">💬</span><div><div>WhatsApp'tan Yaz</div><div style="font-size:11px;opacity:.85;">Hızlıca cevap veriyoruz!</div></div></a>
+      <a href="#" onclick="event.preventDefault();openWA('905442852219',decodeURIComponent('Merhaba%20bilgi%20almak%20istiyorum.'))" class="wp-big-btn"><span style="font-size:24px;">💬</span><div><div>WhatsApp'tan Yaz</div><div style="font-size:11px;opacity:.85;">Hızlıca cevap veriyoruz!</div></div></a>
     </div>
     <div class="contact-form-card">
       <h3>Mesaj Gönder</h3>
@@ -457,7 +454,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     <h2>Siparişiniz Alındı!</h2>
     <p>Teşekkürler! Siparişiniz onaylandı ve en kısa sürede hazırlanacak.</p>
     <p style="font-size:14px;color:var(--text-light);margin-bottom:24px;">Sipariş No: <strong id="orderNoTxt" style="color:var(--terracotta);">#ADT-0000</strong></p>
-    <a class="wp-big-btn" href="https://wa.me/905442852219?text=Merhaba%2C%20sipari%C5%9Fimi%20takip%20etmek%20istiyorum." target="_blank" style="justify-content:center;margin-bottom:18px;">💬 WhatsApp'tan Sipariş Takibi</a><br>
+    <a href="#" onclick="event.preventDefault();openWA('905442852219',decodeURIComponent('Merhaba%2C%20sipari%C5%9Fimi%20takip%20etmek%20istiyorum.'))" class="wp-big-btn" style="justify-content:center;margin-bottom:18px;">💬 WhatsApp'tan Sipariş Takibi</a><br>
     <button class="btn-primary" style="margin-top:8px;" onclick="showPage('home');setNav(0)">Ana Sayfaya Dön</button>
   </div>
 </div>
@@ -469,7 +466,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     <p style="color:var(--text-light);font-size:14px;margin-bottom:36px;">6698 Sayılı Kişisel Verilerin Korunması Kanunu Kapsamında</p>
     <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 4px 20px var(--shadow);line-height:1.8;color:var(--text-mid);font-size:14px;">
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">1. Veri Sorumlusu</h3>
-      <p style="margin-bottom:22px;">Annenin Doğal Tadları — <a href="https://wa.me/905442852219" style="color:var(--terracotta);font-weight:700;">+90 544 285 22 19</a></p>
+      <p style="margin-bottom:22px;">Annenin Doğal Tadları — <a href="#" onclick="event.preventDefault();openWA('905442852219',decodeURIComponent(''))" style="color:var(--terracotta);font-weight:700;">+90 544 285 22 19</a></p>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">2. Toplanan Veriler</h3>
       <p style="margin-bottom:22px;">Ad-soyad, telefon numarası, teslimat adresi ve isteğe bağlı sipariş notu. Kart bilgisi saklanmaz.</p>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">3. Kullanım Amacı</h3>
@@ -491,7 +488,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
       <div class="footer-brand">
         <div class="brand-name">🌾 Annenin Doğal Tadları</div>
         <p>Katkısız, el yapımı, geleneksel yöntemlerle hazırlanan doğal ürünler.</p>
-        <a class="btn-wp" href="https://wa.me/905442852219" target="_blank" style="display:inline-flex;margin-top:4px;">💬 WhatsApp</a>
+        <a href="#" onclick="event.preventDefault();openWA('905442852219',decodeURIComponent(''))" class="btn-wp" style="display:inline-flex;margin-top:4px;">💬 WhatsApp</a>
       </div>
       <div class="footer-col"><h4>Ürünler</h4>
         <a onclick="setCat('baharat',null);showPage('products');setNav(1)">Baharat</a>
@@ -506,7 +503,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
         <a onclick="showPage('contact');setNav(4)">İletişim</a>
       </div>
       <div class="footer-col"><h4>İletişim</h4>
-        <a href="https://wa.me/905442852219" target="_blank">📱 +90 544 285 22 19</a>
+        <a>📱 +90 544 285 22 19</a>
         <a>📍 Gaziantep, Türkiye</a>
       </div>
     </div>
@@ -946,6 +943,29 @@ function sendContact(){
 function showToast(msg,type=''){
   const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');
   clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── WHATSAPP AÇICI ───────────────────────────────────────────
+// Android: intent://, iOS: whatsapp://, masaüstü: web.whatsapp.com
+function openWA(phone, text){
+  const encoded = encodeURIComponent(text||'');
+  const ua = navigator.userAgent || '';
+  const isAndroid = /android/i.test(ua);
+  const isIOS = /iphone|ipad|ipod/i.test(ua);
+
+  if(isAndroid){
+    // Android intent — uygulama varsa açar, yoksa Play Store'a yönlendirir
+    const intentUrl = 'intent://send?phone='+phone+'&text='+encoded+'#Intent;scheme=whatsapp;package=com.whatsapp;end';
+    window.location.href = intentUrl;
+  } else if(isIOS){
+    // iOS universal link — uygulama varsa açar, yoksa App Store
+    window.location.href = 'whatsapp://send?phone='+phone+'&text='+encoded;
+    // Eğer uygulama yoksa 1.5s sonra web'e düş
+    setTimeout(function(){ window.open('https://web.whatsapp.com/send?phone='+phone+'&text='+encoded,'_blank'); }, 1500);
+  } else {
+    // Masaüstü: direkt web.whatsapp.com aç
+    window.open('https://web.whatsapp.com/send?phone='+phone+'&text='+encoded,'_blank');
+  }
 }
 
 loadProducts(); renderReviews();
