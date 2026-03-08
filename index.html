@@ -79,14 +79,12 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .product-desc-short{font-size:13px;color:var(--text-light);line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .product-rating{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
 .stars{color:var(--amber);font-size:14px;}
-/* VARİANT BUTONLARI — KART İÇİ (tıklama prop durdurulmuş) */
+/* VARİANT — KART İÇİ DROPDOWN */
 .variant-selector{margin-bottom:8px;}
 .variant-selector>label{font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
-.variant-buttons{display:flex;flex-wrap:wrap;gap:6px;}
-.variant-btn{padding:6px 11px;border:2px solid var(--border);border-radius:8px;background:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text-mid);}
-.variant-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
-.variant-btn.selected{background:var(--terracotta);color:white;border-color:var(--terracotta);}
-.variant-btn.out-of-stock{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
+.variant-select{width:100%;padding:9px 34px 9px 12px;border:2px solid var(--border);border-radius:10px;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238B6355' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;appearance:none;-webkit-appearance:none;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;color:var(--text-dark);cursor:pointer;outline:none;transition:border-color .2s;}
+.variant-select:focus{border-color:var(--terracotta);}
+.variant-select:disabled{opacity:.5;cursor:not-allowed;}
 .product-price-display{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--terracotta);margin:8px 0 3px;}
 .stock-ok{font-size:11px;color:var(--olive);font-weight:700;margin-bottom:10px;}
 .stock-low{font-size:11px;color:var(--amber);font-weight:700;margin-bottom:10px;}
@@ -165,7 +163,10 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .cart-total span{font-size:14px;color:var(--text-light);}
 .cart-total .amount{font-family:'Playfair Display',serif;font-size:22px;color:var(--text-dark);font-weight:700;}
 .cart-shipping-note{font-size:12px;color:var(--olive);margin-bottom:14px;text-align:center;}
+.cart-footer-btns{display:flex;flex-direction:column;gap:8px;}
 .checkout-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:14px;padding:14px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
+.edit-cart-btn{width:100%;background:white;color:var(--terracotta);border:2px solid var(--terracotta);border-radius:14px;padding:11px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.edit-cart-btn:hover{background:var(--cream);}
 /* CHECKOUT */
 .checkout-layout{display:grid;grid-template-columns:1fr 360px;gap:36px;max-width:1060px;margin:0 auto;padding:40px 24px;}
 .checkout-form-section h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:24px;}
@@ -265,7 +266,13 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   <div class="cart-footer">
     <div class="cart-total"><span>Ara Toplam</span><span class="amount" id="cartTotal">₺0,00</span></div>
     <div class="cart-shipping-note" id="shippingNote">🚚 500₺ üzeri kargo ücretsiz!</div>
-    <button class="checkout-btn" onclick="goToCheckout()">Siparişi Tamamla →</button>
+    <div class="cart-footer-btns">
+      <button class="checkout-btn" onclick="goToCheckout()">Siparişi Tamamla →</button>
+      <div style="display:flex;gap:8px;">
+        <button class="edit-cart-btn" style="flex:1;" onclick="openCart()">🛒 Sepetimi Düzenle</button>
+        <button class="edit-cart-btn" style="flex:1;" onclick="closeCart();showPage('products')">← Alışverişe Devam Et</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -284,11 +291,11 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     </div>
   </div>
   <nav><div class="nav-inner">
-    <div class="nav-item active" onclick="showPage('home');setNav(0)">Ana Sayfa</div>
-    <div class="nav-item" onclick="showPage('products');setNav(1)">Ürünler</div>
-    <div class="nav-item" onclick="showPage('reviews');setNav(2)">Yorumlar</div>
-    <div class="nav-item" onclick="showPage('about');setNav(3)">Hakkımızda</div>
-    <div class="nav-item" onclick="showPage('contact');setNav(4)">İletişim</div>
+    <div class="nav-item active" onclick="showPage('home')">Ana Sayfa</div>
+    <div class="nav-item" onclick="showPage('products')">Ürünler</div>
+    <div class="nav-item" onclick="showPage('reviews')">Yorumlar</div>
+    <div class="nav-item" onclick="showPage('about')">Hakkımızda</div>
+    <div class="nav-item" onclick="showPage('contact')">İletişim</div>
   </div></nav>
 </header>
 
@@ -434,7 +441,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
         <div class="summary-total"><span>Toplam</span><span class="total-amount" id="orderTotal">₺0,00</span></div>
         <div style="font-size:12px;color:var(--text-light);margin-top:6px;">Kargo: <span id="cargoFee">—</span></div>
         <button class="place-order-btn" id="placeOrderBtn" onclick="placeOrder()">✅ Siparişi Onayla</button>
-        <button style="width:100%;margin-top:10px;background:none;border:none;color:var(--text-light);font-size:13px;cursor:pointer;" onclick="showPage('products');setNav(1)">← Alışverişe Devam Et</button>
+        <button style="width:100%;margin-top:10px;background:none;border:2px solid var(--border);color:var(--text-mid);border-radius:14px;padding:11px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;" onclick="showPage('products')">← Alışverişe Devam Et</button>
       </div>
     </div>
   </div>
@@ -539,7 +546,7 @@ function stockLabel(stock){
   return {cls:'stock-ok',txt:'✅ Stokta var'};
 }
 
-// ── ÜRÜN KARTI (variant butonları kart içinde görünür) ────────
+// ── ÜRÜN KARTI — VARİANT DROPDOWN ────────────────────────────
 function buildVariantsCard(p,cid){
   const variants=p.variants||[];
   if(!variants.length){
@@ -551,13 +558,15 @@ function buildVariantsCard(p,cid){
            '<input type="hidden" id="ss-'+cid+'" value="99">';
   }
   const first=variants[0]; const si=stockLabel(first.stock);
-  const btns=variants.map((v,i)=>
-    '<button class="variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'" '+
-    'onclick="event.stopPropagation();selVar('+p.id+',\''+cid+'\','+i+')" id="vb-'+cid+'-'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
-    v.label+'<br><small style="font-size:10px;">₺'+v.price+'</small></button>'
+  const opts=variants.map((v,i)=>
+    '<option value="'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
+    v.label+' — ₺'+v.price+(v.stock<=0?' (Tükendi)':v.stock<=5?' (Son '+v.stock+')':'')+
+    '</option>'
   ).join('');
-  return '<div class="variant-selector" onclick="event.stopPropagation()"><label>Paket Seçin:</label>'+
-         '<div class="variant-buttons">'+btns+'</div></div>'+
+  return '<div class="variant-selector" onclick="event.stopPropagation()">'+
+         '<label>Paket Seçin:</label>'+
+         '<select class="variant-select" id="vsel-'+cid+'" onchange="selVarDrop('+p.id+',\''+cid+'\',this.value)">'+opts+'</select>'+
+         '</div>'+
          '<div class="product-price-display" id="price-'+cid+'">₺'+first.price+'</div>'+
          '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>'+
          '<input type="hidden" id="sv-'+cid+'" value="'+first.label+'">'+
@@ -565,10 +574,9 @@ function buildVariantsCard(p,cid){
          '<input type="hidden" id="ss-'+cid+'" value="'+first.stock+'">';
 }
 
-function selVar(pid,cid,idx){
+function selVarDrop(pid,cid,idxStr){
   const p=allProducts.find(x=>x.id===pid); if(!p) return;
-  const v=p.variants[idx];
-  p.variants.forEach((_,i)=>{const b=document.getElementById('vb-'+cid+'-'+i);if(b)b.classList.toggle('selected',i===idx);});
+  const idx=parseInt(idxStr); const v=p.variants[idx];
   document.getElementById('price-'+cid).textContent='₺'+v.price;
   const si=stockLabel(v.stock);
   const siEl=document.getElementById('si-'+cid); siEl.textContent=si.txt; siEl.className=si.cls;
@@ -584,18 +592,17 @@ function productCard(p){
   const badge=p.badge?'<div class="product-badge-wrap"><span class="badge badge-'+p.badge+'">'+(p.badge==='popular'?'⭐ Popüler':p.badge==='fresh'?'🌿 Taze':'✨ Yeni')+'</span></div>':'';
   const cid='p'+p.id;
   const reviews=p.reviews||[];
-  const revCount=reviews.length;
+  const revCount=p.review_count||reviews.length;
   return '<div class="product-card" onclick="openDetail('+p.id+')">'+badge+
     '<div class="product-img-box" style="background:linear-gradient(135deg,'+grad+')">'+(p.emoji||'📦')+'</div>'+
     '<div class="product-body">'+
     '<div class="product-category">'+(CAT_LABELS[p.category]||p.category)+'</div>'+
     '<div class="product-name">'+p.name+'</div>'+
     '<div class="product-desc-short">'+(p.description||'')+'</div>'+
-    (p.rating?'<div class="product-rating"><span class="stars">'+'⭐'.repeat(Math.round(p.rating||0))+'</span><span style="font-size:13px;font-weight:700;margin-left:4px;">'+p.rating+'</span><span style="font-size:12px;color:var(--text-light);margin-left:4px;">('+( p.review_count||revCount)+' yorum)</span></div>':'')+
+    (p.rating?'<div class="product-rating"><span class="stars">'+'⭐'.repeat(Math.round(p.rating||0))+'</span><span style="font-size:13px;font-weight:700;margin-left:4px;">'+p.rating+'</span><span style="font-size:12px;color:var(--text-light);margin-left:4px;">('+revCount+' yorum)</span></div>':'')+
     buildVariantsCard(p,cid)+
     '<div class="qty-selector" onclick="event.stopPropagation()"><label>Adet:</label><input class="qty-input" type="number" value="1" min="1" id="qty-'+cid+'"></div>'+
     '<button class="add-cart-btn" id="ab-'+cid+'" onclick="event.stopPropagation();addToCart('+p.id+',\''+cid+'\')">🛒 Sepete Ekle</button>'+
-    (revCount?'<div style="font-size:12px;color:var(--text-light);text-align:center;margin-top:8px;cursor:pointer;text-decoration:underline;" onclick="event.stopPropagation();openDetail('+p.id+')">💬 '+revCount+' yorumu gör →</div>':'')+
     '</div></div>';
 }
 
@@ -627,7 +634,7 @@ function setCat(cat,btn){
 }
 
 // ── ÜRÜN DETAY SAYFASI ────────────────────────────────────────
-function openDetail(pid){
+function openDetail(pid, pushState=true){
   const p=allProducts.find(x=>x.id===pid); if(!p) return;
   // Hangi sayfadan gelindi?
   const activePg=document.querySelector('.page.active');
@@ -692,7 +699,14 @@ function openDetail(pid){
     '<h2>💬 Müşteri Yorumları <span style="font-size:16px;color:var(--text-light);">('+reviews.length+')</span></h2>'+
     reviewsHtml+
     '</div>';
-  showPage('detail'); setNav(-1);
+  // Önce sayfayı göster (pushState=false), sonra detail state'ini push et
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-detail')?.classList.add('active');
+  window.scrollTo(0,0);
+  setNav(-1);
+  if(pushState && !_historyNav){
+    history.pushState({page:'detail', pid}, '', '#detail-'+pid);
+  }
 }
 
 function selDetailVar(pid,idx){
@@ -730,9 +744,7 @@ function addToCartFromDetail(pid){
 }
 
 function goBackFromDetail(){
-  showPage(prevPage);
-  if(prevPage==='home') setNav(0);
-  else if(prevPage==='products') setNav(1);
+  history.back();
 }
 
 // ── SEPET ─────────────────────────────────────────────────────
@@ -844,15 +856,42 @@ async function placeOrder(){
   finally{btn.textContent='✅ Siparişi Onayla';btn.disabled=false;}
 }
 
-// ── SAYFA ─────────────────────────────────────────────────────
-function showPage(name){
+// ── SAYFA — History API ile geri/ileri desteği ──────────────
+const PAGE_NAV_IDX = {home:0,products:1,reviews:2,about:3,contact:4};
+let _historyNav = false;
+
+function showPage(name, pushState=true){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+name)?.classList.add('active');
   window.scrollTo(0,0);
   if(name==='products') applyFilters();
   if(name==='reviews') renderReviews();
+  const ni = PAGE_NAV_IDX[name]??-1;
+  setNav(ni);
+  if(pushState && !_historyNav){
+    history.pushState({page:name}, '', '#'+name);
+  }
 }
+
+window.addEventListener('popstate', function(e){
+  const pg = e.state?.page || 'home';
+  _historyNav = true;
+  if(pg === 'detail' && e.state?.pid){
+    openDetail(e.state.pid, false);
+  } else {
+    showPage(pg, false);
+  }
+  _historyNav = false;
+});
+
+// İlk yükleme state'i kaydet
+history.replaceState({page:'home'}, '', '#home');
+
 function setNav(i){document.querySelectorAll('.nav-item').forEach((n,idx)=>n.classList.toggle('active',idx===i));}
+
+function goBackFromDetail(){
+  history.back();
+}
 
 function renderReviews(){
   document.getElementById('reviewsGrid').innerHTML=STATIC_REVIEWS.map(r=>
