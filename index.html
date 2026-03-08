@@ -270,7 +270,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
     <div class="cart-shipping-note" id="shippingNote">🚚 500₺ üzeri kargo ücretsiz!</div>
     <div class="cart-footer-btns">
       <button class="checkout-btn" onclick="goToCheckout()">Siparişi Tamamla →</button>
-      <button class="edit-cart-btn" onclick="closeCart();showPage('products')">← Alışverişe Devam Et</button>
+      <button class="edit-cart-btn" onclick="closeCart()">← Alışverişe Devam Et</button>
     </div>
   </div>
 </div>
@@ -557,21 +557,26 @@ function buildVariantsCard(p,cid){
            '<input type="hidden" id="sp-'+cid+'" value="'+(p.price||0)+'">'+
            '<input type="hidden" id="ss-'+cid+'" value="99">';
   }
-  const first=variants[0]; const si=stockLabel(first.stock);
+  // İlk stoklu varyantı seç; hepsi tükendiyse ilkini göster
+  const firstAvail = variants.find(v=>v.stock>0) || variants[0];
+  const fi = variants.indexOf(firstAvail);
+  const si = stockLabel(firstAvail.stock);
   const opts=variants.map((v,i)=>
-    '<option value="'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
+    '<option value="'+i+'"'+(i===fi?' selected':'')+(v.stock<=0?' disabled':'')+'>'+
     v.label+' — ₺'+v.price+(v.stock<=0?' (Tükendi)':v.stock<=5?' (Son '+v.stock+')':'')+
     '</option>'
   ).join('');
+  // Tüm varyantlar tükendiyse butonu devre dışı bırak
+  const allOut = variants.every(v=>v.stock<=0);
   return '<div class="variant-selector" onclick="event.stopPropagation()">'+
          '<label>Paket Seçin:</label>'+
-         '<select class="variant-select" id="vsel-'+cid+'" onchange="selVarDrop('+p.id+',\''+cid+'\',this.value)">'+opts+'</select>'+
+         '<select class="variant-select" id="vsel-'+cid+'" onchange="selVarDrop('+p.id+',\''+cid+'\',this.value)"'+(allOut?' disabled':'')+'>'+opts+'</select>'+
          '</div>'+
-         '<div class="product-price-display" id="price-'+cid+'">₺'+first.price+'</div>'+
+         '<div class="product-price-display" id="price-'+cid+'">₺'+firstAvail.price+'</div>'+
          '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>'+
-         '<input type="hidden" id="sv-'+cid+'" value="'+first.label+'">'+
-         '<input type="hidden" id="sp-'+cid+'" value="'+first.price+'">'+
-         '<input type="hidden" id="ss-'+cid+'" value="'+first.stock+'">';
+         '<input type="hidden" id="sv-'+cid+'" value="'+firstAvail.label+'">'+
+         '<input type="hidden" id="sp-'+cid+'" value="'+firstAvail.price+'">'+
+         '<input type="hidden" id="ss-'+cid+'" value="'+firstAvail.stock+'">';
 }
 
 function selVarDrop(pid,cid,idxStr){
@@ -766,9 +771,12 @@ function addToCartFromDetail(pid){
   const price=parseFloat(document.getElementById('dPrice2')?.value||p.price||0);
   const stock=parseInt(document.getElementById('dStock')?.value||99);
   const qty=parseInt(document.getElementById('detailQty')?.value||1);
-  if(stock<=0){showToast('⛔ Bu ürün tükendi!','error');return;}
+  if(stock<=0){showToast('⛔ Bu varyant tükendi. Lütfen başka bir gramaj seçin.','error');return;}
   const ex=cart.find(x=>x.id===pid&&x.variant===variant);
-  if(ex&&ex.qty+qty>stock){showToast('⚠️ Stokta yalnızca '+stock+' adet var!','error');return;}
+  if(ex&&ex.qty+qty>stock){
+    showToast('⚠️ Stokta yeterli miktarda ürün bulunmamaktadır. Stok detayı için WhatsApp\'tan iletişime geçebilirsiniz.','error');
+    return;
+  }
   if(ex) ex.qty+=qty; else cart.push({id:pid,name:p.name,emoji:p.emoji||'📦',price,qty,variant,unit:p.unit||''});
   updateCartUI();
   showToast('✅ '+p.name+' ('+variant+') sepete eklendi!','success');
@@ -786,9 +794,12 @@ function addToCart(pid,cid){
   const price=parseFloat(document.getElementById('sp-'+cid)?.value||p.price||0);
   const stock=parseInt(document.getElementById('ss-'+cid)?.value||99);
   const qty=parseInt(document.getElementById('qty-'+cid)?.value||1);
-  if(stock<=0){showToast('⛔ Bu ürün tükendi!','error');return;}
+  if(stock<=0){showToast('⛔ Bu varyant tükendi. Lütfen başka bir gramaj seçin.','error');return;}
   const ex=cart.find(x=>x.id===pid&&x.variant===variant);
-  if(ex&&ex.qty+qty>stock){showToast('⚠️ Stokta yalnızca '+stock+' adet var!','error');return;}
+  if(ex&&ex.qty+qty>stock){
+    showToast('⚠️ Stokta yeterli miktarda ürün bulunmamaktadır. Stok detayı için WhatsApp\'tan iletişime geçebilirsiniz.','error');
+    return;
+  }
   if(ex) ex.qty+=qty; else cart.push({id:pid,name:p.name,emoji:p.emoji||'📦',price,qty,variant,unit:p.unit||''});
   updateCartUI();
   showToast('✅ '+p.name+' ('+variant+') sepete eklendi!','success');
