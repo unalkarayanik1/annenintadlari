@@ -115,7 +115,9 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .detail-variant-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
 .detail-variant-btn.selected{background:var(--terracotta);color:white;border-color:var(--terracotta);}
 .detail-variant-btn.out-of-stock{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
-.detail-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--terracotta);margin:16px 0 6px;}
+.detail-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--terracotta);margin:0 0 6px;}
+.detail-var-select{width:100%;padding:10px 34px 10px 14px;border:2px solid var(--border);border-radius:12px;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238B6355' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;appearance:none;-webkit-appearance:none;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;color:var(--text-dark);cursor:pointer;outline:none;transition:border-color .2s;}
+.detail-var-select:focus{border-color:var(--terracotta);}
 .detail-qty-row{display:flex;align-items:center;gap:14px;margin:16px 0;}
 .detail-qty-row label{font-size:13px;font-weight:700;color:var(--text-mid);}
 .detail-qty-btns{display:flex;align-items:center;gap:0;border:2px solid var(--border);border-radius:12px;overflow:hidden;}
@@ -441,7 +443,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
         <div class="summary-total"><span>Toplam</span><span class="total-amount" id="orderTotal">₺0,00</span></div>
         <div style="font-size:12px;color:var(--text-light);margin-top:6px;">Kargo: <span id="cargoFee">—</span></div>
         <button class="place-order-btn" id="placeOrderBtn" onclick="placeOrder()">✅ Siparişi Onayla</button>
-        <button style="width:100%;margin-top:10px;background:none;border:2px solid var(--border);color:var(--text-mid);border-radius:14px;padding:11px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;" onclick="showPage('products')">← Alışverişe Devam Et</button>
+        <button style="width:100%;margin-top:10px;background:none;border:2px solid var(--terracotta);color:var(--terracotta);border-radius:14px;padding:11px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;" onclick="openCart()">🛒 Sepetimi Düzenle</button>
+        <button style="width:100%;margin-top:8px;background:none;border:2px solid var(--border);color:var(--text-mid);border-radius:14px;padding:11px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;" onclick="showPage('products')">← Alışverişe Devam Et</button>
       </div>
     </div>
   </div>
@@ -642,39 +645,77 @@ function openDetail(pid, pushState=true){
   const grad=CAT_GRAD[p.category]||'#EDD9B8,#C4A060';
   const reviews=p.reviews||[];
   const variants=p.variants||[];
-  // Variant butonları detay sayfası için
+  // Variant + Adet satırı (detay sayfası için)
   let variantHtml='';
   if(variants.length){
-    const btns=variants.map((v,i)=>
-      '<button class="detail-variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'" '+
-      'onclick="selDetailVar('+p.id+','+i+')" id="dvb-'+p.id+'-'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
-      '<div style="font-size:14px;font-weight:700;">'+v.label+'</div>'+
-      '<div style="font-size:13px;color:'+(v.stock<=0?'#ccc':'var(--terracotta)')+';">₺'+v.price+'</div>'+
-      (v.stock<=0?'<div style="font-size:10px;color:#C62828;">Tükendi</div>':v.stock<=5?'<div style="font-size:10px;color:var(--amber);">Son '+v.stock+' adet</div>':'<div style="font-size:10px;color:var(--olive);">Stokta var</div>')+
-      '</button>'
+    const first=variants.find(v=>v.stock>0)||variants[0];
+    const fi=variants.indexOf(first);
+    const opts=variants.map((v,i)=>
+      '<option value="'+i+'"'+(i===fi?' selected':'')+(v.stock<=0?' disabled':'')+'>'+
+      v.label+(v.stock<=0?' (Tükendi)':v.stock<=5?' ⚠️ Son '+v.stock:'')+'</option>'
     ).join('');
-    const first=variants[0];
-    variantHtml='<div class="detail-variant-selector"><label>Paket Seçenekleri:</label><div class="detail-variant-buttons">'+btns+'</div></div>'+
+    const si=stockLabel(first.stock);
+    variantHtml=
+      '<div style="display:flex;align-items:flex-end;gap:12px;margin:16px 0 12px;flex-wrap:wrap;">'+
+        '<div style="flex:1;min-width:130px;">'+
+          '<label style="font-size:12px;font-weight:700;color:var(--text-mid);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Gramaj / Paket</label>'+
+          '<select class="detail-var-select" id="dVarSelect" onchange="selDetailVarDrop('+p.id+',this.value)">'+opts+'</select>'+
+        '</div>'+
+        '<div style="flex:1;min-width:100px;">'+
+          '<label style="font-size:12px;font-weight:700;color:var(--text-mid);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Adet</label>'+
+          '<div class="detail-qty-btns">'+
+          '<button onclick="detailQtyChange(-1)">−</button>'+
+          '<input type="number" id="detailQty" value="1" min="1">'+
+          '<button onclick="detailQtyChange(1)">+</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
       '<div class="detail-price" id="dPrice">₺'+first.price+'</div>'+
+      '<div class="'+si.cls+'" id="dStock-lbl">'+si.txt+'</div>'+
       '<input type="hidden" id="dVariant" value="'+first.label+'">'+
       '<input type="hidden" id="dPrice2" value="'+first.price+'">'+
       '<input type="hidden" id="dStock" value="'+first.stock+'">';
   } else {
-    variantHtml='<div class="detail-price" id="dPrice">₺'+(p.price||'?')+'</div>'+
+    variantHtml=
+      '<div style="display:flex;align-items:flex-end;gap:12px;margin:16px 0 12px;flex-wrap:wrap;">'+
+        '<div style="flex:1;min-width:100px;">'+
+          '<label style="font-size:12px;font-weight:700;color:var(--text-mid);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Adet</label>'+
+          '<div class="detail-qty-btns">'+
+          '<button onclick="detailQtyChange(-1)">−</button>'+
+          '<input type="number" id="detailQty" value="1" min="1">'+
+          '<button onclick="detailQtyChange(1)">+</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="detail-price" id="dPrice">₺'+(p.price||'?')+'</div>'+
+      '<div class="stock-ok" id="dStock-lbl">✅ Stokta var</div>'+
       '<input type="hidden" id="dVariant" value="Standart">'+
       '<input type="hidden" id="dPrice2" value="'+(p.price||0)+'">'+
       '<input type="hidden" id="dStock" value="99">';
   }
-  // Yorumlar
-  const reviewsHtml=reviews.length
-    ?reviews.map(r=>'<div class="detail-review-item">'+
+  // Yorumlar — p.reviews dizisi + review_count göster
+  // review_count > reviews.length ise fark kadar "Doğrulanmış alıcı" placeholder ekle
+  const realReviews = reviews.slice(); // gerçek yorum objeleri
+  const totalCount = p.review_count || realReviews.length;
+  // Eğer review_count fazlaysa aradaki farkı placeholder ile doldur
+  const extraCount = Math.max(0, totalCount - realReviews.length);
+  const extraPlaceholders = Array.from({length: extraCount}, (_,i)=>({
+    author: 'Doğrulanmış Alıcı',
+    stars: 5,
+    text: '— Bu yorum içeriği yüklenmemiş. —',
+    _placeholder: true
+  }));
+  const allReviews = [...realReviews, ...extraPlaceholders];
+  const reviewsHtml = allReviews.length
+    ? allReviews.map(r=>
+        '<div class="detail-review-item'+(r._placeholder?' review-placeholder':'')+'">'+
         '<div class="detail-review-header">'+
-        '<span class="detail-review-author">'+r.author+'</span>'+
-        '<span class="detail-review-stars">'+'⭐'.repeat(r.stars||5)+'</span>'+
+        '<span class="detail-review-author">'+(r.author||'Müşteri')+'</span>'+
+        '<span class="detail-review-stars">'+'⭐'.repeat(Math.min(5,r.stars||5))+'</span>'+
         '</div>'+
-        '<div class="detail-review-text">'+r.text+'</div>'+
+        '<div class="detail-review-text">'+(r._placeholder?'<em style="color:var(--text-light);">Yorum metni mevcut değil.</em>':r.text)+'</div>'+
         '</div>').join('')
-    :'<p style="color:var(--text-light);padding:20px 0;">Henüz yorum yok.</p>';
+    : '<p style="color:var(--text-light);padding:20px 0;">Henüz yorum yok.</p>';
 
   document.getElementById('detailContent').innerHTML=
     '<div class="product-detail-grid">'+
@@ -685,18 +726,10 @@ function openDetail(pid, pushState=true){
     (p.rating?'<div class="product-rating" style="margin-bottom:16px;"><span class="stars">'+'⭐'.repeat(Math.round(p.rating))+'</span><span style="font-size:15px;font-weight:700;margin-left:6px;">'+p.rating+'</span><span style="font-size:13px;color:var(--text-light);margin-left:6px;">('+( p.review_count||reviews.length)+' yorum)</span></div>':'')+
     '<div class="desc">'+(p.description||'')+'</div>'+
     variantHtml+
-    '<div class="detail-qty-row">'+
-    '<label>Adet:</label>'+
-    '<div class="detail-qty-btns">'+
-    '<button onclick="detailQtyChange(-1)">−</button>'+
-    '<input type="number" id="detailQty" value="1" min="1">'+
-    '<button onclick="detailQtyChange(1)">+</button>'+
-    '</div>'+
-    '</div>'+
     '<button class="detail-add-btn" id="detailAddBtn" onclick="addToCartFromDetail('+p.id+')">🛒 Sepete Ekle</button>'+
     '</div></div>'+
     '<div class="detail-reviews">'+
-    '<h2>💬 Müşteri Yorumları <span style="font-size:16px;color:var(--text-light);">('+reviews.length+')</span></h2>'+
+    '<h2>💬 Müşteri Yorumları <span style="font-size:16px;color:var(--text-light);">('+totalCount+')</span></h2>'+
     reviewsHtml+
     '</div>';
   // Önce sayfayı göster (pushState=false), sonra detail state'ini push et
@@ -709,14 +742,16 @@ function openDetail(pid, pushState=true){
   }
 }
 
-function selDetailVar(pid,idx){
+function selDetailVarDrop(pid, idxStr){
   const p=allProducts.find(x=>x.id===pid); if(!p) return;
-  const v=p.variants[idx];
-  p.variants.forEach((_,i)=>{const b=document.getElementById('dvb-'+pid+'-'+i);if(b)b.classList.toggle('selected',i===idx);});
+  const idx=parseInt(idxStr); const v=p.variants[idx];
   document.getElementById('dPrice').textContent='₺'+v.price;
   document.getElementById('dVariant').value=v.label;
   document.getElementById('dPrice2').value=v.price;
   document.getElementById('dStock').value=v.stock;
+  const si=stockLabel(v.stock);
+  const sl=document.getElementById('dStock-lbl');
+  if(sl){sl.textContent=si.txt;sl.className=si.cls;}
   const ab=document.getElementById('detailAddBtn');
   if(ab){ab.disabled=v.stock<=0; ab.textContent=v.stock<=0?'⛔ Tükendi':'🛒 Sepete Ekle';}
 }
