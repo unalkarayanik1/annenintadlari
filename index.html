@@ -7,50 +7,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--cream:#FDF6EC;--warm-white:#FEFAF4;--terracotta:#C0522A;--terracotta-dark:#9B3E1E;--terracotta-light:#E8714A;--olive:#6B7A3A;--olive-light:#8A9B4E;--amber:#D4860A;--amber-light:#F0A820;--brown:#5C3D2E;--text-dark:#2C1810;--text-mid:#5C3D2E;--text-light:#8B6355;--border:#E8D5C0;--shadow:rgba(92,61,46,0.15);}
+:root{--cream:#FDF6EC;--warm-white:#FEFAF4;--terracotta:#C0522A;--terracotta-dark:#9B3E1E;--terracotta-light:#E8714A;--olive:#6B7A3A;--olive-light:#8A9B4E;--amber:#D4860A;--amber-light:#F0A820;--text-dark:#2C1810;--text-mid:#5C3D2E;--text-light:#8B6355;--border:#E8D5C0;--shadow:rgba(92,61,46,0.15);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-thumb{background:var(--terracotta);border-radius:3px;}
+/* HEADER */
 header{background:var(--warm-white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px var(--shadow);}
 .header-top{background:var(--terracotta);color:white;text-align:center;padding:8px;font-size:13px;letter-spacing:.5px;}
 .header-main{max-width:1300px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-.logo{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none;}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
 .logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--terracotta),var(--amber));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
 .logo-text .brand{font-family:'Playfair Display',serif;font-size:20px;color:var(--terracotta);font-weight:700;}
 .logo-text .sub{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
 .header-search{flex:1;max-width:420px;position:relative;}
-.header-search input{width:100%;padding:12px 44px 12px 16px;border:2px solid var(--border);border-radius:50px;background:var(--cream);font-family:'Lato',sans-serif;font-size:14px;color:var(--text-dark);outline:none;transition:border-color .2s;}
+.header-search input{width:100%;padding:12px 44px 12px 16px;border:2px solid var(--border);border-radius:50px;background:var(--cream);font-family:'Lato',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
 .header-search input:focus{border-color:var(--terracotta);}
-.header-search button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-light);}
+.header-search button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;}
 .header-actions{display:flex;align-items:center;gap:12px;}
 .btn-wp{display:flex;align-items:center;gap:8px;background:#25D366;color:white;border:none;border-radius:50px;padding:10px 18px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;}
-.btn-wp:hover{background:#1da851;transform:translateY(-1px);}
+.btn-wp:hover{background:#1da851;}
 .cart-btn{background:var(--terracotta);color:white;border:none;border-radius:50px;padding:10px 20px;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;}
-.cart-btn:hover{background:var(--terracotta-dark);transform:translateY(-1px);}
+.cart-btn:hover{background:var(--terracotta-dark);}
 .cart-count{background:var(--amber-light);color:var(--text-dark);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
 nav{border-top:1px solid var(--border);background:var(--warm-white);}
-.nav-inner{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;overflow-x:auto;}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto;}
 .nav-item{padding:12px 14px;font-size:13px;font-weight:700;color:var(--text-mid);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
 .nav-item:hover,.nav-item.active{color:var(--terracotta);border-bottom-color:var(--terracotta);}
 .page{display:none;}.page.active{display:block;}
+/* HERO */
 .hero{background:linear-gradient(135deg,#2C1810 0%,#5C3D2E 40%,#8B4513 70%,#C0522A 100%);min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
 .hero-content{max-width:1300px;margin:0 auto;padding:60px 24px;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .hero-badge{display:inline-block;background:rgba(240,168,32,.2);border:1px solid rgba(240,168,32,.4);color:var(--amber-light);padding:6px 16px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 .hero-text h1{font-family:'Playfair Display',serif;font-size:48px;line-height:1.15;margin-bottom:20px;font-weight:700;color:white;}
 .hero-text h1 em{color:var(--amber-light);font-style:italic;}
 .hero-text p{font-size:16px;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:32px;}
 .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
-.btn-primary{background:var(--amber-light);color:var(--text-dark);border:none;border-radius:50px;padding:14px 28px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-primary{background:var(--amber-light);color:var(--text-dark);border:none;border-radius:50px;padding:14px 28px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;display:inline-block;}
 .btn-primary:hover{background:#FFB830;transform:translateY(-2px);}
-.btn-secondary{background:transparent;color:white;border:2px solid rgba(255,255,255,.4);border-radius:50px;padding:12px 24px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;}
-.btn-secondary:hover{border-color:white;background:rgba(255,255,255,.1);}
+.btn-secondary{background:transparent;color:white;border:2px solid rgba(255,255,255,.4);border-radius:50px;padding:12px 24px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;text-align:center;backdrop-filter:blur(10px);}
+.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;text-align:center;}
 .hero-card:nth-child(even){margin-top:20px;}
 .hero-card .icon{font-size:44px;margin-bottom:8px;}
 .hero-card .name{color:white;font-family:'Playfair Display',serif;font-size:15px;}
 .hero-card .sub{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
+/* ÜRÜNLER */
 .section{max-width:1300px;margin:0 auto;padding:60px 24px;}
 .section-header{text-align:center;margin-bottom:44px;}
 .section-header .eyebrow{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--terracotta);text-transform:uppercase;margin-bottom:12px;}
@@ -60,82 +61,111 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .filter-btn{padding:8px 18px;border-radius:50px;border:2px solid var(--border);background:white;color:var(--text-mid);font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .filter-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
 .filter-btn.active{background:var(--terracotta);color:white;border-color:var(--terracotta);}
-.sort-select{margin-left:auto;padding:8px 14px;border-radius:50px;border:2px solid var(--border);background:white;font-family:'Lato',sans-serif;font-size:13px;color:var(--text-mid);cursor:pointer;outline:none;}
+.sort-select{margin-left:auto;padding:8px 14px;border-radius:50px;border:2px solid var(--border);background:white;font-family:'Lato',sans-serif;font-size:13px;cursor:pointer;outline:none;}
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:26px;}
-.product-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);transition:all .3s;position:relative;}
+/* ÜRÜN KARTI */
+.product-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);transition:all .3s;position:relative;cursor:pointer;}
 .product-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(92,61,46,.2);}
 .product-badge-wrap{position:absolute;top:14px;left:14px;z-index:2;}
 .badge{padding:4px 10px;border-radius:50px;font-size:11px;font-weight:700;text-transform:uppercase;}
 .badge-popular{background:var(--terracotta);color:white;}
 .badge-fresh{background:var(--amber);color:white;}
 .badge-new{background:var(--olive);color:white;}
-.product-img-box{width:100%;height:210px;display:flex;align-items:center;justify-content:center;font-size:72px;overflow:hidden;}
+.product-img-box{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:72px;overflow:hidden;}
 .product-img-box img{width:100%;height:100%;object-fit:cover;}
 .product-body{padding:18px;}
 .product-category{font-size:11px;font-weight:700;color:var(--terracotta);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
 .product-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--text-dark);margin-bottom:5px;}
-.product-desc{font-size:13px;color:var(--text-light);line-height:1.5;margin-bottom:10px;}
+.product-desc-short{font-size:13px;color:var(--text-light);line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .product-rating{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
 .stars{color:var(--amber);font-size:14px;}
-/* VARİANT */
+/* VARİANT BUTONLARI — KART İÇİ (tıklama prop durdurulmuş) */
 .variant-selector{margin-bottom:8px;}
 .variant-selector>label{font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
 .variant-buttons{display:flex;flex-wrap:wrap;gap:6px;}
-.variant-btn{padding:6px 12px;border:2px solid var(--border);border-radius:8px;background:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text-mid);}
+.variant-btn{padding:6px 11px;border:2px solid var(--border);border-radius:8px;background:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text-mid);}
 .variant-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
 .variant-btn.selected{background:var(--terracotta);color:white;border-color:var(--terracotta);}
 .variant-btn.out-of-stock{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
-.product-price-display{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--terracotta);margin:8px 0 4px;}
+.product-price-display{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--terracotta);margin:8px 0 3px;}
 .stock-ok{font-size:11px;color:var(--olive);font-weight:700;margin-bottom:10px;}
 .stock-low{font-size:11px;color:var(--amber);font-weight:700;margin-bottom:10px;}
 .stock-out{font-size:11px;color:#C62828;font-weight:700;margin-bottom:10px;}
-.qty-selector{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.qty-selector{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .qty-selector label{font-size:12px;color:var(--text-light);font-weight:700;white-space:nowrap;}
-.qty-input{width:65px;padding:7px 8px;border:2px solid var(--border);border-radius:10px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;text-align:center;color:var(--text-dark);outline:none;}
+.qty-input{width:60px;padding:6px 8px;border:2px solid var(--border);border-radius:10px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;text-align:center;outline:none;}
 .qty-input:focus{border-color:var(--terracotta);}
-.add-cart-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:12px;padding:12px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.add-cart-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:12px;padding:11px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .add-cart-btn:hover{background:linear-gradient(135deg,var(--terracotta-dark),var(--terracotta));transform:translateY(-1px);}
 .add-cart-btn.added{background:linear-gradient(135deg,var(--olive),var(--olive-light));}
 .add-cart-btn:disabled{background:#bbb;cursor:not-allowed;transform:none;}
-/* YORUM BUTONU & MODALİ */
-.reviews-toggle-btn{margin-top:10px;background:none;border:none;color:var(--terracotta);font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;font-family:'Lato',sans-serif;padding:0;display:block;}
-.review-modal-overlay{display:none;position:fixed;inset:0;background:rgba(44,24,16,.6);z-index:3000;backdrop-filter:blur(4px);align-items:center;justify-content:center;}
-.review-modal-overlay.open{display:flex;}
-.review-modal{background:white;border-radius:20px;padding:32px;max-width:560px;width:92%;max-height:80vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);}
-.review-modal h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;color:var(--text-dark);padding-right:40px;}
-.review-modal .modal-sub{font-size:13px;color:var(--text-light);margin-bottom:20px;}
-.review-modal-close{position:absolute;top:16px;right:16px;background:var(--cream);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-mid);}
-.review-item{background:var(--cream);border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid var(--terracotta);}
-.review-item-header{display:flex;justify-content:space-between;margin-bottom:5px;}
-.review-author{font-size:12px;font-weight:700;color:var(--text-dark);}
-.review-stars-sm{color:var(--amber);font-size:12px;}
-.review-text{font-size:13px;color:var(--text-light);line-height:1.5;}
+.detail-link{display:block;text-align:center;margin-top:8px;font-size:12px;color:var(--terracotta);font-weight:700;cursor:pointer;text-decoration:underline;}
+/* ÜRÜN DETAY SAYFASI */
+.product-detail-wrap{max-width:960px;margin:0 auto;padding:40px 24px;}
+.product-detail-back{display:inline-flex;align-items:center;gap:6px;color:var(--text-light);font-size:13px;font-weight:700;cursor:pointer;margin-bottom:28px;background:none;border:none;}
+.product-detail-back:hover{color:var(--terracotta);}
+.product-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.product-detail-img{height:360px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:120px;box-shadow:0 8px 30px var(--shadow);}
+.product-detail-img img{width:100%;height:100%;object-fit:cover;border-radius:20px;}
+.product-detail-info .cat{font-size:11px;font-weight:700;color:var(--terracotta);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.product-detail-info h1{font-family:'Playfair Display',serif;font-size:32px;color:var(--text-dark);margin-bottom:10px;}
+.product-detail-info .desc{font-size:15px;color:var(--text-light);line-height:1.8;margin-bottom:18px;}
+.detail-variant-selector{margin-bottom:16px;}
+.detail-variant-selector label{font-size:13px;font-weight:700;color:var(--text-mid);display:block;margin-bottom:8px;}
+.detail-variant-buttons{display:flex;flex-wrap:wrap;gap:8px;}
+.detail-variant-btn{padding:10px 18px;border:2px solid var(--border);border-radius:10px;background:white;font-family:'Lato',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.detail-variant-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
+.detail-variant-btn.selected{background:var(--terracotta);color:white;border-color:var(--terracotta);}
+.detail-variant-btn.out-of-stock{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
+.detail-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--terracotta);margin:16px 0 6px;}
+.detail-qty-row{display:flex;align-items:center;gap:14px;margin:16px 0;}
+.detail-qty-row label{font-size:13px;font-weight:700;color:var(--text-mid);}
+.detail-qty-btns{display:flex;align-items:center;gap:0;border:2px solid var(--border);border-radius:12px;overflow:hidden;}
+.detail-qty-btns button{background:white;border:none;width:38px;height:38px;font-size:18px;cursor:pointer;font-family:'Lato',sans-serif;color:var(--text-mid);transition:background .2s;}
+.detail-qty-btns button:hover{background:var(--cream);}
+.detail-qty-btns input{width:50px;border:none;border-left:2px solid var(--border);border-right:2px solid var(--border);text-align:center;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;color:var(--text-dark);padding:6px 0;outline:none;}
+.detail-add-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:14px;padding:15px;font-family:'Lato',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:8px;}
+.detail-add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,82,42,.3);}
+.detail-add-btn:disabled{background:#bbb;cursor:not-allowed;transform:none;}
+/* DETAY YORUMLAR */
+.detail-reviews{margin-top:48px;}
+.detail-reviews h2{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:20px;}
+.detail-review-item{background:white;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 12px var(--shadow);}
+.detail-review-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.detail-review-author{font-weight:700;font-size:14px;color:var(--text-dark);}
+.detail-review-stars{color:var(--amber);font-size:14px;}
+.detail-review-text{font-size:14px;color:var(--text-mid);line-height:1.6;}
 /* SEPET */
 .cart-overlay{display:none;position:fixed;inset:0;background:rgba(44,24,16,.5);z-index:2000;backdrop-filter:blur(4px);}
 .cart-overlay.open{display:block;}
-.cart-sidebar{position:fixed;right:0;top:0;bottom:0;width:400px;max-width:95vw;background:var(--warm-white);box-shadow:-8px 0 40px rgba(44,24,16,.2);z-index:2001;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease;}
+.cart-sidebar{position:fixed;right:0;top:0;bottom:0;width:420px;max-width:95vw;background:var(--warm-white);box-shadow:-8px 0 40px rgba(44,24,16,.2);z-index:2001;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease;}
 .cart-sidebar.open{transform:translateX(0);}
-.cart-header{padding:22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.cart-header h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--text-dark);}
+.cart-header{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-header h3{font-family:'Playfair Display',serif;font-size:22px;}
 .close-btn{background:none;border:none;cursor:pointer;font-size:20px;color:var(--text-light);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 .close-btn:hover{background:var(--border);}
-.cart-items{flex:1;overflow-y:auto;padding:18px;}
-.cart-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
-.cart-item-emoji{font-size:28px;flex-shrink:0;width:48px;height:48px;background:var(--cream);border-radius:10px;display:flex;align-items:center;justify-content:center;}
-.cart-item-info{flex:1;}
-.cart-item-name{font-size:14px;font-weight:700;color:var(--text-dark);}
-.cart-item-detail{font-size:12px;color:var(--text-light);}
-.cart-item-price{font-family:'Playfair Display',serif;font-size:15px;color:var(--terracotta);font-weight:700;}
-.cart-item-remove{background:none;border:none;cursor:pointer;color:#ccc;font-size:16px;}
-.cart-item-remove:hover{color:var(--terracotta);}
+.cart-items{flex:1;overflow-y:auto;padding:16px;}
+.cart-item{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cart-item-emoji{font-size:26px;flex-shrink:0;width:46px;height:46px;background:var(--cream);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.cart-item-info{flex:1;min-width:0;}
+.cart-item-name{font-size:13px;font-weight:700;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cart-item-detail{font-size:11px;color:var(--text-light);margin-top:2px;}
+.cart-item-price{font-family:'Playfair Display',serif;font-size:14px;color:var(--terracotta);font-weight:700;white-space:nowrap;}
+/* SEPET ADET +/- */
+.cart-qty-ctrl{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0;}
+.cart-qty-ctrl button{background:white;border:none;width:28px;height:28px;font-size:16px;cursor:pointer;color:var(--text-mid);display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.cart-qty-ctrl button:hover{background:var(--cream);}
+.cart-qty-ctrl span{font-size:13px;font-weight:700;color:var(--text-dark);min-width:22px;text-align:center;padding:0 2px;}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:#ccc;font-size:15px;padding:4px;flex-shrink:0;}
+.cart-item-remove:hover{color:#C62828;}
 .cart-empty{text-align:center;padding:60px 20px;color:var(--text-light);}
 .cart-empty .empty-icon{font-size:60px;margin-bottom:14px;}
-.cart-footer{padding:18px 22px;border-top:1px solid var(--border);}
+.cart-footer{padding:16px 22px;border-top:1px solid var(--border);}
 .cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .cart-total span{font-size:14px;color:var(--text-light);}
 .cart-total .amount{font-family:'Playfair Display',serif;font-size:22px;color:var(--text-dark);font-weight:700;}
 .cart-shipping-note{font-size:12px;color:var(--olive);margin-bottom:14px;text-align:center;}
-.checkout-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:14px;padding:15px;font-family:'Lato',sans-serif;font-size:16px;font-weight:700;cursor:pointer;}
+.checkout-btn{width:100%;background:linear-gradient(135deg,var(--terracotta),var(--terracotta-light));color:white;border:none;border-radius:14px;padding:14px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
 /* CHECKOUT */
 .checkout-layout{display:grid;grid-template-columns:1fr 360px;gap:36px;max-width:1060px;margin:0 auto;padding:40px 24px;}
 .checkout-form-section h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:24px;}
@@ -163,6 +193,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .success-icon{font-size:80px;margin-bottom:22px;}
 .success-page h2{font-family:'Playfair Display',serif;font-size:34px;margin-bottom:14px;color:var(--olive);}
 .success-page p{font-size:16px;color:var(--text-light);line-height:1.6;margin-bottom:28px;}
+/* ABOUT */
 .about-hero{background:linear-gradient(135deg,#2C1810,#5C3D2E);padding:80px 24px;text-align:center;color:white;}
 .about-hero h1{font-family:'Playfair Display',serif;font-size:42px;margin-bottom:14px;}
 .about-content{max-width:900px;margin:0 auto;padding:70px 24px;}
@@ -175,6 +206,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .value-card .icon{font-size:38px;margin-bottom:12px;}
 .value-card h4{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:7px;}
 .value-card p{font-size:13px;color:var(--text-light);line-height:1.6;}
+/* REVIEWS PAGE */
 .reviews-hero{background:var(--terracotta);padding:60px 24px;text-align:center;color:white;}
 .reviews-hero h1{font-family:'Playfair Display',serif;font-size:38px;margin-bottom:10px;}
 .reviews-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:650px;margin:0 auto 44px;}
@@ -189,23 +221,25 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 .reviewer-date{font-size:12px;color:var(--text-light);}
 .review-card p{font-size:14px;color:var(--text-mid);line-height:1.7;font-style:italic;}
 .product-tag{display:inline-block;background:var(--cream);border:1px solid var(--border);border-radius:50px;padding:4px 12px;font-size:11px;color:var(--text-light);margin-top:10px;}
+/* CONTACT */
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;max-width:960px;margin:0 auto;padding:70px 24px;}
 .contact-info h2{font-family:'Playfair Display',serif;font-size:30px;margin-bottom:14px;}
 .contact-info>p{font-size:15px;color:var(--text-light);line-height:1.7;margin-bottom:28px;}
 .contact-method{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;}
 .contact-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.contact-method h4{font-size:14px;font-weight:700;margin-bottom:3px;}
-.contact-method p,.contact-method a{font-size:13px;color:var(--text-light);}
+.contact-method h4{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:3px;}
 .contact-method a{color:var(--terracotta);font-weight:700;text-decoration:none;}
 .wp-big-btn{display:flex;align-items:center;gap:12px;background:#25D366;color:white;border:none;border-radius:16px;padding:16px 24px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;margin-top:10px;}
 .wp-big-btn:hover{background:#1da851;transform:translateY(-2px);}
 .contact-form-card{background:white;border-radius:20px;padding:34px;box-shadow:0 4px 24px var(--shadow);}
 .contact-form-card h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:22px;}
 .submit-btn{width:100%;background:var(--terracotta);color:white;border:none;border-radius:12px;padding:13px;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
+/* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--text-dark);color:white;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.3);transform:translateY(100px);opacity:0;transition:all .3s;z-index:9999;max-width:320px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.success{background:var(--olive);}
 .toast.error{background:#C62828;}
+/* FOOTER */
 footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 28px;}
 .footer-inner{max-width:1300px;margin:0 auto;}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px;}
@@ -216,23 +250,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
 .footer-col a:hover{color:white;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:8px;}
 .loading-spinner{text-align:center;padding:60px;color:var(--text-light);}
-@media(max-width:900px){.hero-content,.about-grid,.contact-layout,.checkout-layout,.footer-grid{grid-template-columns:1fr;}.hero-grid{grid-template-columns:1fr 1fr;}.values-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.hero-content,.about-grid,.contact-layout,.checkout-layout,.footer-grid,.product-detail-grid{grid-template-columns:1fr;}.hero-grid{grid-template-columns:1fr 1fr;}.values-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){.hero-text h1{font-size:32px;}.header-search{display:none;}.reviews-stats,.values-grid,.payment-methods,.form-row{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
-
 <div class="toast" id="toast"></div>
-
-<!-- YORUM MODALİ -->
-<div class="review-modal-overlay" id="reviewModalOverlay" onclick="closeReviewModal()">
-  <div class="review-modal" onclick="event.stopPropagation()">
-    <button class="review-modal-close" onclick="closeReviewModal()">✕</button>
-    <h3 id="reviewModalTitle"></h3>
-    <div class="modal-sub" id="reviewModalSub"></div>
-    <div id="reviewModalList"></div>
-  </div>
-</div>
 
 <!-- SEPET -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
@@ -315,6 +338,14 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   </div>
 </div>
 
+<!-- ÜRÜN DETAY -->
+<div class="page" id="page-detail">
+  <div class="product-detail-wrap">
+    <button class="product-detail-back" onclick="goBackFromDetail()">← Ürünlere Dön</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
 <!-- YORUMLAR -->
 <div class="page" id="page-reviews">
   <div class="reviews-hero"><h1>❤️ Müşteri Yorumları</h1><p>Gerçek müşterilerimizin gerçek deneyimleri</p></div>
@@ -336,7 +367,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
       <div class="about-img-box">👩‍🍳</div>
       <div class="about-text">
         <h2>Annemin Mutfağından Sofranıza</h2>
-        <p>Her ürün, katkı maddesi olmadan, geleneksel yöntemlerle özenle hazırlanıyor.</p>
+        <p>Her ürün, katkı maddesi olmadan, geleneksel yöntemlerle özenle hazırlanıyor. Pulbiberimiz güneşte kurutulur, salçamız taş baskıyla yapılır, balımız çiçekten çiçeğe koşan arılarımızdan gelir.</p>
         <div style="margin-top:26px;padding:18px;background:linear-gradient(135deg,#FFF5E8,#FCECD8);border-radius:14px;border-left:4px solid var(--terracotta);">
           <p style="font-style:italic;color:var(--text-dark);font-size:15px;">"Her kavanozun içinde sadece ürün değil, yıllarca aktarılan bir bilgi, bir sevgi var."</p>
         </div>
@@ -356,7 +387,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   <div class="contact-layout">
     <div class="contact-info">
       <h2>Bize Ulaşın</h2>
-      <p>Siparişleriniz hakkında istediğiniz zaman yazabilirsiniz.</p>
+      <p>Siparişleriniz veya ürünlerimiz hakkında istediğiniz zaman yazabilirsiniz.</p>
       <div class="contact-method"><div class="contact-icon" style="background:#E8F5E9;">📱</div><div><h4>WhatsApp</h4><p><a href="https://wa.me/905442852219">+90 544 285 22 19</a></p></div></div>
       <div class="contact-method"><div class="contact-icon" style="background:#FFF3E0;">📍</div><div><h4>Konum</h4><p>Gaziantep, Türkiye</p></div></div>
       <a class="wp-big-btn" href="https://wa.me/905442852219?text=Merhaba%20bilgi%20almak%20istiyorum." target="_blank"><span style="font-size:24px;">💬</span><div><div>WhatsApp'tan Yaz</div><div style="font-size:11px;opacity:.85;">Hızlıca cevap veriyoruz!</div></div></a>
@@ -376,7 +407,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   <div class="checkout-layout">
     <div class="checkout-form-section">
       <h2>Sipariş Bilgileri</h2>
-      <div class="privacy-note"><div style="font-size:20px;flex-shrink:0;">🔒</div><p><strong>Kişisel Verilerin Korunması (KVKK):</strong> Girdiğiniz ad, telefon ve adres bilgileri yalnızca siparişinizin hazırlanması ve teslimatı amacıyla kullanılır. Bu bilgiler hiçbir üçüncü kişi veya kuruluşla paylaşılmaz. Sipariş teslim edildikten sonra verileriniz sistemden silinir. 6698 sayılı KVKK kapsamındaki haklarınız saklıdır.</p></div>
+      <div class="privacy-note"><div style="font-size:20px;flex-shrink:0;">🔒</div><p><strong>KVKK:</strong> Ad, telefon ve adres bilgileriniz yalnızca siparişin teslimi amacıyla kullanılır, üçüncü kişilerle paylaşılmaz ve teslimat sonrası silinir.</p></div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Ad</label><input class="form-input" id="ckAd" placeholder="Adınız"></div>
         <div class="form-group"><label class="form-label">Soyad</label><input class="form-input" id="ckSoyad" placeholder="Soyadınız"></div>
@@ -426,35 +457,21 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
   <div style="max-width:760px;margin:0 auto;padding:60px 24px;">
     <h1 style="font-family:'Playfair Display',serif;font-size:32px;margin-bottom:8px;">🔒 KVKK Aydınlatma Metni</h1>
     <p style="color:var(--text-light);font-size:14px;margin-bottom:36px;">6698 Sayılı Kişisel Verilerin Korunması Kanunu Kapsamında</p>
-
     <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 4px 20px var(--shadow);line-height:1.8;color:var(--text-mid);font-size:14px;">
-
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">1. Veri Sorumlusu</h3>
-      <p style="margin-bottom:22px;">Annenin Doğal Tadları olarak, kişisel verilerinizin güvenliği ve gizliliğine önem veriyoruz. İletişim: <a href="https://wa.me/905442852219" style="color:var(--terracotta);font-weight:700;">+90 544 285 22 19</a></p>
-
-      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">2. Toplanan Kişisel Veriler</h3>
-      <p style="margin-bottom:22px;">Sipariş sürecinde yalnızca şu bilgiler alınmaktadır: ad-soyad, telefon numarası, teslimat adresi ve isteğe bağlı sipariş notu. Ödeme bilgisi (kart numarası vb.) hiçbir şekilde sistemimizde saklanmamaktadır.</p>
-
-      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">3. Verilerin Kullanım Amacı</h3>
-      <p style="margin-bottom:22px;">Toplanan kişisel veriler yalnızca şu amaçlarla kullanılır: siparişin hazırlanması, kargoya verilmesi ve teslimat sürecinin yönetilmesi. Başka hiçbir amaçla kullanılmaz.</p>
-
-      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">4. Verilerin Paylaşımı</h3>
-      <p style="margin-bottom:22px;">Kişisel verileriniz hiçbir üçüncü kişi, kuruluş veya reklam platformuyla paylaşılmaz. Kargo teslimatı için yalnızca kargo firmasıyla zorunlu bilgiler paylaşılır.</p>
-
+      <p style="margin-bottom:22px;">Annenin Doğal Tadları — <a href="https://wa.me/905442852219" style="color:var(--terracotta);font-weight:700;">+90 544 285 22 19</a></p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">2. Toplanan Veriler</h3>
+      <p style="margin-bottom:22px;">Ad-soyad, telefon numarası, teslimat adresi ve isteğe bağlı sipariş notu. Kart bilgisi saklanmaz.</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">3. Kullanım Amacı</h3>
+      <p style="margin-bottom:22px;">Yalnızca siparişin hazırlanması ve teslimatı için kullanılır.</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">4. Paylaşım</h3>
+      <p style="margin-bottom:22px;">Kargo firması dışında hiçbir üçüncü tarafla paylaşılmaz.</p>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">5. Saklama Süresi</h3>
-      <p style="margin-bottom:22px;">Sipariş bilgileriniz teslimat tamamlandıktan sonra en geç 30 gün içinde sistemden silinir.</p>
-
+      <p style="margin-bottom:22px;">Teslimat tamamlandıktan sonra en geç 30 gün içinde silinir.</p>
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">6. Haklarınız</h3>
-      <p style="margin-bottom:28px;">6698 sayılı KVKK'nın 11. maddesi uyarınca; kişisel verilerinize erişme, düzeltme, silme veya işlenmesine itiraz etme haklarına sahipsiniz. Bu haklarınızı kullanmak için WhatsApp üzerinden bizimle iletişime geçebilirsiniz.</p>
-
-      <div style="background:var(--cream);border-radius:12px;padding:16px;border-left:4px solid var(--terracotta);">
-        <p style="font-size:13px;color:var(--text-light);">Bu aydınlatma metni, Annenin Doğal Tadları tarafından hazırlanmıştır ve gerektiğinde güncellenebilir.</p>
-      </div>
+      <p style="margin-bottom:0;">KVKK md.11 kapsamında erişim, düzeltme, silme veya işleme itiraz hakkınız saklıdır. WhatsApp üzerinden ulaşabilirsiniz.</p>
     </div>
-
-    <div style="text-align:center;margin-top:32px;">
-      <button class="btn-primary" onclick="history.back()">← Geri Dön</button>
-    </div>
+    <div style="text-align:center;margin-top:32px;"><button class="btn-primary" onclick="history.back()">← Geri Dön</button></div>
   </div>
 </div>
 
@@ -503,42 +520,44 @@ const STATIC_REVIEWS = [
   {name:'Büşra Y.',product:'Meyve Kuruları',stars:5,text:'Çocuklarım çok seviyor.',date:'3 hafta önce'},
 ];
 
-let allProducts=[], cart=[], activeCat='all';
-// SEPET AÇMA MANTIĞI: sepet boş → ilk ürün eklemede aç, sonra kapat
-let cartWasEmpty = true;
+let allProducts=[], cart=[], activeCat='all', cartWasEmpty=true, prevPage='products';
 
-async function loadProducts() {
-  try {
-    const {data,error} = await sb.from('products').select('*').eq('active',true).order('created_at',{ascending:false});
+// ── YÜKLEME ───────────────────────────────────────────────────
+async function loadProducts(){
+  try{
+    const {data,error}=await sb.from('products').select('*').eq('active',true).order('created_at',{ascending:false});
     if(error) throw error;
-    allProducts = data||[];
-  } catch(e){allProducts=[];}
+    allProducts=data||[];
+  }catch(e){allProducts=[];}
   renderFeatured(); applyFilters();
 }
 
+// ── STOK ETİKETİ ──────────────────────────────────────────────
 function stockLabel(stock){
   if(stock<=0) return {cls:'stock-out',txt:'⛔ Tükendi'};
   if(stock<=5) return {cls:'stock-low',txt:'⚠️ Son '+stock+' adet'};
   return {cls:'stock-ok',txt:'✅ Stokta var'};
 }
 
-function buildVariants(p,cid){
+// ── ÜRÜN KARTI (variant butonları kart içinde görünür) ────────
+function buildVariantsCard(p,cid){
   const variants=p.variants||[];
   if(!variants.length){
-    const si=stockLabel(p.stock??99);
-    return '<div class="product-price-display" id="price-'+cid+'">₺'+p.price+'</div>'+
+    const si=stockLabel(99);
+    return '<div class="product-price-display" id="price-'+cid+'">₺'+(p.price||'?')+'</div>'+
            '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>'+
            '<input type="hidden" id="sv-'+cid+'" value="Standart">'+
-           '<input type="hidden" id="sp-'+cid+'" value="'+p.price+'">'+
-           '<input type="hidden" id="ss-'+cid+'" value="'+(p.stock??99)+'">';
+           '<input type="hidden" id="sp-'+cid+'" value="'+(p.price||0)+'">'+
+           '<input type="hidden" id="ss-'+cid+'" value="99">';
   }
   const first=variants[0]; const si=stockLabel(first.stock);
   const btns=variants.map((v,i)=>
-    '<button class="variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'"'+
-    ' onclick="selVar('+p.id+',\''+cid+'\','+i+')" id="vb-'+cid+'-'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
-    v.label+' — ₺'+v.price+'</button>'
+    '<button class="variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'" '+
+    'onclick="event.stopPropagation();selVar('+p.id+',\''+cid+'\','+i+')" id="vb-'+cid+'-'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
+    v.label+'<br><small style="font-size:10px;">₺'+v.price+'</small></button>'
   ).join('');
-  return '<div class="variant-selector"><label>Seçenek & Fiyat:</label><div class="variant-buttons">'+btns+'</div></div>'+
+  return '<div class="variant-selector" onclick="event.stopPropagation()"><label>Paket Seçin:</label>'+
+         '<div class="variant-buttons">'+btns+'</div></div>'+
          '<div class="product-price-display" id="price-'+cid+'">₺'+first.price+'</div>'+
          '<div class="'+si.cls+'" id="si-'+cid+'">'+si.txt+'</div>'+
          '<input type="hidden" id="sv-'+cid+'" value="'+first.label+'">'+
@@ -557,7 +576,7 @@ function selVar(pid,cid,idx){
   document.getElementById('sp-'+cid).value=v.price;
   document.getElementById('ss-'+cid).value=v.stock;
   const ab=document.getElementById('ab-'+cid);
-  if(ab){ab.disabled=v.stock<=0; ab.textContent=v.stock<=0?'⛔ Tükendi':'🛒 Sepete Ekle';}
+  if(ab){ab.disabled=v.stock<=0; ab.innerHTML=v.stock<=0?'⛔ Tükendi':'🛒 Sepete Ekle';}
 }
 
 function productCard(p){
@@ -565,21 +584,18 @@ function productCard(p){
   const badge=p.badge?'<div class="product-badge-wrap"><span class="badge badge-'+p.badge+'">'+(p.badge==='popular'?'⭐ Popüler':p.badge==='fresh'?'🌿 Taze':'✨ Yeni')+'</span></div>':'';
   const cid='p'+p.id;
   const reviews=p.reviews||[];
-  // Yorum butonu → modal açar (artık kart içinde gizli liste YOK)
-  const revBtn=reviews.length
-    ?'<button class="reviews-toggle-btn" onclick="openReviewModal('+p.id+')">💬 '+reviews.length+' Yorumu Gör</button>'
-    :'';
-  return '<div class="product-card">'+badge+
+  const revCount=reviews.length;
+  return '<div class="product-card" onclick="openDetail('+p.id+')">'+badge+
     '<div class="product-img-box" style="background:linear-gradient(135deg,'+grad+')">'+(p.emoji||'📦')+'</div>'+
     '<div class="product-body">'+
     '<div class="product-category">'+(CAT_LABELS[p.category]||p.category)+'</div>'+
     '<div class="product-name">'+p.name+'</div>'+
-    '<div class="product-desc">'+(p.description||'')+'</div>'+
-    (p.rating?'<div class="product-rating"><span class="stars">'+'⭐'.repeat(Math.round(p.rating||0))+'</span><span style="font-size:13px;font-weight:700;margin-left:4px;">'+p.rating+'</span><span style="font-size:12px;color:var(--text-light);margin-left:4px;">('+( p.review_count||reviews.length)+' yorum)</span></div>':'')+
-    buildVariants(p,cid)+
-    '<div class="qty-selector"><label>Adet:</label><input class="qty-input" type="number" value="1" min="1" step="1" id="qty-'+cid+'"></div>'+
-    '<button class="add-cart-btn" id="ab-'+cid+'" onclick="addToCart('+p.id+',\''+cid+'\')">🛒 Sepete Ekle</button>'+
-    revBtn+
+    '<div class="product-desc-short">'+(p.description||'')+'</div>'+
+    (p.rating?'<div class="product-rating"><span class="stars">'+'⭐'.repeat(Math.round(p.rating||0))+'</span><span style="font-size:13px;font-weight:700;margin-left:4px;">'+p.rating+'</span><span style="font-size:12px;color:var(--text-light);margin-left:4px;">('+( p.review_count||revCount)+' yorum)</span></div>':'')+
+    buildVariantsCard(p,cid)+
+    '<div class="qty-selector" onclick="event.stopPropagation()"><label>Adet:</label><input class="qty-input" type="number" value="1" min="1" id="qty-'+cid+'"></div>'+
+    '<button class="add-cart-btn" id="ab-'+cid+'" onclick="event.stopPropagation();addToCart('+p.id+',\''+cid+'\')">🛒 Sepete Ekle</button>'+
+    (revCount?'<div style="font-size:12px;color:var(--text-light);text-align:center;margin-top:8px;cursor:pointer;text-decoration:underline;" onclick="event.stopPropagation();openDetail('+p.id+')">💬 '+revCount+' yorumu gör →</div>':'')+
     '</div></div>';
 }
 
@@ -610,29 +626,120 @@ function setCat(cat,btn){
   applyFilters();
 }
 
-// ── YORUM MODALİ ─────────────────────────────────────────────
-function openReviewModal(pid){
+// ── ÜRÜN DETAY SAYFASI ────────────────────────────────────────
+function openDetail(pid){
   const p=allProducts.find(x=>x.id===pid); if(!p) return;
+  // Hangi sayfadan gelindi?
+  const activePg=document.querySelector('.page.active');
+  if(activePg && activePg.id) prevPage=activePg.id.replace('page-','');
+  const grad=CAT_GRAD[p.category]||'#EDD9B8,#C4A060';
   const reviews=p.reviews||[];
-  document.getElementById('reviewModalTitle').textContent=p.name+' — Yorumlar';
-  document.getElementById('reviewModalSub').textContent=reviews.length+' yorum · ⭐ '+(p.rating||'—')+' ortalama puan';
-  document.getElementById('reviewModalList').innerHTML=reviews.length
-    ?reviews.map(r=>
-        '<div class="review-item">'+
-        '<div class="review-item-header"><span class="review-author">'+r.author+'</span><span class="review-stars-sm">'+'⭐'.repeat(r.stars||5)+'</span></div>'+
-        '<div class="review-text">'+r.text+'</div>'+
-        '</div>'
-      ).join('')
-    :'<p style="color:var(--text-light);text-align:center;padding:20px;">Henüz yorum yok.</p>';
-  document.getElementById('reviewModalOverlay').classList.add('open');
+  const variants=p.variants||[];
+  // Variant butonları detay sayfası için
+  let variantHtml='';
+  if(variants.length){
+    const btns=variants.map((v,i)=>
+      '<button class="detail-variant-btn'+(i===0?' selected':'')+(v.stock<=0?' out-of-stock':'')+'" '+
+      'onclick="selDetailVar('+p.id+','+i+')" id="dvb-'+p.id+'-'+i+'"'+(v.stock<=0?' disabled':'')+'>'+
+      '<div style="font-size:14px;font-weight:700;">'+v.label+'</div>'+
+      '<div style="font-size:13px;color:'+(v.stock<=0?'#ccc':'var(--terracotta)')+';">₺'+v.price+'</div>'+
+      (v.stock<=0?'<div style="font-size:10px;color:#C62828;">Tükendi</div>':v.stock<=5?'<div style="font-size:10px;color:var(--amber);">Son '+v.stock+' adet</div>':'<div style="font-size:10px;color:var(--olive);">Stokta var</div>')+
+      '</button>'
+    ).join('');
+    const first=variants[0];
+    variantHtml='<div class="detail-variant-selector"><label>Paket Seçenekleri:</label><div class="detail-variant-buttons">'+btns+'</div></div>'+
+      '<div class="detail-price" id="dPrice">₺'+first.price+'</div>'+
+      '<input type="hidden" id="dVariant" value="'+first.label+'">'+
+      '<input type="hidden" id="dPrice2" value="'+first.price+'">'+
+      '<input type="hidden" id="dStock" value="'+first.stock+'">';
+  } else {
+    variantHtml='<div class="detail-price" id="dPrice">₺'+(p.price||'?')+'</div>'+
+      '<input type="hidden" id="dVariant" value="Standart">'+
+      '<input type="hidden" id="dPrice2" value="'+(p.price||0)+'">'+
+      '<input type="hidden" id="dStock" value="99">';
+  }
+  // Yorumlar
+  const reviewsHtml=reviews.length
+    ?reviews.map(r=>'<div class="detail-review-item">'+
+        '<div class="detail-review-header">'+
+        '<span class="detail-review-author">'+r.author+'</span>'+
+        '<span class="detail-review-stars">'+'⭐'.repeat(r.stars||5)+'</span>'+
+        '</div>'+
+        '<div class="detail-review-text">'+r.text+'</div>'+
+        '</div>').join('')
+    :'<p style="color:var(--text-light);padding:20px 0;">Henüz yorum yok.</p>';
+
+  document.getElementById('detailContent').innerHTML=
+    '<div class="product-detail-grid">'+
+    '<div class="product-detail-img" style="background:linear-gradient(135deg,'+grad+')">'+(p.emoji||'📦')+'</div>'+
+    '<div class="product-detail-info">'+
+    '<div class="cat">'+(CAT_LABELS[p.category]||p.category)+'</div>'+
+    '<h1>'+p.name+'</h1>'+
+    (p.rating?'<div class="product-rating" style="margin-bottom:16px;"><span class="stars">'+'⭐'.repeat(Math.round(p.rating))+'</span><span style="font-size:15px;font-weight:700;margin-left:6px;">'+p.rating+'</span><span style="font-size:13px;color:var(--text-light);margin-left:6px;">('+( p.review_count||reviews.length)+' yorum)</span></div>':'')+
+    '<div class="desc">'+(p.description||'')+'</div>'+
+    variantHtml+
+    '<div class="detail-qty-row">'+
+    '<label>Adet:</label>'+
+    '<div class="detail-qty-btns">'+
+    '<button onclick="detailQtyChange(-1)">−</button>'+
+    '<input type="number" id="detailQty" value="1" min="1">'+
+    '<button onclick="detailQtyChange(1)">+</button>'+
+    '</div>'+
+    '</div>'+
+    '<button class="detail-add-btn" id="detailAddBtn" onclick="addToCartFromDetail('+p.id+')">🛒 Sepete Ekle</button>'+
+    '</div></div>'+
+    '<div class="detail-reviews">'+
+    '<h2>💬 Müşteri Yorumları <span style="font-size:16px;color:var(--text-light);">('+reviews.length+')</span></h2>'+
+    reviewsHtml+
+    '</div>';
+  showPage('detail'); setNav(-1);
 }
-function closeReviewModal(){ document.getElementById('reviewModalOverlay').classList.remove('open'); }
+
+function selDetailVar(pid,idx){
+  const p=allProducts.find(x=>x.id===pid); if(!p) return;
+  const v=p.variants[idx];
+  p.variants.forEach((_,i)=>{const b=document.getElementById('dvb-'+pid+'-'+i);if(b)b.classList.toggle('selected',i===idx);});
+  document.getElementById('dPrice').textContent='₺'+v.price;
+  document.getElementById('dVariant').value=v.label;
+  document.getElementById('dPrice2').value=v.price;
+  document.getElementById('dStock').value=v.stock;
+  const ab=document.getElementById('detailAddBtn');
+  if(ab){ab.disabled=v.stock<=0; ab.textContent=v.stock<=0?'⛔ Tükendi':'🛒 Sepete Ekle';}
+}
+
+function detailQtyChange(delta){
+  const inp=document.getElementById('detailQty');
+  if(!inp) return;
+  const v=Math.max(1,parseInt(inp.value||1)+delta);
+  inp.value=v;
+}
+
+function addToCartFromDetail(pid){
+  const p=allProducts.find(x=>x.id===pid); if(!p) return;
+  const variant=document.getElementById('dVariant')?.value||'Standart';
+  const price=parseFloat(document.getElementById('dPrice2')?.value||p.price||0);
+  const stock=parseInt(document.getElementById('dStock')?.value||99);
+  const qty=parseInt(document.getElementById('detailQty')?.value||1);
+  if(stock<=0){showToast('⛔ Bu ürün tükendi!','error');return;}
+  const ex=cart.find(x=>x.id===pid&&x.variant===variant);
+  if(ex&&ex.qty+qty>stock){showToast('⚠️ Stokta yalnızca '+stock+' adet var!','error');return;}
+  if(ex) ex.qty+=qty; else cart.push({id:pid,name:p.name,emoji:p.emoji||'📦',price,qty,variant,unit:p.unit||''});
+  updateCartUI();
+  showToast('✅ '+p.name+' ('+variant+') sepete eklendi!','success');
+  if(cartWasEmpty){openCart();cartWasEmpty=false;}
+}
+
+function goBackFromDetail(){
+  showPage(prevPage);
+  if(prevPage==='home') setNav(0);
+  else if(prevPage==='products') setNav(1);
+}
 
 // ── SEPET ─────────────────────────────────────────────────────
 function addToCart(pid,cid){
   const p=allProducts.find(x=>x.id===pid); if(!p) return;
   const variant=document.getElementById('sv-'+cid)?.value||'Standart';
-  const price=parseFloat(document.getElementById('sp-'+cid)?.value||p.price);
+  const price=parseFloat(document.getElementById('sp-'+cid)?.value||p.price||0);
   const stock=parseInt(document.getElementById('ss-'+cid)?.value||99);
   const qty=parseInt(document.getElementById('qty-'+cid)?.value||1);
   if(stock<=0){showToast('⛔ Bu ürün tükendi!','error');return;}
@@ -640,17 +747,26 @@ function addToCart(pid,cid){
   if(ex&&ex.qty+qty>stock){showToast('⚠️ Stokta yalnızca '+stock+' adet var!','error');return;}
   if(ex) ex.qty+=qty; else cart.push({id:pid,name:p.name,emoji:p.emoji||'📦',price,qty,variant,unit:p.unit||''});
   updateCartUI();
-  // Her eklemede toast göster
   showToast('✅ '+p.name+' ('+variant+') sepete eklendi!','success');
-  // Sepet boşken ilk ekleme → bir kez aç, sonra aynı sipariş için açma
-  if(cartWasEmpty){ openCart(); cartWasEmpty=false; }
+  if(cartWasEmpty){openCart();cartWasEmpty=false;}
   const btn=document.getElementById('ab-'+cid);
-  if(btn){const orig=btn.textContent;btn.textContent='✅ Eklendi!';btn.classList.add('added');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('added');},2000);}
+  if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Eklendi!';btn.classList.add('added');setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove('added');},2000);}
+}
+
+// Sepetteki ürün adedini +/- 1 değiştir
+function changeCartQty(i,delta){
+  if(!cart[i]) return;
+  cart[i].qty+=delta;
+  if(cart[i].qty<=0){
+    cart.splice(i,1);
+    if(cart.length===0) cartWasEmpty=true;
+  }
+  updateCartUI();
 }
 
 function removeFromCart(i){
   cart.splice(i,1);
-  if(cart.length===0) cartWasEmpty=true; // Sepet boşaldı → bir sonraki ilk ekleme yeniden açsın
+  if(cart.length===0) cartWasEmpty=true;
   updateCartUI();
 }
 
@@ -665,12 +781,22 @@ function updateCartUI(){
     document.getElementById('shippingNote').textContent='🚚 500₺ üzeri kargo ücretsiz!';
     return;
   }
-  el.innerHTML=cart.map((item,i)=>'<div class="cart-item">'+
+  el.innerHTML=cart.map((item,i)=>
+    '<div class="cart-item">'+
     '<div class="cart-item-emoji">'+item.emoji+'</div>'+
-    '<div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-detail">'+item.variant+' × '+item.qty+'</div></div>'+
+    '<div class="cart-item-info">'+
+      '<div class="cart-item-name">'+item.name+'</div>'+
+      '<div class="cart-item-detail">'+item.variant+'</div>'+
+    '</div>'+
+    '<div class="cart-qty-ctrl">'+
+      '<button onclick="changeCartQty('+i+',-1)">−</button>'+
+      '<span>'+item.qty+'</span>'+
+      '<button onclick="changeCartQty('+i+',1)">+</button>'+
+    '</div>'+
     '<div class="cart-item-price">₺'+(item.price*item.qty).toFixed(0)+'</div>'+
-    '<button class="cart-item-remove" onclick="removeFromCart('+i+')">✕</button>'+
-    '</div>').join('');
+    '<button class="cart-item-remove" onclick="removeFromCart('+i+')" title="Kaldır">✕</button>'+
+    '</div>'
+  ).join('');
   document.getElementById('cartTotal').textContent='₺'+total.toFixed(2).replace('.',',');
   document.getElementById('shippingNote').textContent=total>=500?'🎉 Kargo ücretsiz!':'🚚 '+(500-total).toFixed(0)+'₺ daha alın, kargo bedava!';
 }
@@ -702,13 +828,12 @@ async function placeOrder(){
   const orderData={customer_name:ad+' '+document.getElementById('ckSoyad').value.trim(),customer_phone:tel,customer_city:document.getElementById('ckSehir').value,customer_address:adres,order_note:document.getElementById('ckNot').value,payment_method:payEl?.textContent||'—',items:JSON.stringify(cart),total_amount:total,cargo_fee:total>=500?0:49.90,status:'Yeni'};
   const btn=document.getElementById('placeOrderBtn');btn.textContent='⏳ Gönderiliyor...';btn.disabled=true;
   try{
-    // Stok düşür — her variant için ayrı ayrı
     for(const item of cart){
       const p=allProducts.find(x=>x.id===item.id);if(!p) continue;
       if(p.variants&&p.variants.length){
         const vi=p.variants.findIndex(v=>v.label===item.variant);
         if(vi>=0){p.variants[vi].stock=Math.max(0,p.variants[vi].stock-item.qty);await sb.from('products').update({variants:p.variants}).eq('id',p.id);}
-      } else {p.stock=Math.max(0,(p.stock??99)-item.qty);await sb.from('products').update({stock:p.stock}).eq('id',p.id);}
+      }
     }
     const {data,error}=await sb.from('orders').insert([orderData]).select();
     if(error) throw error;
@@ -719,9 +844,11 @@ async function placeOrder(){
   finally{btn.textContent='✅ Siparişi Onayla';btn.disabled=false;}
 }
 
+// ── SAYFA ─────────────────────────────────────────────────────
 function showPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name)?.classList.add('active');window.scrollTo(0,0);
+  document.getElementById('page-'+name)?.classList.add('active');
+  window.scrollTo(0,0);
   if(name==='products') applyFilters();
   if(name==='reviews') renderReviews();
 }
@@ -747,8 +874,7 @@ function showToast(msg,type=''){
   clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
-loadProducts();
-renderReviews();
+loadProducts(); renderReviews();
 </script>
 </body>
 </html>
