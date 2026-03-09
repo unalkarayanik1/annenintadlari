@@ -37,6 +37,7 @@ nav{border-top:1px solid var(--border);background:var(--warm-white);}
 /* HERO */
 .hero{background:linear-gradient(135deg,#2C1810 0%,#5C3D2E 40%,#8B4513 70%,#C0522A 100%);min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden;}
 .hero-content{max-width:1300px;margin:0 auto;padding:60px 24px;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.hero-content-slim{grid-template-columns:1fr!important;max-width:700px!important;}
 .hero-badge{display:inline-block;background:rgba(240,168,32,.2);border:1px solid rgba(240,168,32,.4);color:var(--amber-light);padding:6px 16px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 .hero-text h1{font-family:'Playfair Display',serif;font-size:48px;line-height:1.15;margin-bottom:20px;font-weight:700;color:white;}
 .hero-text h1 em{color:var(--amber-light);font-style:italic;}
@@ -301,28 +302,21 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.8);padding:60px 24px 
 <!-- ANA SAYFA -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <div class="hero-content">
+    <div class="hero-content hero-content-slim">
       <div class="hero-text">
         <div class="hero-badge">🌿 %100 Doğal & Katkısız</div>
         <h1>Annenizin <em>Sıcak Elleri</em>nden Sofranıza</h1>
-        <p>Pulbiber, salça, patlıcan kurusu, antepfıstığı, meyve kuruları, bal ve ekmek... Geleneksel yöntemlerle hazırlanmış doğal lezzetler.</p>
+        <p>Pulbiber, salça, patlıcan kurusu, antepfıstığı, meyve kuruları, bal ve ekmek... Geleneksel yöntemlerle hazırlanmış, katkısız ve tamamen doğal lezzetler. Her kavanozda bir annenin emeği, bir yörenin tadı var.</p>
         <div class="hero-buttons">
           <button class="btn-primary" onclick="showPage('products');setNav(1)">Ürünleri Keşfet 🌾</button>
           <button class="btn-secondary" onclick="showPage('about');setNav(3)">Hikayemiz</button>
         </div>
-      </div>
-      <div class="hero-grid">
-        <div class="hero-card"><div class="icon">🌶️</div><div class="name">Pulbiber</div><div class="sub">Taze öğütülmüş</div></div>
-        <div class="hero-card"><div class="icon">🍯</div><div class="name">Çiçek Balı</div><div class="sub">Ham, doğal</div></div>
-        <div class="hero-card"><div class="icon">🍅</div><div class="name">Domates Salçası</div><div class="sub">Ev yapımı</div></div>
-        <div class="hero-card"><div class="icon">🥜</div><div class="name">Antepfıstığı</div><div class="sub">Gaziantep'ten</div></div>
       </div>
     </div>
   </div>
   <div class="section">
     <div class="section-header"><div class="eyebrow">En Çok Tercih Edilenler</div><h2>Öne Çıkan Ürünler</h2><p>Müşterilerimizin en çok sevdiği doğal lezzetlerimiz</p></div>
     <div class="products-grid" id="featuredGrid"><div class="loading-spinner">⏳ Yükleniyor...</div></div>
-    <div style="text-align:center;margin-top:36px;"><button class="btn-primary" onclick="showPage('products');setNav(1)">Tüm Ürünleri Gör →</button></div>
   </div>
 </div>
 
@@ -537,6 +531,12 @@ async function loadProducts(){
     allProducts=data||[];
   }catch(e){allProducts=[];}
   renderFeatured(); applyFilters();
+  // Sayfa yenilenince hash'te detail varsa aç
+  const hash = window.location.hash.replace('#','');
+  if(hash.startsWith('detail-')){
+    const pid = parseInt(hash.replace('detail-',''));
+    if(pid && allProducts.find(x=>x.id===pid)) openDetail(pid, false);
+  }
 }
 
 // ── STOK ETİKETİ ──────────────────────────────────────────────
@@ -612,10 +612,9 @@ function productCard(p){
 }
 
 function renderFeatured(){
-  const list=allProducts.filter(p=>p.badge).slice(0,4);
-  const show=list.length>=2?list:allProducts.slice(0,4);
+  // Ana sayfada tüm ürünleri göster (sonsuz scroll — buton yok)
   const el=document.getElementById('featuredGrid');
-  if(el) el.innerHTML=show.length?show.map(productCard).join(''):'<p style="grid-column:1/-1;text-align:center;color:var(--text-light);">Ürün bulunamadı.</p>';
+  if(el) el.innerHTML=allProducts.length?allProducts.map(productCard).join(''):'<p style="grid-column:1/-1;text-align:center;color:var(--text-light);">Ürün bulunamadı.</p>';
 }
 
 function applyFilters(){
@@ -811,6 +810,17 @@ function addToCart(pid,cid){
 // Sepetteki ürün adedini +/- 1 değiştir
 function changeCartQty(i,delta){
   if(!cart[i]) return;
+  if(delta>0){
+    // Stok kontrolü
+    const p=allProducts.find(x=>x.id===cart[i].id);
+    if(p&&p.variants&&p.variants.length){
+      const v=p.variants.find(x=>x.label===cart[i].variant);
+      if(v&&cart[i].qty+delta>v.stock){
+        showToast('⚠️ Stokta yeterli miktarda ürün bulunmamaktadır. Stok detayı için WhatsApp\'tan iletişime geçebilirsiniz.','error');
+        return;
+      }
+    }
+  }
   cart[i].qty+=delta;
   if(cart[i].qty<=0){
     cart.splice(i,1);
@@ -903,10 +913,10 @@ async function placeOrder(){
 const PAGE_NAV_IDX = {home:0,products:1,reviews:2,about:3,contact:4};
 let _historyNav = false;
 
-function showPage(name, pushState=true){
+function showPage(name, pushState=true, scrollTop=true){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+name)?.classList.add('active');
-  window.scrollTo(0,0);
+  if(scrollTop) window.scrollTo(0,0);
   if(name==='products') applyFilters();
   if(name==='reviews') renderReviews();
   const ni = PAGE_NAV_IDX[name]??-1;
@@ -927,8 +937,20 @@ window.addEventListener('popstate', function(e){
   _historyNav = false;
 });
 
-// İlk yükleme state'i kaydet
-history.replaceState({page:'home'}, '', '#home');
+// Sayfa yenilenince hash'ten sayfayı geri yükle
+function initPageFromHash(){
+  const hash = window.location.hash.replace('#','');
+  if(!hash){ history.replaceState({page:'home'},'','#home'); return; }
+  if(hash.startsWith('detail-')){
+    // Ürün detayı: ürünler yüklendikten sonra açılacak, yükleme callback'te ele alınır
+    history.replaceState({page:'detail',pid:parseInt(hash.replace('detail-',''))},'',window.location.hash);
+  } else {
+    const validPages = ['home','products','reviews','about','contact','checkout','kvkk'];
+    const pg = validPages.includes(hash) ? hash : 'home';
+    showPage(pg, false);
+    history.replaceState({page:pg},'','#'+pg);
+  }
+}
 
 function setNav(i){document.querySelectorAll('.nav-item').forEach((n,idx)=>n.classList.toggle('active',idx===i));}
 
@@ -979,6 +1001,7 @@ function openWA(phone, text){
   }
 }
 
+initPageFromHash();
 loadProducts(); renderReviews();
 </script>
 </body>
