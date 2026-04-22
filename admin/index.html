@@ -395,10 +395,19 @@ const SUPABASE_URL = 'https://kegddzrlsomgyckgnnmj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlZ2RkenJsc29tZ3lja2dubm1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3OTg2ODIsImV4cCI6MjA4ODM3NDY4Mn0.VKSVvjBSCq7B9Jpmkky_-1XsOq3BYMSiNRkhJfn8rUk';
 // ── AUTH ─────────────────────────────────────────────────────
 async function checkAuth(){
-  const {data:{session}}=await sb.auth.getSession();
-  if(session){
+  if(!sb){
+    // Supabase bağlı değil, direkt aç
     showApp();
-  } else {
+    return;
+  }
+  try{
+    const {data:{session}}=await sb.auth.getSession();
+    if(session){
+      showApp();
+    } else {
+      document.getElementById('loginScreen').style.display='flex';
+    }
+  } catch(e){
     document.getElementById('loginScreen').style.display='flex';
   }
 }
@@ -410,14 +419,25 @@ async function doLogin(){
   const errEl=document.getElementById('loginError');
   errEl.style.display='none';
   btn.textContent='⏳ Giriş yapılıyor...'; btn.disabled=true;
-  const {error}=await sb.auth.signInWithPassword({email,password:pass});
-  if(error){
-    errEl.textContent='❌ '+error.message; errEl.style.display='block';
-    btn.textContent='Giriş Yap'; btn.disabled=false;
-  } else {
-    showApp();
+  
+  try{
+    const {data, error}=await sb.auth.signInWithPassword({email,password:pass});
+    if(error){
+      errEl.textContent='❌ '+error.message; 
+      errEl.style.display='block';
+      btn.textContent='Giriş Yap'; 
+      btn.disabled=false;
+    } else {
+      showApp();
+    }
+  } catch(e){
+    errEl.textContent='❌ Bağlantı hatası: '+e.message; 
+    errEl.style.display='block';
+    btn.textContent='Giriş Yap'; 
+    btn.disabled=false;
   }
 }
+
 
 function showApp(){
   document.getElementById('loginScreen').style.display='none';
