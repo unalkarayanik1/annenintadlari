@@ -6,6 +6,8 @@
 <title>Yönetim Paneli — Annenin Doğal Tadları</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
 <style>
 :root{--cream:#FDF6EC;--terracotta:#C0522A;--terracotta-dark:#9B3E1E;--terracotta-light:#E8714A;--olive:#6B7A3A;--amber:#D4860A;--amber-light:#F0A820;--brown:#3D2B1F;--text-dark:#2C1810;--text-mid:#5C3D2E;--text-light:#8B6355;--border:#E8D5C0;--shadow:rgba(92,61,46,0.15);--bg:#F5EDE3;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -119,6 +121,25 @@ input:checked+.slider::before{transform:translateX(22px);}
 </style>
 </head>
 <body>
+<!-- LOGIN EKRANI -->
+<div id="loginScreen" style="display:none;position:fixed;inset:0;background:#FAF6F0;z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:24px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.12);text-align:center;">
+    <div style="font-size:48px;margin-bottom:12px;">🌿</div>
+    <h2 style="font-family:Georgia,serif;color:#2C1810;margin-bottom:4px;">Annenin Doğal Tadları</h2>
+    <p style="color:#9C8060;font-size:14px;margin-bottom:32px;">Admin Paneli</p>
+    <div id="loginError" style="display:none;background:#FFEBEE;color:#C62828;padding:10px 16px;border-radius:10px;font-size:13px;margin-bottom:16px;"></div>
+    <input type="email" id="loginEmail" placeholder="E-posta adresiniz"
+      style="width:100%;box-sizing:border-box;padding:14px 16px;border:1.5px solid #E8DDD0;border-radius:12px;font-size:14px;margin-bottom:12px;outline:none;font-family:inherit;">
+    <input type="password" id="loginPassword" placeholder="Şifreniz"
+      style="width:100%;box-sizing:border-box;padding:14px 16px;border:1.5px solid #E8DDD0;border-radius:12px;font-size:14px;margin-bottom:20px;outline:none;font-family:inherit;">
+    <button onclick="doLogin()" id="loginBtn"
+      style="width:100%;padding:15px;background:#C1440E;color:white;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">
+      Giriş Yap
+    </button>
+    <p style="margin-top:16px;font-size:12px;color:#9C8060;">Yetkisiz erişim yasaktır.</p>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <!-- SİPARİŞ MODAL -->
@@ -161,7 +182,11 @@ input:checked+.slider::before{transform:translateX(22px);}
   <div class="main">
     <div class="topbar">
       <div><h2 id="topbarTitle">Dashboard</h2><p id="topbarSub">Genel durum ve son siparişler</p></div>
-      <div style="font-size:13px;color:var(--text-light);" id="topbarTime"></div>
+      <div style="display:flex;align-items:center;gap:16px;">
+  			<div style="font-size:13px;color:var(--text-light);" id="topbarTime"></div>
+  			<button onclick="doLogout()" style="background:#C1440E;border:none;color:white;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;">🚪 Çıkış</button>
+		</div>
+
     </div>
     <div class="content">
 
@@ -368,6 +393,47 @@ input:checked+.slider::before{transform:translateX(22px);}
 <script>
 const SUPABASE_URL = 'https://kegddzrlsomgyckgnnmj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlZ2RkenJsc29tZ3lja2dubm1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3OTg2ODIsImV4cCI6MjA4ODM3NDY4Mn0.VKSVvjBSCq7B9Jpmkky_-1XsOq3BYMSiNRkhJfn8rUk';
+// ── AUTH ─────────────────────────────────────────────────────
+async function checkAuth(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){
+    showApp();
+  } else {
+    document.getElementById('loginScreen').style.display='flex';
+  }
+}
+
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  const btn=document.getElementById('loginBtn');
+  const errEl=document.getElementById('loginError');
+  errEl.style.display='none';
+  btn.textContent='⏳ Giriş yapılıyor...'; btn.disabled=true;
+  const {error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){
+    errEl.textContent='❌ '+error.message; errEl.style.display='block';
+    btn.textContent='Giriş Yap'; btn.disabled=false;
+  } else {
+    showApp();
+  }
+}
+
+function showApp(){
+  document.getElementById('loginScreen').style.display='none';
+  initApp();
+}
+
+async function doLogout(){
+  await sb.auth.signOut();
+  location.reload();
+}
+
+// Enter tuşu ile giriş
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none') doLogin();
+});
+
 let sb;
 try {
   if(SUPABASE_URL.startsWith('BURAYA') || SUPABASE_ANON_KEY.startsWith('BURAYA')) { sb = null; }
@@ -1161,10 +1227,9 @@ async function upsertSetting(key,value){
 
 // ── BAŞLATICI ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function(){
-  document.getElementById('loginBtn').addEventListener('click', login);
-  document.getElementById('passInput').addEventListener('keydown', function(e){ if(e.key==='Enter') login(); });
-  if(sessionStorage.getItem('adminAuth')==='1') showApp();
+  checkAuth();
 });
+
 </script>
 </body>
 </html>
