@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -6,8 +7,6 @@
 <title>Yönetim Paneli — Annenin Doğal Tadları</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-
 <style>
 :root{--cream:#FDF6EC;--terracotta:#C0522A;--terracotta-dark:#9B3E1E;--terracotta-light:#E8714A;--olive:#6B7A3A;--amber:#D4860A;--amber-light:#F0A820;--brown:#3D2B1F;--text-dark:#2C1810;--text-mid:#5C3D2E;--text-light:#8B6355;--border:#E8D5C0;--shadow:rgba(92,61,46,0.15);--bg:#F5EDE3;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -121,28 +120,10 @@ input:checked+.slider::before{transform:translateX(22px);}
 </style>
 </head>
 <body>
-<!-- LOGIN EKRANI -->
-<div id="loginScreen" style="display:none;position:fixed;inset:0;background:#FAF6F0;z-index:9999;display:flex;align-items:center;justify-content:center;">
-  <div style="background:white;border-radius:24px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.12);text-align:center;">
-    <div style="font-size:48px;margin-bottom:12px;">🌿</div>
-    <h2 style="font-family:Georgia,serif;color:#2C1810;margin-bottom:4px;">Annenin Doğal Tadları</h2>
-    <p style="color:#9C8060;font-size:14px;margin-bottom:32px;">Admin Paneli</p>
-    <div id="loginError" style="display:none;background:#FFEBEE;color:#C62828;padding:10px 16px;border-radius:10px;font-size:13px;margin-bottom:16px;"></div>
-    <input type="email" id="loginEmail" placeholder="E-posta adresiniz"
-      style="width:100%;box-sizing:border-box;padding:14px 16px;border:1.5px solid #E8DDD0;border-radius:12px;font-size:14px;margin-bottom:12px;outline:none;font-family:inherit;">
-    <input type="password" id="loginPassword" placeholder="Şifreniz"
-      style="width:100%;box-sizing:border-box;padding:14px 16px;border:1.5px solid #E8DDD0;border-radius:12px;font-size:14px;margin-bottom:20px;outline:none;font-family:inherit;">
-    <button onclick="doLogin()" id="loginBtn"
-      style="width:100%;padding:15px;background:#C1440E;color:white;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">
-      Giriş Yap
-    </button>
-    <p style="margin-top:16px;font-size:12px;color:#9C8060;">Yetkisiz erişim yasaktır.</p>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <!-- SİPARİŞ MODAL -->
+
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -151,19 +132,43 @@ input:checked+.slider::before{transform:translateX(22px);}
   </div>
 </div>
 
-<!-- GİRİŞ -->
-<div id="loginWrap" class="login-wrap">
-  <div class="login-card">
-    <div class="login-logo">🌾</div>
-    <h1>Yönetim Paneli</h1>
-    <p>Annenin Doğal Tadları — Satıcı Girişi</p>
-    <input class="login-input" type="password" id="passInput" placeholder="Şifrenizi girin">
-    <button class="login-btn" id="loginBtn">Giriş Yap →</button>
-    <div class="login-error" id="loginError">❌ Yanlış şifre!</div>
+<!-- LOGIN EKRANI -->
+
+<div id="loginScreen" style="display:flex;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a0a00 0%,#3D2B1F 50%,#6B3A20 100%);">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(192,82,42,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(212,134,10,.1) 0%,transparent 40%);"></div>
+  <div style="position:relative;background:rgba(255,255,255,.97);border-radius:28px;padding:52px 44px;width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,.4);text-align:center;backdrop-filter:blur(10px);">
+    <div style="width:72px;height:72px;background:linear-gradient(135deg,#C0522A,#E8714A);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px;box-shadow:0 8px 24px rgba(192,82,42,.4);">🌿</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:26px;color:#2C1810;margin-bottom:6px;font-weight:700;">Annenin Doğal Tadları</h1>
+    <p style="color:#8B6355;font-size:14px;margin-bottom:36px;letter-spacing:.3px;">Yönetim Paneli Girişi</p>
+    <div id="loginError" style="display:none;background:#FFEBEE;color:#C62828;padding:12px 16px;border-radius:12px;font-size:13px;margin-bottom:18px;font-weight:600;border:1px solid rgba(198,40,40,.2);"></div>
+    <div style="text-align:left;margin-bottom:14px;">
+      <label style="display:block;font-size:11px;font-weight:700;color:#8B6355;margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px;">E-posta</label>
+      <input type="email" id="loginEmail" placeholder="ornek@gmail.com" autocomplete="email"
+        style="width:100%;padding:14px 16px;border:2px solid #E8D5C0;border-radius:14px;font-size:15px;outline:none;font-family:'Lato',sans-serif;color:#2C1810;transition:border-color .2s;background:#FDFAF6;"
+        onfocus="this.style.borderColor='#C0522A'" onblur="this.style.borderColor='#E8D5C0'">
+    </div>
+    <div style="text-align:left;margin-bottom:28px;">
+      <label style="display:block;font-size:11px;font-weight:700;color:#8B6355;margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px;">Şifre</label>
+      <div style="position:relative;">
+        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"
+          style="width:100%;padding:14px 48px 14px 16px;border:2px solid #E8D5C0;border-radius:14px;font-size:15px;outline:none;font-family:'Lato',sans-serif;color:#2C1810;transition:border-color .2s;background:#FDFAF6;"
+          onfocus="this.style.borderColor='#C0522A'" onblur="this.style.borderColor='#E8D5C0'"
+          onkeydown="if(event.key==='Enter')doLogin()">
+        <button onclick="togglePassVis()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#8B6355;" title="Şifreyi göster">👁</button>
+      </div>
+    </div>
+    <button onclick="doLogin()" id="loginBtn"
+      style="width:100%;padding:16px;background:linear-gradient(135deg,#C0522A,#E8714A);color:white;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif;letter-spacing:.3px;box-shadow:0 6px 20px rgba(192,82,42,.4);transition:all .2s;"
+      onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 8px 24px rgba(192,82,42,.5)'"
+      onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(192,82,42,.4)'">
+      Giriş Yap →
+    </button>
+    <p style="margin-top:20px;font-size:12px;color:#B09080;">🔒 Yetkisiz erişim yasaktır</p>
   </div>
 </div>
 
 <!-- UYGULAMA -->
+
 <div class="app" id="app">
   <div class="sidebar">
     <div class="sidebar-logo"><div class="emoji">🌾</div><div class="brand">Annenin Doğal</div><div class="sub">Yönetim Paneli</div></div>
@@ -177,239 +182,251 @@ input:checked+.slider::before{transform:translateX(22px);}
       <div class="nav-item" onclick="showTab('certificates',this)"><span class="icon">🏅</span>Sertifikalar</div>
       <div class="nav-item" onclick="showTab('product-order',this)"><span class="icon">↕️</span>Ürün Sırası</div>
     </div>
-    <div class="sidebar-footer"><button class="logout-btn" onclick="logout()">🚪 Çıkış Yap</button></div>
+    <div class="sidebar-footer"><button class="logout-btn" onclick="doLogout()">🚪 Çıkış Yap</button></div>
   </div>
   <div class="main">
     <div class="topbar">
       <div><h2 id="topbarTitle">Dashboard</h2><p id="topbarSub">Genel durum ve son siparişler</p></div>
       <div style="display:flex;align-items:center;gap:16px;">
-  			<div style="font-size:13px;color:var(--text-light);" id="topbarTime"></div>
-  			<button onclick="doLogout()" style="background:#C1440E;border:none;color:white;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;">🚪 Çıkış</button>
-		</div>
-
+        <div style="font-size:13px;color:var(--text-light);" id="topbarTime"></div>
+        <button onclick="doLogout()" style="background:#C0522A;border:none;color:white;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Lato',sans-serif;">🚪 Çıkış</button>
+      </div>
     </div>
     <div class="content">
 
-      <!-- DASHBOARD -->
-      <div class="tab active" id="tab-dashboard">
-        <div class="stats-grid">
-          <div class="stat-card"><div class="slabel">Aktif Ürün</div><div class="svalue" id="st-products">—</div><div class="schange">Satıştaki ürünler</div></div>
-          <div class="stat-card"><div class="slabel">Toplam Sipariş</div><div class="svalue" id="st-orders">—</div><div class="schange">Tüm siparişler</div></div>
-          <div class="stat-card"><div class="slabel">Bekleyen</div><div class="svalue" id="st-pending">—</div><div class="schange">İşlem bekliyor</div></div>
-          <div class="stat-card"><div class="slabel">Toplam Ciro</div><div class="svalue" id="st-revenue">—</div><div class="schange">Tüm zamanlar</div></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><h3>Son Siparişler</h3><button class="btn btn-secondary" onclick="showTab('orders', document.querySelectorAll('.nav-item')[1])">Tümünü Gör →</button></div>
-          <table class="tbl"><thead><tr><th>No</th><th>Müşteri</th><th>Tutar</th><th>Ödeme</th><th>Durum</th><th>Tarih</th></tr></thead><tbody id="dashOrders"></tbody></table>
-        </div>
-      </div>
-
-      <!-- SİPARİŞLER -->
-      <div class="tab" id="tab-orders">
-        <div class="card">
-          <div class="card-header">
-            <h3>Tüm Siparişler</h3>
-            <div style="display:flex;gap:8px;">
-              <select class="form-input" style="width:auto;padding:8px 12px;font-size:13px;" id="orderStatusFilter" onchange="loadOrders()">
-                <option value="">Tüm Durumlar</option>
-                <option value="Yeni">Yeni</option>
-                <option value="Hazırlanıyor">Hazırlanıyor</option>
-                <option value="Kargoda">Kargoda</option>
-                <option value="Teslim Edildi">Teslim Edildi</option>
-                <option value="İptal">İptal</option>
-              </select>
-              <button class="btn btn-danger" onclick="clearAllOrders()">🗑️ Tümünü Sil</button>
-            </div>
-          </div>
-          <div id="ordersWrap"></div>
-        </div>
-      </div>
-
-      <!-- ÜRÜN LİSTESİ -->
-      <div class="tab" id="tab-products">
-        <div class="card">
-          <div class="card-header"><h3>Ürün Listesi</h3><button class="btn btn-primary" onclick="showTab('add-product',null);clearForm()">+ Yeni Ürün</button></div>
-          <table class="tbl">
-            <thead><tr><th>Ürün</th><th>Kategori</th><th>Seçenekler & Stok</th><th>Aktif</th><th>İşlemler</th></tr></thead>
-            <tbody id="productsBody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ÜRÜN EKLE/DÜZENLE -->
-      <div class="tab" id="tab-add-product">
-        <div class="card">
-          <div class="card-header"><h3 id="formTitle">➕ Yeni Ürün Ekle</h3><button class="btn btn-secondary" onclick="clearForm()">Formu Temizle</button></div>
-          <input type="hidden" id="editId">
-          <div class="form-grid">
-            <div>
-              <label class="form-label">Ürün Adı *</label>
-              <input class="form-input" id="fName" placeholder="Örn: Pul Biber">
-            </div>
-            <div>
-              <label class="form-label">Kategori *</label>
-              <select class="form-input" id="fCat">
-                <option value="baharat">🌶️ Baharat</option>
-                <option value="salca">🍅 Salça & Ezme</option>
-                <option value="kuru">🍆 Kurutulmuş</option>
-                <option value="kuruyemis">🥜 Kuruyemiş</option>
-                <option value="bal">🍯 Bal & Reçel</option>
-                <option value="ekmek">🍞 Ekmek & Unlu</option>
-              </select>
-            </div>
-            <div class="span2">
-              <label class="form-label">Açıklama</label>
-              <textarea class="form-input" id="fDesc" rows="3" placeholder="Ürün hakkında kısa açıklama..."></textarea>
-            </div>
-
-            <!-- VARİANTLAR -->
-            <div class="span2">
-              <label class="form-label">📦 Paket Seçenekleri — Gramaj / Ad + Fiyat + Stok *</label>
-              <div class="variants-wrap">
-                <div class="variant-header-row">
-                  <span>Paket Adı</span><span>Fiyat (₺)</span><span>Stok Adedi</span><span></span>
-                </div>
-                <div id="variantRows"></div>
-                <button class="add-var-btn" onclick="addVariantRow()">+ Yeni Paket Seçeneği Ekle</button>
-              </div>
-              <div style="font-size:12px;color:var(--text-light);margin-top:6px;">Her gramaj için ayrı satır ekleyin. Örn: "250g", "500g", "1kg Paket"</div>
-            </div>
-
-            <div>
-              <label class="form-label">Emoji</label>
-              <input class="form-input" id="fEmoji" placeholder="🌶️" maxlength="4" oninput="document.getElementById('emojiPrev').textContent=this.value||'📦'">
-              <div class="emoji-preview" id="emojiPrev">📦</div>
-            </div>
-            <div>
-              <label class="form-label">Ürün Görseli</label>
-              <div style="display:flex;gap:8px;margin-bottom:8px;">
-                <button type="button" onclick="setImgMode('file')" id="imgModeFile" style="flex:1;padding:7px;border-radius:8px;border:2px solid var(--terracotta);background:var(--terracotta);color:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">📁 Dosya Yükle</button>
-                <button type="button" onclick="setImgMode('url')" id="imgModeUrl" style="flex:1;padding:7px;border-radius:8px;border:2px solid var(--border);background:white;color:var(--text-mid);font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">🔗 URL Gir</button>
-              </div>
-              <div id="imgFileWrap">
-                <input type="file" id="fImgFile" accept="image/*" onchange="handleImgUpload(this)" style="width:100%;padding:10px;border:2px dashed var(--border);border-radius:12px;font-family:'Lato',sans-serif;font-size:13px;background:var(--cream);cursor:pointer;">
-                <div style="font-size:11px;color:var(--text-light);margin-top:4px;">JPG, PNG, WEBP — Max 2MB önerilir</div>
-              </div>
-              <div id="imgUrlWrap" style="display:none;">
-                <input class="form-input" id="fImgUrl" placeholder="https://..." oninput="previewImg()">
-                <div style="font-size:11px;color:var(--text-light);margin-top:4px;">Görselin doğrudan URL'sini yapıştırın</div>
-              </div>
-              <div id="imgPreviewWrap" style="margin-top:8px;"></div>
-              <input type="hidden" id="fImgData" value="">
-            </div>
-            <div>
-              <label class="form-label">Rozet</label>
-              <select class="form-input" id="fBadge">
-                <option value="">— Rozet Yok —</option>
-                <option value="popular">⭐ Popüler</option>
-                <option value="fresh">🌿 Taze</option>
-                <option value="new">✨ Yeni</option>
-              </select>
-            </div>
-            <div>
-              <label class="form-label">Satış Birimi</label>
-              <select class="form-input" id="fUnit">
-                <option value="paket">Paket</option>
-                <option value="kg">Kilogram (kg)</option>
-                <option value="adet">Adet</option>
-                <option value="kavanoz">Kavanoz</option>
-              </select>
-            </div>
-            <div>
-              <label class="form-label">Durum</label>
-              <div class="toggle-wrap">
-                <label class="switch"><input type="checkbox" id="fActive" checked><span class="slider"></span></label>
-                <span class="toggle-label" id="fActiveLabel">🟢 Stokta var (Aktif)</span>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:24px;display:flex;gap:12px;">
-            <button class="btn btn-primary btn-lg" onclick="saveProduct()">✅ Ürünü Kaydet</button>
-            <button class="btn btn-secondary btn-lg" onclick="showTab('products',null)">İptal</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLAYTLAR -->
-      <div class="tab" id="tab-slides">
-        <div class="card">
-          <div class="card-header"><h3>🖼️ Ana Sayfa Slaytları</h3><button class="btn btn-primary" onclick="addSlide()">+ Yeni Slayt Ekle</button></div>
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Slaytları sürükleyerek sıralayabilirsiniz. Görsel URL ya da dosya yükleyebilirsiniz.</p>
-          <div id="slidesWrap"></div>
-          <div style="margin-top:16px;"><button class="btn btn-primary btn-lg" onclick="saveSlides()">💾 Slaytları Kaydet</button></div>
-        </div>
-      </div>
-
-      <!-- SİTE AYARLARI -->
-      <div class="tab" id="tab-site-settings">
-        <div class="card">
-          <div class="card-header"><h3>⚙️ Site Ayarları</h3></div>
-          <div class="form-grid">
-            <div class="span2">
-              <label class="form-label">📢 Duyuru Bandı Yazısı</label>
-              <input class="form-input" id="sAnnouncement" placeholder="Örn: 17:00'a kadar verilen siparişler aynı gün gönderilir.">
-              <div style="font-size:11px;color:var(--text-light);margin-top:4px;">Sayfanın üst kısmındaki yeşil bantın yazısı</div>
-            </div>
-            <div class="span2">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                <label class="form-label" style="margin:0;">🛡️ Güven Rozetleri</label>
-                <button class="btn btn-secondary" onclick="addTrustBadge()">+ Rozet Ekle</button>
-              </div>
-              <div style="font-size:11px;color:var(--text-light);margin-bottom:10px;">İkon (emoji), başlık ve açıklama girin. İstediğiniz kadar rozet ekleyebilirsiniz.</div>
-              <div id="trustBadgesFormWrap"></div>
-            </div>
-          </div>
-          <div style="margin-top:24px;display:flex;gap:12px;">
-            <button class="btn btn-primary btn-lg" onclick="saveSiteSettings()">💾 Ayarları Kaydet</button>
-            <button class="btn btn-secondary btn-lg" onclick="loadSiteSettingsAdmin()">🔄 Mevcut Ayarları Yükle</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SERTİFİKALAR -->
-      <div class="tab" id="tab-certificates">
-        <div class="card">
-          <div class="card-header"><h3>🏅 Sertifikalar</h3><button class="btn btn-primary" onclick="addCert()">+ Yeni Sertifika</button></div>
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Sertifika görseli dosya ya da URL olarak ekleyebilirsiniz. Sırayı da düzenleyebilirsiniz.</p>
-          <div id="certsAdminWrap"></div>
-          <div style="margin-top:16px;"><button class="btn btn-primary btn-lg" onclick="saveCerts()">💾 Sertifikaları Kaydet</button></div>
-        </div>
-      </div>
-
-      <!-- ÜRÜN SIRASI -->
-      <div class="tab" id="tab-product-order">
-        <div class="card">
-          <div class="card-header"><h3>↕️ Ürün Sırası</h3><button class="btn btn-secondary" onclick="loadProductOrder()">🔄 Yenile</button></div>
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Ürünlerin müşteride görünme sırasını belirleyin. ↑↓ ile sırayı değiştirin.</p>
-          <div id="productOrderWrap"></div>
-          <div style="margin-top:16px;"><button class="btn btn-primary btn-lg" onclick="saveProductOrder()">💾 Sırayı Kaydet</button></div>
-        </div>
-      </div>
-
+```
+  <!-- DASHBOARD -->
+  <div class="tab active" id="tab-dashboard">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="slabel">Aktif Ürün</div><div class="svalue" id="st-products">—</div><div class="schange">Satıştaki ürünler</div></div>
+      <div class="stat-card"><div class="slabel">Toplam Sipariş</div><div class="svalue" id="st-orders">—</div><div class="schange">Tüm siparişler</div></div>
+      <div class="stat-card"><div class="slabel">Bekleyen</div><div class="svalue" id="st-pending">—</div><div class="schange">İşlem bekliyor</div></div>
+      <div class="stat-card"><div class="slabel">Toplam Ciro</div><div class="svalue" id="st-revenue">—</div><div class="schange">Tüm zamanlar</div></div>
     </div>
+    <div class="card">
+      <div class="card-header"><h3>Son Siparişler</h3><button class="btn btn-secondary" onclick="showTab('orders', document.querySelectorAll('.nav-item')[1])">Tümünü Gör →</button></div>
+      <table class="tbl"><thead><tr><th>No</th><th>Müşteri</th><th>Tutar</th><th>Ödeme</th><th>Durum</th><th>Tarih</th></tr></thead><tbody id="dashOrders"></tbody></table>
+    </div>
+  </div>
+
+  <!-- SİPARİŞLER -->
+  <div class="tab" id="tab-orders">
+    <div class="card">
+      <div class="card-header">
+        <h3>Tüm Siparişler</h3>
+        <div style="display:flex;gap:8px;">
+          <select class="form-input" style="width:auto;padding:8px 12px;font-size:13px;" id="orderStatusFilter" onchange="loadOrders()">
+            <option value="">Tüm Durumlar</option>
+            <option value="Yeni">Yeni</option>
+            <option value="Hazırlanıyor">Hazırlanıyor</option>
+            <option value="Kargoda">Kargoda</option>
+            <option value="Teslim Edildi">Teslim Edildi</option>
+            <option value="İptal">İptal</option>
+          </select>
+          <button class="btn btn-danger" onclick="clearAllOrders()">🗑️ Tümünü Sil</button>
+        </div>
+      </div>
+      <div id="ordersWrap"></div>
+    </div>
+  </div>
+
+  <!-- ÜRÜN LİSTESİ -->
+  <div class="tab" id="tab-products">
+    <div class="card">
+      <div class="card-header"><h3>Ürün Listesi</h3><button class="btn btn-primary" onclick="showTab('add-product',null);clearForm()">+ Yeni Ürün</button></div>
+      <table class="tbl">
+        <thead><tr><th>Ürün</th><th>Kategori</th><th>Seçenekler & Stok</th><th>Öne Çıkan</th><th>Aktif</th><th>İşlemler</th></tr></thead>
+        <tbody id="productsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ÜRÜN EKLE/DÜZENLE -->
+  <div class="tab" id="tab-add-product">
+    <div class="card">
+      <div class="card-header"><h3 id="formTitle">➕ Yeni Ürün Ekle</h3><button class="btn btn-secondary" onclick="clearForm()">Formu Temizle</button></div>
+      <input type="hidden" id="editId">
+      <div class="form-grid">
+        <div>
+          <label class="form-label">Ürün Adı *</label>
+          <input class="form-input" id="fName" placeholder="Örn: Pul Biber">
+        </div>
+        <div>
+          <label class="form-label">Kategori *</label>
+          <select class="form-input" id="fCat">
+            <option value="baharat">🌶️ Baharat</option>
+            <option value="salca">🍅 Salça & Ezme</option>
+            <option value="kuru">🍆 Kurutulmuş</option>
+            <option value="kuruyemis">🥜 Kuruyemiş</option>
+            <option value="bal">🍯 Bal & Reçel</option>
+            <option value="ekmek">🍞 Ekmek & Unlu</option>
+          </select>
+        </div>
+        <div class="span2">
+          <label class="form-label">Açıklama</label>
+          <textarea class="form-input" id="fDesc" rows="3" placeholder="Ürün hakkında kısa açıklama..."></textarea>
+        </div>
+
+        <!-- VARİANTLAR -->
+        <div class="span2">
+          <label class="form-label">📦 Paket Seçenekleri — Gramaj / Ad + Fiyat + Stok *</label>
+          <div class="variants-wrap">
+            <div class="variant-header-row">
+              <span>Paket Adı</span><span>Fiyat (₺)</span><span>Stok Adedi</span><span></span>
+            </div>
+            <div id="variantRows"></div>
+            <button class="add-var-btn" onclick="addVariantRow()">+ Yeni Paket Seçeneği Ekle</button>
+          </div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:6px;">Her gramaj için ayrı satır ekleyin. Örn: "250g", "500g", "1kg Paket"</div>
+        </div>
+
+        <div>
+          <label class="form-label">Emoji</label>
+          <input class="form-input" id="fEmoji" placeholder="🌶️" maxlength="4" oninput="document.getElementById('emojiPrev').textContent=this.value||'📦'">
+          <div class="emoji-preview" id="emojiPrev">📦</div>
+        </div>
+        <div>
+          <label class="form-label">Ürün Görseli</label>
+          <div style="display:flex;gap:8px;margin-bottom:8px;">
+            <button type="button" onclick="setImgMode('file')" id="imgModeFile" style="flex:1;padding:7px;border-radius:8px;border:2px solid var(--terracotta);background:var(--terracotta);color:white;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">📁 Dosya Yükle</button>
+            <button type="button" onclick="setImgMode('url')" id="imgModeUrl" style="flex:1;padding:7px;border-radius:8px;border:2px solid var(--border);background:white;color:var(--text-mid);font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">🔗 URL Gir</button>
+          </div>
+          <div id="imgFileWrap">
+            <input type="file" id="fImgFile" accept="image/*" onchange="handleImgUpload(this)" style="width:100%;padding:10px;border:2px dashed var(--border);border-radius:12px;font-family:'Lato',sans-serif;font-size:13px;background:var(--cream);cursor:pointer;">
+            <div style="font-size:11px;color:var(--text-light);margin-top:4px;">JPG, PNG, WEBP — Max 2MB önerilir</div>
+          </div>
+          <div id="imgUrlWrap" style="display:none;">
+            <input class="form-input" id="fImgUrl" placeholder="https://..." oninput="previewImg()">
+            <div style="font-size:11px;color:var(--text-light);margin-top:4px;">Görselin doğrudan URL'sini yapıştırın</div>
+          </div>
+          <div id="imgPreviewWrap" style="margin-top:8px;"></div>
+          <input type="hidden" id="fImgData" value="">
+        </div>
+        <div>
+          <label class="form-label">Rozet</label>
+          <select class="form-input" id="fBadge">
+            <option value="">— Rozet Yok —</option>
+            <option value="popular">⭐ Popüler</option>
+            <option value="fresh">🌿 Taze</option>
+            <option value="new">✨ Yeni</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Satış Birimi</label>
+          <select class="form-input" id="fUnit">
+            <option value="paket">Paket</option>
+            <option value="kg">Kilogram (kg)</option>
+            <option value="adet">Adet</option>
+            <option value="kavanoz">Kavanoz</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Durum</label>
+          <div class="toggle-wrap">
+            <label class="switch"><input type="checkbox" id="fActive" checked><span class="slider"></span></label>
+            <span class="toggle-label" id="fActiveLabel">🟢 Stokta var (Aktif)</span>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Öne Çıkan</label>
+          <div class="toggle-wrap">
+            <label class="switch"><input type="checkbox" id="fFeatured"><span class="slider"></span></label>
+            <span class="toggle-label" id="fFeaturedLabel">⭐ Ana sayfada göster</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:12px;">
+        <button class="btn btn-primary btn-lg" onclick="saveProduct()">✅ Ürünü Kaydet</button>
+        <button class="btn btn-secondary btn-lg" onclick="showTab('products',null)">İptal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLAYTLAR -->
+  <div class="tab" id="tab-slides">
+    <div class="card">
+      <div class="card-header"><h3>🖼️ Ana Sayfa Slaytları</h3><button class="btn btn-primary" onclick="addSlide()">+ Yeni Slayt Ekle</button></div>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Slaytları sürükleyerek sıralayabilirsiniz. Görsel URL ya da dosya yükleyebilirsiniz.</p>
+      <div id="slidesWrap"></div>
+      <div style="margin-top:16px;"><button class="btn btn-primary btn-lg" onclick="saveSlides()">💾 Slaytları Kaydet</button></div>
+    </div>
+  </div>
+
+  <!-- SİTE AYARLARI -->
+  <div class="tab" id="tab-site-settings">
+    <div class="card">
+      <div class="card-header"><h3>⚙️ Site Ayarları</h3></div>
+      <div class="form-grid">
+        <div class="span2">
+          <label class="form-label">📢 Duyuru Bandı Yazısı</label>
+          <input class="form-input" id="sAnnouncement" placeholder="Örn: 17:00'a kadar verilen siparişler aynı gün gönderilir.">
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px;">Sayfanın üst kısmındaki yeşil bantın yazısı</div>
+        </div>
+        <div class="span2">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <label class="form-label" style="margin:0;">🛡️ Güven Rozetleri</label>
+            <button class="btn btn-secondary" onclick="addTrustBadge()">+ Rozet Ekle</button>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);margin-bottom:10px;">İkon (emoji), başlık ve açıklama girin. İstediğiniz kadar rozet ekleyebilirsiniz.</div>
+          <div id="trustBadgesFormWrap"></div>
+        </div>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:12px;">
+        <button class="btn btn-primary btn-lg" onclick="saveSiteSettings()">💾 Ayarları Kaydet</button>
+        <button class="btn btn-secondary btn-lg" onclick="loadSiteSettingsAdmin()">🔄 Mevcut Ayarları Yükle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERTİFİKALAR -->
+  <div class="tab" id="tab-certificates">
+    <div class="card">
+      <div class="card-header"><h3>🏅 Sertifikalar</h3><button class="btn btn-primary" onclick="addCert()">+ Yeni Sertifika</button></div>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Sertifika görseli dosya ya da URL olarak ekleyebilirsiniz. Sırayı da düzenleyebilirsiniz.</p>
+      <div id="certsAdminWrap"></div>
+      <div style="margin-top:16px;"><button class="btn btn-primary btn-lg" onclick="saveCerts()">💾 Sertifikaları Kaydet</button></div>
+    </div>
+  </div>
+
+  <!-- ÜRÜN SIRASI -->
+  <div class="tab" id="tab-product-order">
+    <div class="card">
+      <div class="card-header"><h3>↕️ Ürün Sırası</h3><button class="btn btn-secondary" onclick="loadProductOrder()">🔄 Yenile</button></div>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Ürünlerin müşteride görünme sırasını belirleyin. ↑↓ ile sırayı değiştirin.</p>
+      <div id="productOrderWrap"></div>
+      <div style="margin-top:16px;"><button class="btn btn-primary btn-lg" onclick="saveProductOrder()">💾 Sırayı Kaydet</button></div>
+    </div>
+  </div>
+
+</div>
+```
+
   </div>
 </div>
 
 <script>
 const SUPABASE_URL = 'https://kegddzrlsomgyckgnnmj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlZ2RkenJsc29tZ3lja2dubm1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3OTg2ODIsImV4cCI6MjA4ODM3NDY4Mn0.VKSVvjBSCq7B9Jpmkky_-1XsOq3BYMSiNRkhJfn8rUk';
-// ── AUTH ─────────────────────────────────────────────────────
+
+let sb;
+try {
+  if(SUPABASE_URL.startsWith('BURAYA')||SUPABASE_ANON_KEY.startsWith('BURAYA')) sb=null;
+  else sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+} catch(e){ sb=null; }
+
+// ── AUTH ──────────────────────────────────────────────────────
 async function checkAuth(){
-  if(!sb){
-    // Supabase bağlı değil, direkt aç
-    showApp();
-    return;
-  }
+  if(!sb){ showApp(); return; }
   try{
     const {data:{session}}=await sb.auth.getSession();
-    if(session){
-      showApp();
-    } else {
-      document.getElementById('loginScreen').style.display='flex';
-    }
-  } catch(e){
-    document.getElementById('loginScreen').style.display='flex';
-  }
+    if(session) showApp();
+    else document.getElementById('loginScreen').style.display='flex';
+  }catch(e){ document.getElementById('loginScreen').style.display='flex'; }
+}
+
+function togglePassVis(){
+  const inp=document.getElementById('loginPassword');
+  inp.type=inp.type==='password'?'text':'password';
 }
 
 async function doLogin(){
@@ -417,73 +434,30 @@ async function doLogin(){
   const pass=document.getElementById('loginPassword').value;
   const btn=document.getElementById('loginBtn');
   const errEl=document.getElementById('loginError');
+  if(!email||!pass){errEl.textContent='E-posta ve şifre zorunludur.';errEl.style.display='block';return;}
   errEl.style.display='none';
-  btn.textContent='⏳ Giriş yapılıyor...'; btn.disabled=true;
-  
+  btn.textContent='⏳ Giriş yapılıyor...';btn.disabled=true;
   try{
-    const {data, error}=await sb.auth.signInWithPassword({email,password:pass});
-    // Hatayı ekranda göster
-    errEl.textContent='Sonuç: '+(error ? error.message : 'Başarılı, yönlendiriliyor...');
-    errEl.style.display='block';
-    errEl.style.background='#E8F5E9';
-    errEl.style.color='#1B5E20';
+    const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
     if(error){
-      errEl.style.background='#FFEBEE';
-      errEl.style.color='#C62828';
-      btn.textContent='Giriş Yap'; 
-      btn.disabled=false;
-    } else {
-      setTimeout(()=>showApp(), 1500);
-    }
-  } catch(e){
-    errEl.textContent='❌ Exception: '+e.message; 
-    errEl.style.display='block';
-    errEl.style.background='#FFEBEE';
-    errEl.style.color='#C62828';
-    btn.textContent='Giriş Yap'; 
-    btn.disabled=false;
+      errEl.textContent='❌ '+error.message;errEl.style.display='block';
+      btn.textContent='Giriş Yap →';btn.disabled=false;
+    } else { showApp(); }
+  }catch(e){
+    errEl.textContent='❌ Bağlantı hatası: '+e.message;errEl.style.display='block';
+    btn.textContent='Giriş Yap →';btn.disabled=false;
   }
 }
-
 
 function showApp(){
   document.getElementById('loginScreen').style.display='none';
-  initApp();
-}
-
-
-async function doLogout(){
-  await sb.auth.signOut();
-  location.reload();
-}
-
-// Enter tuşu ile giriş
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none') doLogin();
-});
-
-let sb;
-try {
-  if(SUPABASE_URL.startsWith('BURAYA') || SUPABASE_ANON_KEY.startsWith('BURAYA')) { sb = null; }
-  else { sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }
-} catch(e){ sb = null; }
-const ADMIN_PASSWORD = 'Annem2024!';
-
-// ── GİRİŞ ─────────────────────────────────────────────────────
-function login(){
-  const val = document.getElementById('passInput').value;
-  if(val===ADMIN_PASSWORD){
-    sessionStorage.setItem('adminAuth','1'); showApp();
-  } else {
-    const e=document.getElementById('loginError'); e.style.display='block';
-    setTimeout(()=>e.style.display='none',3000);
-  }
-}
-function logout(){ sessionStorage.removeItem('adminAuth'); location.reload(); }
-function showApp(){
-  document.getElementById('loginWrap').style.display='none';
   document.getElementById('app').classList.add('visible');
   initApp();
+}
+
+async function doLogout(){
+  if(sb) await sb.auth.signOut();
+  location.reload();
 }
 
 // ── INIT ─────────────────────────────────────────────────────
@@ -492,12 +466,11 @@ function initApp(){
   renderTrustBadgesForm(DEFAULT_TRUST_BADGES);
   if(!document.getElementById('variantRows').children.length) addVariantRow();
   document.getElementById('fActive').addEventListener('change',function(){
-    const dot = this.checked ? '🟢' : '🔴';
-    document.getElementById('fActiveLabel').textContent = dot + ' ' + (this.checked ? 'Stokta var (Aktif)' : 'Stokta yok (Pasif)');
+    const dot=this.checked?'🟢':'🔴';
+    document.getElementById('fActiveLabel').textContent=dot+' '+(this.checked?'Stokta var (Aktif)':'Stokta yok (Pasif)');
   });
-  // Son açık sekmeyi geri yükle
-  const lastTab = localStorage.getItem('adt_admin_tab')||'dashboard';
-  showTab(lastTab, null);
+  const lastTab=localStorage.getItem('adt_admin_tab')||'dashboard';
+  showTab(lastTab,null);
 }
 function updateClock(){
   document.getElementById('topbarTime').textContent=new Date().toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'})+' '+new Date().toLocaleTimeString('tr-TR');
@@ -528,8 +501,36 @@ function showTab(name,el){
   if(name==='product-order') loadProductOrder();
 }
 
+// ── VARSAYILAN ÜRÜNLER ────────────────────────────────────────
+const DEFAULT_PRODUCTS=[
+  {id:1001,name:'Ev Yapımı Kırmızı Biber Salçası',category:'salca',description:'Güneşte kurutulmuş kırmızı biberlerden geleneksel yöntemle hazırlanmış, katkısız doğal salça.',emoji:'🌶️',image_url:null,badge:'popular',unit:'kavanoz',active:true,variants:[{label:'400g',price:85,stock:20},{label:'700g',price:140,stock:15},{label:'1kg',price:185,stock:10}],price:85,rating:4.9,review_count:24,sort_order:1},
+  {id:1002,name:'Domates Salçası',category:'salca',description:'Taze ve olgun domateslerden yapılan, içinde hiçbir katkı maddesi bulunmayan ev usulü salça.',emoji:'🍅',image_url:null,badge:'fresh',unit:'kavanoz',active:true,variants:[{label:'400g',price:75,stock:18},{label:'700g',price:120,stock:12},{label:'1kg',price:160,stock:8}],price:75,rating:4.8,review_count:17,sort_order:2},
+  {id:1003,name:'Karışık Baharat',category:'baharat',description:'Özel karışım doğal baharatlar. Yemeklerinize özgün bir lezzet katmak için ideal.',emoji:'🧂',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'100g',price:55,stock:30},{label:'250g',price:110,stock:20}],price:55,rating:4.7,review_count:11,sort_order:3},
+  {id:1004,name:'Pul Biber',category:'baharat',description:'Kendi üretimimiz kırmızı biberden elde edilen, acısı dengeli, doğal pul biber.',emoji:'🌶️',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'100g',price:45,stock:35},{label:'250g',price:95,stock:25}],price:45,rating:4.8,review_count:9,sort_order:4},
+  {id:1005,name:'Nane',category:'baharat',description:'Tarladan toplandıktan sonra gölgede kurutulan, rengi ve kokusu bol doğal nane.',emoji:'🌿',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'50g',price:35,stock:40},{label:'150g',price:80,stock:20}],price:35,rating:4.6,review_count:6,sort_order:5},
+  {id:1006,name:'Ham Çiçek Balı',category:'bal',description:'Filtrelenmemiş, ısıl işlem görmemiş, doğrudan kovandan sofraya gelen saf çiçek balı.',emoji:'🍯',image_url:null,badge:'popular',unit:'kavanoz',active:true,variants:[{label:'450g',price:180,stock:12},{label:'850g',price:320,stock:8}],price:180,rating:5.0,review_count:31,sort_order:6},
+  {id:1007,name:'Kestane Balı',category:'bal',description:'Karadeniz kestane ormanlarından toplanan, kendine özgü kokusu ve koyu rengiyle doğal kestane balı.',emoji:'🌰',image_url:null,badge:null,unit:'kavanoz',active:true,variants:[{label:'450g',price:210,stock:10},{label:'850g',price:375,stock:6}],price:210,rating:4.9,review_count:14,sort_order:7},
+  {id:1008,name:'Kurutulmuş Domates',category:'kuru',description:'Güneşte kurutulmuş, tuzlanmamış, zeytinyağı ile saklanan ev yapımı kurutulmuş domates.',emoji:'🍅',image_url:null,badge:'fresh',unit:'paket',active:true,variants:[{label:'150g',price:65,stock:22},{label:'300g',price:115,stock:14}],price:65,rating:4.8,review_count:13,sort_order:8},
+  {id:1009,name:'Kurutulmuş Patlıcan',category:'kuru',description:'İpliğe dizilerek gölgede kurutulan, dolma için hazır ev usulü patlıcan.',emoji:'🍆',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'100g',price:55,stock:16},{label:'250g',price:120,stock:9}],price:55,rating:4.7,review_count:8,sort_order:9},
+  {id:1010,name:'Kurutulmuş Biber',category:'kuru',description:'Dolmalık ve sivri biberlerden yapılan, doğal yöntemle kurutulmuş karışık biber.',emoji:'🫑',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'100g',price:50,stock:18},{label:'250g',price:110,stock:10}],price:50,rating:4.6,review_count:7,sort_order:10},
+  {id:1011,name:'Antep Fıstığı',category:'kuruyemis',description:'Yöresel üretim, kabuğu elle kırılmış, taze ve çıtır Antep fıstığı.',emoji:'🥜',image_url:null,badge:'popular',unit:'paket',active:true,variants:[{label:'250g',price:145,stock:20},{label:'500g',price:270,stock:12}],price:145,rating:4.9,review_count:19,sort_order:11},
+  {id:1012,name:'Ceviz İçi',category:'kuruyemis',description:'Kırık ceviz içi, doğal ve katkısız. Sabah kahvaltısından tatlılara kadar her yerde kullanılabilir.',emoji:'🪨',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'250g',price:110,stock:18},{label:'500g',price:200,stock:10}],price:110,rating:4.8,review_count:12,sort_order:12},
+  {id:1013,name:'Badem',category:'kuruyemis',description:'Kabuklu ya da kabuksuz seçeneğiyle doğal, katkısız badem.',emoji:'🌰',image_url:null,badge:null,unit:'paket',active:true,variants:[{label:'250g',price:130,stock:15},{label:'500g',price:240,stock:8}],price:130,rating:4.7,review_count:9,sort_order:13},
+  {id:1014,name:'Ekşi Mayalı Köy Ekmeği',category:'ekmek',description:'Doğal ekşi maya ile uzun süre mayalandırılmış, taş fırında pişirilmiş geleneksel köy ekmeği.',emoji:'🍞',image_url:null,badge:'new',unit:'adet',active:true,variants:[{label:'500g',price:65,stock:10},{label:'1kg',price:110,stock:7}],price:65,rating:4.9,review_count:5,sort_order:14},
+  {id:1015,name:'Tam Buğday Ekmeği',category:'ekmek',description:'Değirmende çekilmiş tam buğday unundan yapılan, lif oranı yüksek sağlıklı ekmek.',emoji:'🌾',image_url:null,badge:null,unit:'adet',active:true,variants:[{label:'500g',price:55,stock:12},{label:'1kg',price:95,stock:8}],price:55,rating:4.8,review_count:7,sort_order:15},
+];
+
 // ── DASHBOARD ─────────────────────────────────────────────────
 async function loadDashboard(){
+  if(!sb){
+    const activeCount=DEFAULT_PRODUCTS.filter(p=>p.active).length;
+    document.getElementById('st-products').textContent=activeCount;
+    ['st-orders','st-pending'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='0';});
+    const rev=document.getElementById('st-revenue');if(rev)rev.textContent='₺0';
+    const dash=document.getElementById('dashOrders');
+    if(dash)dash.innerHTML='<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-light);">Henüz sipariş yok</td></tr>';
+    return;
+  }
   try{
     const [{data:products},{data:orders}]=await Promise.all([
       sb.from('products').select('id,active'),
@@ -553,6 +554,10 @@ async function loadDashboard(){
 // ── SİPARİŞLER ────────────────────────────────────────────────
 async function loadOrders(){
   const flt=document.getElementById('orderStatusFilter')?.value||'';
+  if(!sb){
+    document.getElementById('ordersWrap').innerHTML='<div style="text-align:center;padding:60px;color:var(--text-light);">⚠️ Siparişleri görmek için Supabase bağlantısı gereklidir.</div>';
+    return;
+  }
   try{
     let q=sb.from('orders').select('*').order('created_at',{ascending:false});
     if(flt) q=q.eq('status',flt);
@@ -615,47 +620,63 @@ async function clearAllOrders(){
 
 // ── ÜRÜN LİSTESİ ─────────────────────────────────────────────
 async function loadProductsList(){
-  const {data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});
-  if(error){showToast('❌ Yüklenemedi','error');return;}
   const catLabels={baharat:'🌶️ Baharat',salca:'🍅 Salça',kuru:'🍆 Kurutulmuş',kuruyemis:'🥜 Kuruyemiş',bal:'🍯 Bal',ekmek:'🍞 Ekmek'};
-  document.getElementById('productsBody').innerHTML=!data?.length
-    ?'<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-light);">Henüz ürün eklenmemiş</td></tr>'
-    :data.map(p=>{
-      const variants=p.variants||[];
-      const totalStock=variants.reduce((s,v)=>s+(v.stock||0),0);
-      const variantInfo=variants.map(v=>
-        '<div style="font-size:11px;margin-bottom:3px;">'+
-        '<strong>'+v.label+'</strong> — <span style="color:var(--terracotta);">₺'+v.price+'</span>'+
-        ' — <span class="'+(v.stock<=0?'s-out':v.stock<=5?'s-low':'s-ok')+'">'+v.stock+' adet</span>'+
-        '</div>'
-      ).join('');
-      return '<tr id="prod-row-'+p.id+'">'+
-        '<td><span style="font-size:22px;margin-right:6px;">'+(p.emoji||'📦')+'</span><strong>'+p.name+'</strong></td>'+
-        '<td>'+(catLabels[p.category]||p.category)+'</td>'+
-        '<td>'+
-          (variantInfo||'<span style="color:var(--text-light);">—</span>')+
-          (variants.length?'<div style="font-size:11px;color:var(--text-light);margin-top:4px;border-top:1px solid var(--border);padding-top:4px;">Toplam stok: <strong>'+totalStock+' adet</strong></div>':'')+
-        '</td>'+
-        '<td style="white-space:nowrap;">'+
-          '<div style="display:flex;align-items:center;gap:8px;">'+
-          '<label class="switch" style="flex-shrink:0;">'+
-          '<input type="checkbox"'+(p.active?' checked':'')+' onchange="toggleActive('+p.id+',this.checked,this)">'+
-          '<span class="slider"></span>'+
-          '</label>'+
-          '<span id="active-lbl-'+p.id+'" style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;">'+
-          '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+(p.active?'#43A047':'#E53935')+'"></span>'+
-          '<span style="color:'+(p.active?'#43A047':'#E53935')+'">'+(p.active?'Stokta var':'Stokta yok')+'</span>'+
-          '</span>'+
-          '</div>'+
-        '</td>'+
-        '<td style="display:flex;gap:6px;">'+
-          '<button class="btn btn-warning" onclick="editProduct('+p.id+')">✏️ Düzenle</button>'+
-          '<button class="btn btn-danger" onclick="deleteProduct('+p.id+')">🗑️ Sil</button>'+
-        '</td></tr>';
-    }).join('');
+  const renderRows=(data,readonly=false)=>{
+    document.getElementById('productsBody').innerHTML=!data?.length
+      ?'<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-light);">Henüz ürün eklenmemiş</td></tr>'
+      :data.map(p=>{
+        const variants=p.variants||[];
+        const totalStock=variants.reduce((s,v)=>s+(v.stock||0),0);
+        const variantInfo=variants.map(v=>
+          '<div style="font-size:11px;margin-bottom:3px;">'+
+          '<strong>'+v.label+'</strong> — <span style="color:var(--terracotta);">₺'+v.price+'</span>'+
+          ' — <span class="'+(v.stock<=0?'s-out':v.stock<=5?'s-low':'s-ok')+'">'+v.stock+' adet</span>'+
+          '</div>'
+        ).join('');
+        return '<tr id="prod-row-'+p.id+'">'+
+          '<td><span style="font-size:22px;margin-right:6px;">'+(p.emoji||'📦')+'</span><strong>'+p.name+'</strong></td>'+
+          '<td>'+(catLabels[p.category]||p.category)+'</td>'+
+          '<td>'+
+            (variantInfo||'<span style="color:var(--text-light);">—</span>')+
+            (variants.length?'<div style="font-size:11px;color:var(--text-light);margin-top:4px;border-top:1px solid var(--border);padding-top:4px;">Toplam stok: <strong>'+totalStock+' adet</strong></div>':'')+
+          '</td>'+
+          // Öne Çıkan sütunu
+          '<td style="text-align:center;">'+
+            (readonly
+              ?'<span style="font-size:18px;">'+(p.featured?'⭐':'—')+'</span>'
+              :'<label class="switch" style="flex-shrink:0;" title="Öne Çıkan">'+
+                '<input type="checkbox"'+(p.featured?' checked':'')+' onchange="toggleFeatured('+p.id+',this.checked)">'+
+                '<span class="slider"></span>'+
+               '</label>'
+            )+
+          '</td>'+
+          // Aktif sütunu
+          '<td style="white-space:nowrap;">'+
+            '<div style="display:flex;align-items:center;gap:8px;">'+
+            (readonly
+              ?'<span id="active-lbl-'+p.id+'" style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+(p.active?'#43A047':'#E53935')+'"></span><span style="color:'+(p.active?'#43A047':'#E53935')+'">'+(p.active?'Stokta var':'Stokta yok')+'</span></span>'
+              :'<label class="switch" style="flex-shrink:0;"><input type="checkbox"'+(p.active?' checked':'')+' onchange="toggleActive('+p.id+',this.checked,this)"><span class="slider"></span></label>'+
+               '<span id="active-lbl-'+p.id+'" style="font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+(p.active?'#43A047':'#E53935')+'"></span><span style="color:'+(p.active?'#43A047':'#E53935')+'">'+(p.active?'Stokta var':'Stokta yok')+'</span></span>'
+            )+
+            '</div>'+
+          '</td>'+
+          '<td style="display:flex;gap:6px;">'+
+            (readonly
+              ?'<span style="color:var(--text-light);font-size:12px;">Supabase bağlanınca düzenlenebilir</span>'
+              :'<button class="btn btn-warning" onclick="editProduct('+p.id+')">✏️ Düzenle</button>'+
+               '<button class="btn btn-danger" onclick="deleteProduct('+p.id+')">🗑️ Sil</button>'
+            )+
+          '</td></tr>';
+      }).join('');
+  };
+  if(!sb){ renderRows(DEFAULT_PRODUCTS, true); return; }
+  const {data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});
+  if(error){showToast('❌ Yüklenemedi','error'); renderRows(DEFAULT_PRODUCTS, true); return;}
+  renderRows(data?.length ? data : DEFAULT_PRODUCTS, !data?.length);
 }
 
 async function toggleActive(id, active, checkbox){
+  if(!sb){showToast('⚠️ Supabase bağlantısı gereklidir.','error');checkbox.checked=!active;return;}
   const {error} = await sb.from('products').update({active}).eq('id', id);
   if(error){ showToast('❌ Güncellenemedi','error'); checkbox.checked=!active; return; }
   // Etiketi yerinde güncelle
@@ -668,6 +689,12 @@ async function toggleActive(id, active, checkbox){
     if(txt){ txt.style.color = col; txt.textContent = active ? 'Stokta var' : 'Stokta yok'; }
   }
   showToast(active ? '✅ Ürün aktife alındı' : '⏸ Ürün pasife alındı', active ? 'success' : '');
+}
+async function toggleFeatured(id, featured){
+  if(!sb){showToast('⚠️ Supabase bağlantısı gereklidir.','error');return;}
+  const {error}=await sb.from('products').update({featured}).eq('id',id);
+  if(error){showToast('❌ Güncellenemedi','error');return;}
+  showToast(featured?'⭐ Öne çıkanlara eklendi':'Öne çıkanlandan çıkarıldı','success');
 }
 async function deleteProduct(id){
   if(!confirm('Bu ürünü silmek istediğinize emin misiniz?')) return;
@@ -682,8 +709,11 @@ function addVariantRow(label='',price='',stock=''){
   row.innerHTML=
     '<input type="text" placeholder="Örn: 250g" value="'+label+'" class="v-label">'+
     '<input type="number" placeholder="Fiyat ₺" value="'+price+'" min="0" class="v-price">'+
-    '<input type="number" placeholder="Stok adedi" value="'+stock+'" min="0" class="v-stock" oninput="checkAllStockZero()">'+
+    '<input type="number" placeholder="Stok adedi *" value="'+stock+'" min="0" class="v-stock" required oninput="checkAllStockZero()" style="border-color:'+(stock===''?'var(--amber)':'var(--border)')+'">'+
     '<button class="del-var-btn" onclick="this.parentElement.remove();checkAllStockZero()">✕</button>';
+  // stok boşsa sarı kenarlık ile uyar
+  const stockInput=row.querySelector('.v-stock');
+  stockInput.addEventListener('blur',function(){ this.style.borderColor=this.value===''||this.value<0?'#E53935':'var(--border)'; });
   document.getElementById('variantRows').appendChild(row);
 }
 
@@ -762,6 +792,8 @@ async function editProduct(id){
   document.getElementById('fActive').checked=data.active!==false;
   const isAct = data.active!==false;
   document.getElementById('fActiveLabel').textContent=(isAct?'🟢 Stokta var (Aktif)':'🔴 Stokta yok (Pasif)');
+  const featuredEl=document.getElementById('fFeatured');
+  if(featuredEl) featuredEl.checked=data.featured===true;
   document.getElementById('formTitle').textContent='✏️ Düzenle: '+data.name;
   document.getElementById('variantRows').innerHTML='';
   const variants=data.variants||[];
@@ -778,6 +810,14 @@ async function saveProduct(){
   document.getElementById('fName').classList.remove('error');
   const variants=getVariants();
   if(!variants.length){showToast('⚠️ En az bir paket seçeneği ekleyin!','error');return;}
+  // Stok zorunlu kontrolü
+  const rows=document.querySelectorAll('#variantRows .variant-row');
+  let stockMissing=false;
+  rows.forEach(r=>{
+    const sv=r.querySelector('.v-stock');
+    if(sv&&(sv.value===''||sv.value===null)){stockMissing=true;sv.style.borderColor='#E53935';}
+  });
+  if(stockMissing){showToast('⚠️ Lütfen tüm paket seçenekleri için stok adedi girin!','error');return;}
   const basePrice=Math.min(...variants.map(v=>v.price));
   // Tüm varyantların stoğu 0 ise otomatik pasife al
   const allVariantsOut = variants.every(v=>v.stock<=0);
@@ -795,6 +835,7 @@ async function saveProduct(){
     badge:document.getElementById('fBadge').value||null,
     unit:document.getElementById('fUnit').value,
     active:isActive,
+    featured:document.getElementById('fFeatured')?.checked||false,
     variants,
     price:basePrice,
     reviews:[],
@@ -802,6 +843,7 @@ async function saveProduct(){
     review_count:0,
   };
   const editId=document.getElementById('editId').value;
+  if(!sb){showToast('⚠️ Ürün kaydetmek için Supabase bağlantısı gereklidir.','error');return;}
   let error;
   if(editId){({error}=await sb.from('products').update(productData).eq('id',editId));}
   else{({error}=await sb.from('products').insert([productData]));}
@@ -826,6 +868,7 @@ function clearForm(){
   document.getElementById('fUnit').value='paket';
   document.getElementById('fActive').checked=true;
   document.getElementById('fActiveLabel').textContent='🟢 Stokta var (Aktif)';
+  const ff=document.getElementById('fFeatured'); if(ff) ff.checked=false;
   document.getElementById('fName').classList.remove('error');
   document.getElementById('formTitle').textContent='➕ Yeni Ürün Ekle';
   document.getElementById('variantRows').innerHTML='';
@@ -1257,7 +1300,7 @@ async function upsertSetting(key,value){
 document.addEventListener('DOMContentLoaded', function(){
   checkAuth();
 });
-
 </script>
+
 </body>
 </html>
