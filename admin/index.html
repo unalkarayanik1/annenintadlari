@@ -411,13 +411,11 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── AUTH ──────────────────────────────────────────────────────
 async function checkAuth(){
-  const {data:{session}} = await sb.auth.getSession();
-  if(session){
-    showApp();
-  } else {
-    document.getElementById('loginScreen').style.display='flex';
-  }
+  // Her açılışta oturumu kapat, her zaman giriş iste
+  await sb.auth.signOut();
+  document.getElementById('loginScreen').style.display='flex';
 }
+
 
 async function doLogin(){
   const email = document.getElementById('loginEmail').value.trim();
