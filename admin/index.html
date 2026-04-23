@@ -447,9 +447,13 @@ async function doLogin(){
 
 
 function showApp(){
-  document.getElementById('loginScreen').style.display='none';
+  const loginScreen = document.getElementById('loginScreen');
+  if(loginScreen) loginScreen.style.display='none';
+  const wrapper = document.getElementById('wrapper');
+  if(wrapper) wrapper.style.display='flex';
   initApp();
 }
+
 
 async function doLogout(){
   await sb.auth.signOut();
