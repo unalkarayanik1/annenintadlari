@@ -407,45 +407,39 @@ input:checked+.slider::before{transform:translateX(22px);}
 <script>
 const SUPABASE_URL = 'https://kegddzrlsomgyckgnnmj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlZ2RkenJsc29tZ3lja2dubm1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3OTg2ODIsImV4cCI6MjA4ODM3NDY4Mn0.VKSVvjBSCq7B9Jpmkky_-1XsOq3BYMSiNRkhJfn8rUk';
-
-let sb;
-try {
-  if(SUPABASE_URL.startsWith('BURAYA')||SUPABASE_ANON_KEY.startsWith('BURAYA')) sb=null;
-  else sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-} catch(e){ sb=null; }
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── AUTH ──────────────────────────────────────────────────────
 async function checkAuth(){
-  if(!sb){ showApp(); return; }
-  try{
-    const {data:{session}}=await sb.auth.getSession();
-    if(session) showApp();
-    else document.getElementById('loginScreen').style.display='flex';
-  }catch(e){ document.getElementById('loginScreen').style.display='flex'; }
-}
-
-function togglePassVis(){
-  const inp=document.getElementById('loginPassword');
-  inp.type=inp.type==='password'?'text':'password';
+  const {data:{session}} = await sb.auth.getSession();
+  if(session){
+    showApp();
+  } else {
+    document.getElementById('loginScreen').style.display='flex';
+  }
 }
 
 async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim();
-  const pass=document.getElementById('loginPassword').value;
-  const btn=document.getElementById('loginBtn');
-  const errEl=document.getElementById('loginError');
-  if(!email||!pass){errEl.textContent='E-posta ve şifre zorunludur.';errEl.style.display='block';return;}
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value;
+  const btn = document.getElementById('loginBtn');
+  const errEl = document.getElementById('loginError');
+  if(!email||!pass){
+    errEl.textContent='E-posta ve şifre giriniz.';
+    errEl.style.display='block';
+    return;
+  }
   errEl.style.display='none';
-  btn.textContent='⏳ Giriş yapılıyor...';btn.disabled=true;
-  try{
-    const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
-    if(error){
-      errEl.textContent='❌ '+error.message;errEl.style.display='block';
-      btn.textContent='Giriş Yap →';btn.disabled=false;
-    } else { showApp(); }
-  }catch(e){
-    errEl.textContent='❌ Bağlantı hatası: '+e.message;errEl.style.display='block';
-    btn.textContent='Giriş Yap →';btn.disabled=false;
+  btn.textContent='⏳ Giriş yapılıyor...';
+  btn.disabled=true;
+  const {data, error} = await sb.auth.signInWithPassword({email, password:pass});
+  if(error){
+    errEl.textContent='❌ E-posta veya şifre hatalı.';
+    errEl.style.display='block';
+    btn.textContent='Giriş Yap →';
+    btn.disabled=false;
+  } else {
+    showApp();
   }
 }
 
@@ -456,7 +450,7 @@ function showApp(){
 }
 
 async function doLogout(){
-  if(sb) await sb.auth.signOut();
+  await sb.auth.signOut();
   location.reload();
 }
 
