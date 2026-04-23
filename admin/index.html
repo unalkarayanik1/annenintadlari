@@ -422,17 +422,24 @@ async function doLogin(){
   
   try{
     const {data, error}=await sb.auth.signInWithPassword({email,password:pass});
+    // Hatayı ekranda göster
+    errEl.textContent='Sonuç: '+(error ? error.message : 'Başarılı, yönlendiriliyor...');
+    errEl.style.display='block';
+    errEl.style.background='#E8F5E9';
+    errEl.style.color='#1B5E20';
     if(error){
-      errEl.textContent='❌ '+error.message; 
-      errEl.style.display='block';
+      errEl.style.background='#FFEBEE';
+      errEl.style.color='#C62828';
       btn.textContent='Giriş Yap'; 
       btn.disabled=false;
     } else {
-      showApp();
+      setTimeout(()=>showApp(), 1500);
     }
   } catch(e){
-    errEl.textContent='❌ Bağlantı hatası: '+e.message; 
+    errEl.textContent='❌ Exception: '+e.message; 
     errEl.style.display='block';
+    errEl.style.background='#FFEBEE';
+    errEl.style.color='#C62828';
     btn.textContent='Giriş Yap'; 
     btn.disabled=false;
   }
