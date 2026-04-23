@@ -122,7 +122,8 @@ input:checked+.slider::before{transform:translateX(22px);}
 </head>
 <body>
 <!-- LOGIN EKRANI -->
-<div id="loginScreen" style="display:none;position:fixed;inset:0;background:#FAF6F0;z-index:9999;display:flex;align-items:center;justify-content:center;">
+<div id="loginScreen" style="position:fixed;inset:0;background:#FAF6F0;z-index:9999;display:flex;align-items:center;justify-content:center;">
+align-items:center;justify-content:center;">
   <div style="background:white;border-radius:24px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.12);text-align:center;">
     <div style="font-size:48px;margin-bottom:12px;">🌿</div>
     <h2 style="font-family:Georgia,serif;color:#2C1810;margin-bottom:4px;">Annenin Doğal Tadları</h2>
@@ -447,10 +448,7 @@ async function doLogin(){
 
 
 function showApp(){
-  const loginScreen = document.getElementById('loginScreen');
-  if(loginScreen) loginScreen.style.display='none';
-  const wrapper = document.getElementById('wrapper');
-  if(wrapper) wrapper.style.display='flex';
+  document.getElementById('loginScreen').style.display='none';
   initApp();
 }
 
